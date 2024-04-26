@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * Class starts the javaFX application window
- * @author seng201 teaching team
+ * @author Elise and Hannah
  */
 public class MainWindow extends Application {
 
