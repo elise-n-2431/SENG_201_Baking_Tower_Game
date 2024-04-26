@@ -6,4 +6,16 @@ public class Inventory {
     private ArrayList<String> storedItems;
     private ArrayList<String> activeTowers;
     private int lastSelected;
+
+    public void decreaseBank(int decrease) {
+        bankBalance -= decrease;
+    }
+
+    public void increaseBank(int increase) {
+        bankBalance += increase;
+    }
+
+    public void activateTower() {
+
+    }
 }
