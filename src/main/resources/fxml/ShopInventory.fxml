@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.ShopInventoryController">
+   <children>
+      <GridPane layoutX="7.0" layoutY="10.0" prefHeight="379.0" prefWidth="584.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.5999755859375" minWidth="10.0" prefWidth="301.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.20001220703125" minWidth="10.0" prefWidth="285.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="104.4" minHeight="10.0" prefHeight="100.4" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="137.4000152587891" minHeight="10.0" prefHeight="106.79998168945309" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="142.00003662109376" minHeight="10.0" prefHeight="93.20001831054685" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Inventory">
+               <GridPane.margin>
+                  <Insets left="120.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Shop" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="135.0" />
+               </GridPane.margin>
+            </Label>
+            <Button fx:id="back_button" mnemonicParsing="false" text="Back" />
+            <Button fx:id="i1" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="1" GridPane.rowIndex="1" />
+            <Button fx:id="i2" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="i3" layoutX="110.0" layoutY="86.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="s3" layoutX="210.0" layoutY="86.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="s3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="i4" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="4" GridPane.rowIndex="2" />
+            <Button fx:id="i8" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="8" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="i5" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="5" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="i6" layoutX="110.0" layoutY="163.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="6" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="i9" layoutX="110.0" layoutY="282.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="9" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="i7" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="7" GridPane.rowIndex="3" />
+            <Button fx:id="s2" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="s2" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="s1" layoutX="210.0" layoutY="282.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="s1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="s4" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="s4" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="s5" layoutX="303.0" layoutY="172.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="s5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="s6" layoutX="403.0" layoutY="172.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="s6" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="sell_or_buy" mnemonicParsing="false" text="Sell" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="place_or_invisible" layoutX="310.0" layoutY="324.0" mnemonicParsing="false" text="Place" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
