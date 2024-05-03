@@ -1,5 +1,10 @@
 package seng201.team0;
 
+/**
+ * Class which stores information about the current game session.
+ * @author Hannah Grace, Elise Newman
+ */
+
 public class MainGameInfo {
     private Integer difficulty;
     private String name;
@@ -10,15 +15,19 @@ public class MainGameInfo {
     public Integer getDifficulty(){
         return difficulty;
     }
+
     public String getName(){
         return name;
     }
+
     public Integer getNumRounds(){
         return numRounds;
     }
+
     public Integer getCurrentRound(){
         return currentRound;
     }
+
     public void updateRounds(){
         currentRound += 1;
         remainingRounds -= 1;
