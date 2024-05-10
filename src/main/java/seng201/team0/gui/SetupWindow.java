@@ -12,19 +12,19 @@ import java.io.IOException;
  * Class starts the javaFX application window
  * @author Elise and Hannah
  */
-public class MainWindow extends Application {
+public class SetupWindow extends Application {
 
     /**
-     * Opens the gui with the fxml content specified in resources/fxml/main.fxml
+     * Opens the gui with the fxml content specified in resources/fxml/setup_screen.fxml
      * @param primaryStage The current fxml stage, handled by javaFX Application class
      * @throws IOException if there is an issue loading fxml file
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/setup_screen.fxml"));
         Parent root = baseLoader.load();
 
-        MainController baseController = baseLoader.getController();
+        SetupController baseController = baseLoader.getController();
         baseController.init(primaryStage);
 
         primaryStage.setTitle("SENG201 Example App");

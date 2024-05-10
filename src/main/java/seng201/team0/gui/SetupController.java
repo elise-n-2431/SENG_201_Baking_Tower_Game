@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 import seng201.team0.services.CounterService;
 
 /**
- * Controller for the main.fxml window
+ * Controller for the setup_screen.fxml window
  * @author seng201 teaching team
  */
-public class MainController {
+public class SetupController {
 
     @FXML
     private Label defaultLabel;
