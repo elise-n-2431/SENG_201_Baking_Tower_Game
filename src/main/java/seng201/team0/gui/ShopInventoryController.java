@@ -1,25 +1,37 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import seng201.team0.models.Tower;
 
+import java.util.List;
+
 public class ShopInventoryController {
-    public ShopInventoryController(Class Tower1){
-        Tower = Tower1;
+    /*
+    public ShopInventoryController(Class Tower){
+        Tower = Tower;
     }
     private int selectedTowerIndex = -1;
-    private final Tower[] selectedTowers = new Tower[3];
+    private final Tower[] selectedTowers = new Tower[3];*/
+
+
+
 
     @FXML
-    private TextArea inputTextArea;
+    private Button back_button;
     @FXML
-    private Label speakingLabel;
+    private Button buyTower;
+    @FXML
+    private Button sell_tower;
+    @FXML
+    private Button place;
 
     @FXML
-    private void onSpeakClicked() {
-        /**speakingLabel.setText(inputTextArea.getText());
-        inputTextArea.setText("");**/
+    public void onBuyTowerClicked(){
+        //change tower from shop to inventory
     }
+
+
 }

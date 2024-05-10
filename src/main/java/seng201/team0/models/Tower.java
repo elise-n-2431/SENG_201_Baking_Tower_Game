@@ -38,6 +38,38 @@ public class Tower extends Purchasable {
 
     }
 
+    public String getResourceType() {
+        return resourceType;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getReloadSpeed() {
+        return reloadSpeed;
+    }
+
+    public void setReloadSpeed(int reloadSpeed) {
+        this.reloadSpeed = reloadSpeed;
+    }
+
+    public void setResourceType(String resourceType) {
+        this.resourceType = resourceType;
+    }
+
+    public int getResourceAmount() {
+        return resourceAmount;
+    }
+
+    public void setResourceAmount(int resourceAmount) {
+        this.resourceAmount = resourceAmount;
+    }
+
     public boolean isBroken() {
         /* Getter function to check whether a tower is broken. Returns true or false. */
         return broken;
