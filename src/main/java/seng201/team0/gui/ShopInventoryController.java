@@ -8,6 +8,11 @@ import seng201.team0.models.Tower;
 
 import java.util.List;
 
+/**
+ * Controller class for the shop/inventory window.
+ * @author Hannah Grace, Elise Newman
+ */
+
 public class ShopInventoryController {
     /*
     public ShopInventoryController(Class Tower){
@@ -15,9 +20,6 @@ public class ShopInventoryController {
     }
     private int selectedTowerIndex = -1;
     private final Tower[] selectedTowers = new Tower[3];*/
-
-
-
 
     @FXML
     private Button back_button;
