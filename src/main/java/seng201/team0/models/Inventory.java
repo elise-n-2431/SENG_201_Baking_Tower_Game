@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Inventory class which stores bank balance, items owned by player. Controls which towers are active.
- * @author Hannah Grace (add your name when you make changes)
+ * @author Hannah Grace
  */
 
 public class Inventory {
@@ -39,6 +39,10 @@ public class Inventory {
         }
     }
 
+    /**
+     * Return value of bank balance.
+     * @return bankBalance
+     * */
     public int getBankBalance() {
         return bankBalance;
     }
