@@ -1,27 +1,78 @@
 package seng201.team0.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import seng201.team0.MainGameInfo;
+import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
 import seng201.team0.services.CounterService;
 
 import java.util.List;
 
 /**
- * Controller for the main.fxml window
+ * Controller for the setup_screen.fxml window
  * @author seng201 teaching team
  */
 public class SetupController {
-    public SetupController(Class Tower){
-        Tower = Tower;
-    }
+    TowerManager towerManager;
+
     private int selectedTowerIndex = -1;
+
     private final Tower[] selectedTowers = new Tower[3];
+
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private Slider numRoundsSlider;
+
+    @FXML
+    private ChoiceBox gameDifficultySlider;
+
+    @FXML
+    private Button flourTowerButton;
+
+    @FXML
+    private Button waterTowerButton;
+
+    @FXML
+    private Button sugarTowerButton;
+
+    @FXML
+    private Button milkTowerButton;
+
+    @FXML
+    private Button selectedTower1Button;
+
+    @FXML
+    private Button selectedTower2Button;
+
+    @FXML
+    private Button selectedTower3Button;
+
+    @FXML
+    private Button startGameButton;
+
+    @FXML
+    private Label statsResourceTypeLabel;
+
+    @FXML
+    private Label statsReloadSpeedLabel;
+
+    @FXML
+    private Label statsResourceAmountLabel;
+
+    @FXML
+    private Label statsLevelLabel;
+
+    public SetupController(TowerManager towerManager){
+        this.towerManager = towerManager;
+    }
+
     public void initialisation(){
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);
-        List<Button> towerButtons = List.of(tower1Button, tower2Button, tower3Button, tower4Button, tower5Button, tower6Button);
+        List<Button> towerButtons = List.of(flourTowerButton, waterTowerButton, sugarTowerButton, milkTowerButton;
 
         /* Loops through tower index and sets up on click functionality */
         for (int i = 0; i < towerButtons.size(); i++) {

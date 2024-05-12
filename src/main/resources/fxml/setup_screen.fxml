@@ -13,26 +13,27 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.SetupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.SetupController">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="600.0">
+      <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.66668701171875" minWidth="10.0" prefWidth="330.99997965494794" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.66668701171875" minWidth="10.0" prefWidth="36.333353678385436" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.33331298828125" minWidth="10.0" prefWidth="324.66664632161456" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="358.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.66668701171875" minWidth="4.0" prefWidth="9.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.33331298828125" minWidth="10.0" prefWidth="233.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="64.33333206176758" minHeight="10.0" prefHeight="32.66667588551839" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="92.66665649414062" minHeight="0.0" prefHeight="21.666661580403648" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="170.66665649414062" minHeight="10.0" prefHeight="32.666671752929695" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="235.3333435058594" minHeight="10.0" prefHeight="27.333328247070312" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="235.3333435058594" minHeight="9.333325703938783" prefHeight="9.333325703938783" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="168.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="14.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="97.66665649414062" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="92.66665649414062" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="170.66665649414062" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="235.3333435058594" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="235.3333435058594" minHeight="0.0" prefHeight="14.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="7.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="14.0" prefWidth="229.0" text="Welcome to Tower Game!" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label prefHeight="25.0" prefWidth="275.0" text="Welcome to Tower Game!" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
@@ -48,7 +49,7 @@
                <padding>
                   <Insets left="15.0" />
                </padding></Label>
-            <Label text="Difficulty:" textAlignment="CENTER" GridPane.rowIndex="3">
+            <Label text="Game difficulty:" textAlignment="CENTER" GridPane.rowIndex="3">
                <padding>
                   <Insets left="15.0" />
                </padding>
@@ -58,64 +59,49 @@
                   <Insets left="15.0" right="15.0" top="10.0" />
                </GridPane.margin>
             </Slider>
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Button fx:id="tower1Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Tower 1" GridPane.rowIndex="5">
+            <ChoiceBox fx:id="gameDifficultySlider" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Button fx:id="flourTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Flour" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets bottom="80.0" left="15.0" />
+                  <Insets left="15.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower2Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Tower 2" GridPane.rowIndex="5">
+            <Button fx:id="waterTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Water" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets bottom="80.0" left="100.0" />
+                  <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower3Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Tower 3" GridPane.rowIndex="5">
+            <Button fx:id="sugarTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Sugar" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets bottom="80.0" left="185.0" />
+                  <Insets left="185.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower4Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Tower 4" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="15.0" top="80.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="tower6Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Tower 6" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="185.0" top="80.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="tower5Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Tower 5" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="100.0" top="80.0" />
-               </GridPane.margin>
-            </Button>
-            <Label text="Tower Stats" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+            <Label text="Tower Stats" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="resourceTypeLabel" text="Resource Type:" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.valignment="TOP">
+            <Label fx:id="statsResourceTypeLabel" text="Resource Type:" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets left="20.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="reloadSpeedLabel" text="Reload Speed:" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label fx:id="statsReloadSpeedLabel" text="Reload Speed:" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets bottom="20.0" left="20.0" top="20.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="resourceAmountLabel" text="Resource Amount:" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label fx:id="statsResourceAmountLabel" text="Resource Amount:" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="20.0" top="70.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="levelLabel" text="Level: 1" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label fx:id="statsLevelLabel" text="Level: 1" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets left="20.0" top="130.0" />
+                  <Insets left="20.0" top="140.0" />
                </GridPane.margin>
             </Label>
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
-            <Label text="Selected Towers:" GridPane.rowIndex="6">
+            <Label text="Selected Towers:" GridPane.rowIndex="7">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -123,28 +109,41 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="tower1Button1" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="7">
+            <Button fx:id="selectedTower1Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower2Button1" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="7">
+            <Button fx:id="selectedTower2Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower3Button1" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="7">
+            <Button fx:id="selectedTower3Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="185.0" />
                </GridPane.margin>
             </Button>
-            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="3" />
-            <Button mnemonicParsing="false" text="Start Game!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="4" />
+            <Button fx:id="startGameButton" mnemonicParsing="false" text="Start Game!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
             <TextField fx:id="nameTextField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="181.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
             </TextField>
+            <Button fx:id="milkTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Milk" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="270.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="Choose from the following starter towers:" GridPane.rowIndex="5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>

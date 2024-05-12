@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import seng201.team0.TowerManager;
+
 import java.io.IOException;
 
 public class FXWrapper {
@@ -16,6 +18,7 @@ public class FXWrapper {
 
     public void init(Stage stage){
         this.stage = stage;
+        // Changes: TowerManager becomes MainGameInfo.
         new TowerManager(this::launchSetupScreen, this::launchMainScreen, this::clearPane);
     }
     public void launchSetupScreen(TowerManager towerManager) {

@@ -1,18 +1,43 @@
 package seng201.team0;
 
+import com.sun.tools.javac.Main;
+import seng201.team0.models.Tower;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 /**
- * This class stores information about the current game session.
+ * This class stores information about the current game session. EQUIVALENT TO ROCKETMANAGER IN TUTORIAL
  * It manages holding state, GUI windows, and passing objects into controller classes.
+ * An
  * @author Hannah Grace, Elise Newman
  */
 
 public class MainGameInfo {
+
     private Integer gameDifficulty;
     private Integer roundDifficulty;
     private String name;
     private Integer numRounds;
     private Integer currentRound;
     private Integer remainingRounds;
+
+    // MOVED INTO TOWERMANAGER
+//    public MainGameInfo(Consumer<MainGameInfo> setupScreenLauncher, Consumer<MainGameInfo> mainScreenLauncher, Runnable clearScreen) {
+//        this.setupScreenLauncher = setupScreenLauncher;
+//        this.mainScreenLauncher = mainScreenLauncher;
+//        this.clearScreen = clearScreen;
+//
+//        Tower flourTower = new Tower("Flour Mill", "Creates flour", 5, 3, "Flour", 10, 1);
+//        Tower waterTower = new Tower("Water Tower", "Stores water", 5, 3, "Water", 20, 2);
+//        Tower sugarTower = new Tower("Sugarcane Mill", "Processes sugar", 5, 3, "Sugar", 5, 2);
+//        Tower dairyTower = new Tower("Dairy", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
+//
+//        towerSelectionList.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
+//        launchSetupScreen();
+//    }
+
 
     /**
      * Get game difficulty
