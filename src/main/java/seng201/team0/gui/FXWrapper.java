@@ -1,6 +1,3 @@
-//TODO create towerManager, mainscreen(and its controllers) navigate to shopinventory
-
-
 package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +8,7 @@ import seng201.team0.TowerManager;
 
 import java.io.IOException;
 
+
 public class FXWrapper {
     @FXML
     private Pane pane;
@@ -18,8 +16,7 @@ public class FXWrapper {
 
     public void init(Stage stage){
         this.stage = stage;
-        // Changes: TowerManager becomes MainGameInfo.
-        new TowerManager(this::launchSetupScreen, this::launchMainScreen, this::clearPane);
+        new TowerManager (this::launchSetupScreen, this::launchMainScreen, this::clearPane);
     }
     public void launchSetupScreen(TowerManager towerManager) {
         try {

@@ -32,6 +32,9 @@ public class TowerManager {
         launchSetupScreen();
     }
 
+    public List<Tower> getTowerSelectionList() {
+        return towerSelectionList;
+    }
 
     public void launchSetupScreen() {
         setupScreenLauncher.accept(this);

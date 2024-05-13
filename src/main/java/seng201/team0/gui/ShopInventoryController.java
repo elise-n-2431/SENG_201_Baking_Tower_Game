@@ -2,24 +2,31 @@ package seng201.team0.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Controller class for the shop/inventory window.
- * @author Hannah Grace, Elise Newman
+ * Controller for the main.fxml window
+ * @author seng201 teaching team
  */
+public class ShopInventoryController{
+    private TowerManager towerManager;
 
-public class ShopInventoryController {
-    /*
-    public ShopInventoryController(Class Tower){
-        Tower = Tower;
+    // Constructor taking RocketManager as a parameter
+    public ShopInventoryController(TowerManager towerManager) {
+        this.towerManager = towerManager;
     }
+
     private int selectedTowerIndex = -1;
-    private final Tower[] selectedTowers = new Tower[3];*/
+    private final Tower[] selectedTowers = new Tower[3];
+
+    public void init() {
+    }
 
     @FXML
     private Button back_button;
