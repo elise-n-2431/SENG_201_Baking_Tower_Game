@@ -75,6 +75,7 @@ public class Tower extends Purchasable {
 
     /**
      * Get tower's reload speed.
+     *
      * @return reloadSpeed
      */
     public int getReloadSpeed() {
@@ -99,6 +100,7 @@ public class Tower extends Purchasable {
 
     /**
      * Getter function for resourceAmount
+     *
      * @return resourceAmount
      */
     public int getResourceAmount() {
