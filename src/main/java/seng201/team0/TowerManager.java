@@ -10,7 +10,8 @@ public class TowerManager {
     private final Consumer<TowerManager> setupScreenLauncher;
     private final Consumer<TowerManager> mainScreenLauncher;
     private final Runnable clearScreen;
-    private final List<Tower> towerSelectionList = new ArrayList<>();
+    private final List<Tower> defaultTowers = new ArrayList<>();
+    private List<Tower> playerTowers;
 
     /**
      * Constructor
@@ -28,7 +29,7 @@ public class TowerManager {
         Tower sugarTower = new Tower("Sugarcane Mill", "Processes sugar", 5, 3, "Sugar", 5, 2);
         Tower dairyTower = new Tower("Dairy", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
 
-        towerSelectionList.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
+        defaultTowers.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
         launchSetupScreen();
     }
 
@@ -50,5 +51,17 @@ public class TowerManager {
     public void closeRoundScreen() {
         clearScreen.run();
         // LAUNCH NEXT SCREEN -- Shop/Inventory? Also have a quit function with System.exit(0)
+    }
+
+    public List<Tower> getDefaultTowers() {
+        return defaultTowers;
+    }
+
+    public List<Tower> getPlayerTowers() {
+        return playerTowers;
+    }
+
+    public void setPlayerTowers(List<Tower> playerTowers) {
+        this.playerTowers = playerTowers;
     }
 }

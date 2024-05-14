@@ -8,14 +8,18 @@ import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
 import seng201.team0.services.CounterService;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Controller for the setup_screen.fxml window
  * @author seng201 teaching team
  */
 public class SetupController {
+    // Instantiate manager objects to control game state
     TowerManager towerManager;
+    MainGameInfo mainGameInfo;
 
     private int selectedTowerIndex = -1;
 
@@ -70,16 +74,17 @@ public class SetupController {
         this.towerManager = towerManager;
     }
 
-    public void initialisation(){
+    // CHANGED TO TAKE primaryStage INPUT FROM SetupWindow.java
+    public void initialisation(Stage primaryStage){
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);
-        List<Button> towerButtons = List.of(flourTowerButton, waterTowerButton, sugarTowerButton, milkTowerButton;
+        List<Button> towerButtons = List.of(flourTowerButton, waterTowerButton, sugarTowerButton, milkTowerButton);
 
         /* Loops through tower index and sets up on click functionality */
         for (int i = 0; i < towerButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             towerButtons.get(i).setOnAction(event -> {
                 updateStats(towerManager.getDefaultTowers().get(finalI)); //towerManager could be Inventory/MainGameInfo???
-                selectedTowersIndex = finalI;
+                selectedTowerIndex = finalI;
                 towerButtons.forEach(button -> {
                     if (button == towerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
@@ -93,29 +98,30 @@ public class SetupController {
             int finalI = i; // variables used within lambdas must be final
             selectedTowerButtons.get(i).setOnAction(event -> {
                 if (selectedTowerIndex != -1) {
-                    selectedTowerButtons.get(finalI).setText(towerManager.getDefaultRockets().get(selectedTowerIndex).getName());
-                    selectedTowers[finalI] = towerManager.getDefaultRockets().get(selectedTowerIndex);
+                    selectedTowerButtons.get(finalI).setText(towerManager.getDefaultTowers().get(selectedTowerIndex).getName());
+                    selectedTowers[finalI] = towerManager.getDefaultTowers().get(selectedTowerIndex);
                 }
             });
         }
-        roundSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            for (int i = 0; i < selectedTowerButtons.size(); i++) {
-                selectedTowerButtons.get(i).setDisable(i >= newValue.intValue());
-            }
+
+        /* Sets number of rounds based on user input */
+        numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mainGameInfo.setNumRounds(newValue.intValue());
+            mainGameInfo.setCurrentRound(1);
+            mainGameInfo.setRemainingRounds(mainGameInfo.getNumRounds() - 1);
         });
     }
     /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
     public void updateStats(Tower tower){
-        resourceTypeLabel.setText(tower.getResourceAmount());
-        reloadSpeedLabel.setText(tower.getReloadSpeed());
-        resourceAmountLabel.setText(tower.getResourceAmount());
+        statsResourceTypeLabel.setText(tower.getResourceType());
+        statsReloadSpeedLabel.setText(String.valueOf(tower.getReloadSpeed()));
+        statsResourceAmountLabel.setText(String.valueOf(tower.getResourceAmount()));
     }
     /* Sends the information to the relevant classes - tower or */
     @FXML
     private void onAcceptClicked() {
-
-        towerManager.setName(nameTextField.getText());
-        towerManager.setRocketList(Arrays.stream(selectedRockets).filter((Objects::nonNull)).toList());
+        mainGameInfo.setName(nameTextField.getText());
+        towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
         towerManager.closeSetupScreen();
     }
 

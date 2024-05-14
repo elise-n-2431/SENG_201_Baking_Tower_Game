@@ -25,7 +25,7 @@ public class SetupWindow extends Application {
         Parent root = baseLoader.load();
 
         SetupController baseController = baseLoader.getController();
-        baseController.init(primaryStage);
+        baseController.initialisation(primaryStage);
 
         primaryStage.setTitle("SENG201 Example App");
         Scene scene = new Scene(root, 600, 400);

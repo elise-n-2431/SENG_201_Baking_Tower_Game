@@ -47,4 +47,42 @@ public class Purchasable {
     public int getSellPrice() {
         return this.sellPrice;
     }
+
+    /**
+     * Get name of the Purchasable object
+     * @return name
+     */
+    public String getName() { return name; }
+
+    /**
+     * Set name
+     * @param name Name of Purchasable object
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Set purchase price
+     * @param purchasePrice Amount of coins required to purchase object from shop
+     */
+    public void setPurchasePrice(int purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    /**
+     * Set sell price
+     * @param sellPrice Amount of coins user receives after selling object in shop
+     */
+    public void setSellPrice(int sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    /**
+     *  Set description
+     * @param description Short description of Purchasable object in the game's context
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

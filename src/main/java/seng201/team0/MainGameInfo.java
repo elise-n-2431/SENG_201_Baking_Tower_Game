@@ -96,5 +96,27 @@ public class MainGameInfo {
         return remainingRounds;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setNumRounds(Integer numRounds) {
+        this.numRounds = numRounds;
+    }
+
+    public void setCurrentRound(Integer currentRound) {
+        this.currentRound = currentRound;
+    }
+
+    public void setGameDifficulty(Integer gameDifficulty) {
+        this.gameDifficulty = gameDifficulty;
+    }
+
+    public void setRoundDifficulty(Integer roundDifficulty) {
+        this.roundDifficulty = roundDifficulty;
+    }
+
+    public void setRemainingRounds(Integer remainingRounds) {
+        this.remainingRounds = remainingRounds;
+    }
 }
