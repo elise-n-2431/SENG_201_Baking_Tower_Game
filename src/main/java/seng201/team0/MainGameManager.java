@@ -1,9 +1,7 @@
 package seng201.team0;
 
-import com.sun.tools.javac.Main;
 import seng201.team0.models.Tower;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -14,8 +12,11 @@ import java.util.function.Consumer;
  * @author Hannah Grace, Elise Newman
  */
 
-public class MainGameInfo {
-
+public class MainGameManager {
+    TowerManager towerManager;
+    private final Consumer<MainGameManager> setupScreenLauncher;
+    private final Consumer<MainGameManager> mainScreenLauncher;
+    private final Runnable clearScreen;
     private Integer gameDifficulty;
     private Integer roundDifficulty;
     private String name;
@@ -23,20 +24,37 @@ public class MainGameInfo {
     private Integer currentRound;
     private Integer remainingRounds;
 
-    // MOVED INTO TOWERMANAGER
-//    public MainGameInfo(Consumer<MainGameInfo> setupScreenLauncher, Consumer<MainGameInfo> mainScreenLauncher, Runnable clearScreen) {
-//        this.setupScreenLauncher = setupScreenLauncher;
-//        this.mainScreenLauncher = mainScreenLauncher;
-//        this.clearScreen = clearScreen;
-//
-//        Tower flourTower = new Tower("Flour Mill", "Creates flour", 5, 3, "Flour", 10, 1);
-//        Tower waterTower = new Tower("Water Tower", "Stores water", 5, 3, "Water", 20, 2);
-//        Tower sugarTower = new Tower("Sugarcane Mill", "Processes sugar", 5, 3, "Sugar", 5, 2);
-//        Tower dairyTower = new Tower("Dairy", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
-//
-//        towerSelectionList.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
-//        launchSetupScreen();
-//    }
+    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen) {
+        this.setupScreenLauncher = setupScreenLauncher;
+        this.mainScreenLauncher = mainScreenLauncher;
+        this.clearScreen = clearScreen;
+        this.towerManager = new TowerManager();
+
+        launchSetupScreen();
+    }
+
+    public void launchSetupScreen() {
+        setupScreenLauncher.accept(this);
+    }
+
+    public void closeSetupScreen() {
+        clearScreen.run();
+        launchMainScreen();
+    }
+
+    public void launchMainScreen() {
+        // Screen where rounds will be played
+        mainScreenLauncher.accept(this);
+    }
+
+    public void closeRoundScreen() {
+        clearScreen.run();
+        // LAUNCH NEXT SCREEN -- Shop/Inventory? Also have a quit function with System.exit(0)
+    }
+
+    public TowerManager getTowerManager() {
+        return towerManager;
+    }
 
 
     /**

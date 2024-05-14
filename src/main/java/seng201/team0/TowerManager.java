@@ -7,22 +7,19 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class TowerManager {
-    private final Consumer<TowerManager> setupScreenLauncher;
-    private final Consumer<TowerManager> mainScreenLauncher;
-    private final Runnable clearScreen;
+//    private final Consumer<TowerManager> setupScreenLauncher;
+//    private final Consumer<TowerManager> mainScreenLauncher;
+//    private final Runnable clearScreen;
     private final List<Tower> defaultTowers = new ArrayList<>();
     private List<Tower> playerTowers;
 
     /**
      * Constructor
-     * @param setupScreenLauncher
-     * @param mainScreenLauncher
-     * @param clearScreen
      */
-    public TowerManager(Consumer<TowerManager> setupScreenLauncher, Consumer<TowerManager> mainScreenLauncher, Runnable clearScreen) {
-        this.setupScreenLauncher = setupScreenLauncher;
-        this.mainScreenLauncher = mainScreenLauncher;
-        this.clearScreen = clearScreen;
+    public TowerManager() {
+//        this.setupScreenLauncher = setupScreenLauncher; // MOVED TO MAIN GAME MANAGER
+//        this.mainScreenLauncher = mainScreenLauncher;
+//        this.clearScreen = clearScreen;
 
         Tower flourTower = new Tower("Flour Mill", "Creates flour", 5, 3, "Flour", 10, 1);
         Tower waterTower = new Tower("Water Tower", "Stores water", 5, 3, "Water", 20, 2);
@@ -30,28 +27,28 @@ public class TowerManager {
         Tower dairyTower = new Tower("Dairy", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
 
         defaultTowers.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
-        launchSetupScreen();
+//        launchSetupScreen();
     }
 
-
-    public void launchSetupScreen() {
-        setupScreenLauncher.accept(this);
-    }
-
-    public void closeSetupScreen() {
-        clearScreen.run();
-        launchMainScreen();
-    }
-
-    public void launchMainScreen() {
-        // Screen where rounds will be played
-        mainScreenLauncher.accept(this);
-    }
-
-    public void closeRoundScreen() {
-        clearScreen.run();
-        // LAUNCH NEXT SCREEN -- Shop/Inventory? Also have a quit function with System.exit(0)
-    }
+// MOVED TO MAIN GAME MANAGER
+//    public void launchSetupScreen() {
+//        setupScreenLauncher.accept(this);
+//    }
+//
+//    public void closeSetupScreen() {
+//        clearScreen.run();
+//        launchMainScreen();
+//    }
+//
+//    public void launchMainScreen() {
+//        // Screen where rounds will be played
+//        mainScreenLauncher.accept(this);
+//    }
+//
+//    public void closeRoundScreen() {
+//        clearScreen.run();
+//        // LAUNCH NEXT SCREEN -- Shop/Inventory? Also have a quit function with System.exit(0)
+//    }
 
     public List<Tower> getDefaultTowers() {
         return defaultTowers;

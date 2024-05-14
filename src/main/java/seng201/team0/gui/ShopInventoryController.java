@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import seng201.team0.MainGameManager;
 import seng201.team0.models.Tower;
 
 import java.util.List;
@@ -14,12 +15,11 @@ import java.util.List;
  */
 
 public class ShopInventoryController {
-    /*
-    public ShopInventoryController(Class Tower){
-        Tower = Tower;
+
+    public ShopInventoryController(MainGameManager mainGameManager){
     }
     private int selectedTowerIndex = -1;
-    private final Tower[] selectedTowers = new Tower[3];*/
+    private final Tower[] selectedTowers = new Tower[3];
 
     @FXML
     private Button back_button;

@@ -3,10 +3,9 @@ package seng201.team0.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import seng201.team0.MainGameInfo;
+import seng201.team0.MainGameManager;
 import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
-import seng201.team0.services.CounterService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.Objects;
 public class SetupController {
     // Instantiate manager objects to control game state
     TowerManager towerManager;
-    MainGameInfo mainGameInfo;
+    MainGameManager mainGameManager;
 
     private int selectedTowerIndex = -1;
 
@@ -70,8 +69,9 @@ public class SetupController {
     @FXML
     private Label statsLevelLabel;
 
-    public SetupController(TowerManager towerManager){
-        this.towerManager = towerManager;
+    public SetupController(MainGameManager mainGameManager){
+        this.mainGameManager = mainGameManager;
+        this.towerManager = mainGameManager.getTowerManager();
     }
 
     // CHANGED TO TAKE primaryStage INPUT FROM SetupWindow.java
@@ -106,9 +106,9 @@ public class SetupController {
 
         /* Sets number of rounds based on user input */
         numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            mainGameInfo.setNumRounds(newValue.intValue());
-            mainGameInfo.setCurrentRound(1);
-            mainGameInfo.setRemainingRounds(mainGameInfo.getNumRounds() - 1);
+            mainGameManager.setNumRounds(newValue.intValue());
+            mainGameManager.setCurrentRound(1);
+            mainGameManager.setRemainingRounds(mainGameManager.getNumRounds() - 1);
         });
     }
     /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
@@ -120,9 +120,9 @@ public class SetupController {
     /* Sends the information to the relevant classes - tower or */
     @FXML
     private void onAcceptClicked() {
-        mainGameInfo.setName(nameTextField.getText());
+        mainGameManager.setName(nameTextField.getText());
         towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
-        towerManager.closeSetupScreen();
+        mainGameManager.closeSetupScreen();
     }
 
     /* Prefilled in content
