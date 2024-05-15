@@ -10,7 +10,7 @@ import java.io.IOException;
 public class ShopInventoryWindow extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/ShopInventory.fxml"));
+        FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/shop_inventory.fxml"));
         Parent root = baseLoader.load();
         Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Shop and Inventory");

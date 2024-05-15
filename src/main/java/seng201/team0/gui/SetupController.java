@@ -1,7 +1,11 @@
 package seng201.team0.gui;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseDragEvent;
 import javafx.stage.Stage;
 import seng201.team0.MainGameManager;
 import seng201.team0.TowerManager;
@@ -31,7 +35,7 @@ public class SetupController {
     private Slider numRoundsSlider;
 
     @FXML
-    private ChoiceBox gameDifficultySlider;
+    private ChoiceBox<String> gameDifficultyChoiceBox;
 
     @FXML
     private Button flourTowerButton;
@@ -75,15 +79,17 @@ public class SetupController {
     }
 
     // CHANGED TO TAKE primaryStage INPUT FROM SetupWindow.java
+    @FXML
     public void initialisation(Stage primaryStage){
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);
         List<Button> towerButtons = List.of(flourTowerButton, waterTowerButton, sugarTowerButton, milkTowerButton);
 
-        /* Loops through tower index and sets up on click functionality */
+        /* Loops through tower index and sets up on click functionality.
+        * Calls updateStats. Sets selectedTowerIndex to index of clicked button. */
         for (int i = 0; i < towerButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             towerButtons.get(i).setOnAction(event -> {
-                updateStats(towerManager.getDefaultTowers().get(finalI)); //towerManager could be Inventory/MainGameInfo???
+                updateStats(towerManager.getDefaultTowers().get(finalI));
                 selectedTowerIndex = finalI;
                 towerButtons.forEach(button -> {
                     if (button == towerButtons.get(finalI)) {
@@ -119,10 +125,20 @@ public class SetupController {
     }
     /* Sends the information to the relevant classes - tower or */
     @FXML
-    private void onAcceptClicked() {
+    private void onStartClicked() {
         mainGameManager.setName(nameTextField.getText());
         towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
         mainGameManager.closeSetupScreen();
+    }
+
+    @FXML
+    private void onDifficultyChange() {
+        mainGameManager.setGameDifficulty(gameDifficultyChoiceBox.getValue());
+        statsLevelLabel.setText("Level TEST" + mainGameManager.getGameDifficulty());
+    }
+
+    public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {
+        mainGameManager.setNumRounds((int) numRoundsSlider.getValue());
     }
 
     /* Prefilled in content

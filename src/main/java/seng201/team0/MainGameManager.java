@@ -15,17 +15,19 @@ import java.util.function.Consumer;
 public class MainGameManager {
     TowerManager towerManager;
     private final Consumer<MainGameManager> setupScreenLauncher;
+    private final Consumer<MainGameManager> preroundScreenLauncher;
     private final Consumer<MainGameManager> mainScreenLauncher;
     private final Runnable clearScreen;
-    private Integer gameDifficulty;
+    private String gameDifficulty;
     private Integer roundDifficulty;
     private String name;
     private Integer numRounds;
     private Integer currentRound;
     private Integer remainingRounds;
 
-    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen) {
+    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen) {
         this.setupScreenLauncher = setupScreenLauncher;
+        this.preroundScreenLauncher = preroundScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.clearScreen = clearScreen;
         this.towerManager = new TowerManager();
@@ -39,13 +41,19 @@ public class MainGameManager {
 
     public void closeSetupScreen() {
         clearScreen.run();
+        launchPreroundScreen();
+    }
+
+    public void launchPreroundScreen() {
+        preroundScreenLauncher.accept(this);
+    }
+
+    public void closePreroundScreen() {
+        clearScreen.run();
         launchMainScreen();
     }
 
-    public void launchMainScreen() {
-        // Screen where rounds will be played
-        mainScreenLauncher.accept(this);
-    }
+    public void launchMainScreen() { mainScreenLauncher.accept(this); }
 
     public void closeRoundScreen() {
         clearScreen.run();
@@ -61,7 +69,7 @@ public class MainGameManager {
      * Get game difficulty
      * @return gameDifficulty
      */
-    public Integer getGameDifficulty(){
+    public String getGameDifficulty(){
         return gameDifficulty;
     }
 
@@ -126,7 +134,7 @@ public class MainGameManager {
         this.currentRound = currentRound;
     }
 
-    public void setGameDifficulty(Integer gameDifficulty) {
+    public void setGameDifficulty(String gameDifficulty) {
         this.gameDifficulty = gameDifficulty;
     }
 

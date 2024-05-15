@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import seng201.team0.TowerManager;
+import seng201.team0.MainGameManager;
 
 import java.io.IOException;
 
@@ -19,16 +19,17 @@ public class FXWrapper {
     public void init(Stage stage){
         this.stage = stage;
         // Changes: TowerManager becomes MainGameInfo.
-        new TowerManager(this::launchSetupScreen, this::launchMainScreen, this::clearPane);
+        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane);
     }
-    public void launchSetupScreen(TowerManager towerManager) {
+
+    public void launchSetupScreen(MainGameManager mainGameManager) {
         try {
             FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/setup_screen.fxml"));
             // provide a custom Controller with parameters
-            setupLoader.setControllerFactory(param -> new SetupController(towerManager));
+            setupLoader.setControllerFactory(param -> new SetupController(mainGameManager));
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
-            stage.setTitle("Rocket Manager Setup");
+            stage.setTitle("Tower Game Setup");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,21 +39,34 @@ public class FXWrapper {
         pane.getChildren().removeAll(pane.getChildren());
     }
 
-    public void launchMainScreen(TowerManager towerManager) {
+    private void launchPreroundScreen(MainGameManager mainGameManager) {
         try {
-            FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/main_screen.fxml"));
-            mainScreenLoader.setControllerFactory(param -> new MainScreenController(towerManager));
-            Parent setupParent  = mainScreenLoader.load();
+            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/preround_screen.fxml"));
+            // provide a custom Controller with parameters
+            setupLoader.setControllerFactory(param -> new PreroundController(mainGameManager));
+            Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
-            stage.setTitle("Tower Manager Main Screen");
+            stage.setTitle("Prepare for Round");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void launchShopInventoryScreen(TowerManager towerManager) {
+
+    public void launchMainScreen(MainGameManager mainGameManager) {
         try {
-            FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/ShopInventory.fxml"));
-            mainScreenLoader.setControllerFactory(param -> new ShopInventoryController(towerManager));
+            FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/main_screen.fxml"));
+            mainScreenLoader.setControllerFactory(param -> new MainScreenController(mainGameManager));
+            Parent setupParent  = mainScreenLoader.load();
+            pane.getChildren().add(setupParent);
+            stage.setTitle("Tower Game Main Screen");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void launchShopInventoryScreen(MainGameManager mainGameManager) {
+        try {
+            FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/shop_inventory.fxml"));
+            mainScreenLoader.setControllerFactory(param -> new ShopInventoryController(mainGameManager));
             Parent setupParent  = mainScreenLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Shop Inventory Screen");
