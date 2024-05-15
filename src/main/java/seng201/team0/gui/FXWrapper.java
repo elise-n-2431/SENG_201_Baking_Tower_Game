@@ -19,7 +19,7 @@ public class FXWrapper {
     public void init(Stage stage){
         this.stage = stage;
         // Changes: TowerManager becomes MainGameInfo.
-        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane);
+        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane, this::launchShopInventoryScreen);
     }
 
     public void launchSetupScreen(MainGameManager mainGameManager) {

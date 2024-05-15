@@ -32,7 +32,7 @@
                   <Insets left="135.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="back_button" mnemonicParsing="false" text="Back" />
+            <Button fx:id="back_button" onAction="#onBackClicked" mnemonicParsing="false" text="Back" />
             <Button fx:id="i1" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="1" GridPane.rowIndex="1" />
             <Button fx:id="i2" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="2" GridPane.rowIndex="1">
                <GridPane.margin>

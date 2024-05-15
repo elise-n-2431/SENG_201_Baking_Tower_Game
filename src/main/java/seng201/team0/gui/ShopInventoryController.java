@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import seng201.team0.MainGameManager;
+import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
 
 import java.util.List;
@@ -15,8 +16,11 @@ import java.util.List;
  */
 
 public class ShopInventoryController {
-
+    TowerManager towerManager;
+    MainGameManager mainGameManager;
     public ShopInventoryController(MainGameManager mainGameManager){
+        this.mainGameManager = mainGameManager;
+        this.towerManager = mainGameManager.getTowerManager();
     }
     private int selectedTowerIndex = -1;
     private final Tower[] selectedTowers = new Tower[3];
@@ -33,6 +37,10 @@ public class ShopInventoryController {
     @FXML
     public void onBuyTowerClicked(){
         //change tower from shop to inventory
+    }
+    @FXML
+    private void onBackClicked(){
+        mainGameManager.closeShopScreen();
     }
 
 

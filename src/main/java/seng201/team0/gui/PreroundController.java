@@ -28,5 +28,6 @@ public class PreroundController {
     }
 
     public void onStartClicked(ActionEvent actionEvent) {
+        mainGameManager.closePreroundScreen();
     }
 }

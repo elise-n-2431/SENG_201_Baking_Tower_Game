@@ -61,4 +61,5 @@ public class TowerManager {
     public void setPlayerTowers(List<Tower> playerTowers) {
         this.playerTowers = playerTowers;
     }
+
 }

@@ -17,6 +17,7 @@ public class MainGameManager {
     private final Consumer<MainGameManager> setupScreenLauncher;
     private final Consumer<MainGameManager> preroundScreenLauncher;
     private final Consumer<MainGameManager> mainScreenLauncher;
+    private final Consumer<MainGameManager> shopScreenLauncher;
     private final Runnable clearScreen;
     private String gameDifficulty;
     private Integer roundDifficulty;
@@ -25,10 +26,13 @@ public class MainGameManager {
     private Integer currentRound;
     private Integer remainingRounds;
 
-    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen) {
+    private String moneyPerRound;
+
+    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher) {
         this.setupScreenLauncher = setupScreenLauncher;
         this.preroundScreenLauncher = preroundScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
+        this.shopScreenLauncher = shopScreenLauncher;
         this.clearScreen = clearScreen;
         this.towerManager = new TowerManager();
 
@@ -55,9 +59,19 @@ public class MainGameManager {
 
     public void launchMainScreen() { mainScreenLauncher.accept(this); }
 
-    public void closeRoundScreen() {
+    public void closeMainScreenHome() {
         clearScreen.run();
-        // LAUNCH NEXT SCREEN -- Shop/Inventory? Also have a quit function with System.exit(0)
+        launchSetupScreen();
+    }
+    public void launchShopScreen() { shopScreenLauncher.accept(this); }
+    public void closeShopScreen(){
+        clearScreen.run();
+        launchMainScreen();}
+
+    public void closeMainScreenShop() {
+        clearScreen.run();
+        launchShopScreen();
+        //how is data stored - continue progress when return
     }
 
     public TowerManager getTowerManager() {
@@ -79,6 +93,9 @@ public class MainGameManager {
      */
     public Integer getRoundDifficulty() {
         return roundDifficulty;
+    }
+    public String getMoneyPerRound() {
+        return moneyPerRound;
     }
 
     /**
@@ -144,5 +161,8 @@ public class MainGameManager {
 
     public void setRemainingRounds(Integer remainingRounds) {
         this.remainingRounds = remainingRounds;
+    }
+    public void setMoneyPerRound(String moneyPerRound) {
+        this.moneyPerRound = moneyPerRound;
     }
 }

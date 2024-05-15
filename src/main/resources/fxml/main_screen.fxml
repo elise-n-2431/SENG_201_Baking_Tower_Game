@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="seng201.team0.gui.MainScreenController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.MainScreenController">
+   <children>
+      <ImageView fitHeight="423.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@IMG_0086.JPG" />
+         </image>
+      </ImageView>
+      <Button fx:id="backButton" onAction="#onBackClicked" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="shopButton" onAction="#onShopClicked" layoutX="35.0" layoutY="76.0" mnemonicParsing="false" text="Shop" />
+      <Label fx:id="moneyValue" layoutX="56.0" layoutY="117.0" text="100" />
+      <GridPane layoutX="92.0" layoutY="208.0" prefHeight="61.0" prefWidth="360.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fx:id="imageOne" fitHeight="103.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Water.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageTwo" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@Flour.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageThree" fitHeight="150.0" fitWidth="50.0" layoutX="82.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@Butter.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageFour" fitHeight="150.0" fitWidth="50.0" layoutX="154.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@Sugar.JPG" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageFive" fitHeight="150.0" fitWidth="50.0" layoutX="226.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@flour_-9_16.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>
