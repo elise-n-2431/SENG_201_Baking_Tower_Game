@@ -146,7 +146,6 @@ public class SetupController {
     @FXML
     private void onDifficultyChange() {
         mainGameManager.setGameDifficulty(gameDifficultyChoiceBox.getValue());
-        statsLevelLabel.setText("Level TEST" + mainGameManager.getGameDifficulty());
     }
 
     public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {

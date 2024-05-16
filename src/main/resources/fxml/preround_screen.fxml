@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -20,6 +22,7 @@
         <rowConstraints>
           <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="311.0" minHeight="0.0" prefHeight="120.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="311.0" minHeight="10.0" prefHeight="178.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -34,17 +37,17 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Label>
-            <Label prefHeight="29.0" prefWidth="131.0" text="Number of carts: " GridPane.rowIndex="2">
+            <Label prefHeight="29.0" prefWidth="131.0" text="Number of carts: " GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="30.0" left="20.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="startRoundButton" mnemonicParsing="false" onAction="#onStartClicked" text="Start Round!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+            <Button fx:id="startRoundButton" mnemonicParsing="false" onAction="#onStartClicked" text="Start Round!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Button>
-            <Label text="This impacts the round's difficulty." GridPane.rowIndex="2">
+            <Label text="This impacts the round's difficulty." GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="20.0" top="30.0" />
                </GridPane.margin>
@@ -52,7 +55,20 @@
                   <Font name="System Italic" size="13.0" />
                </font>
             </Label>
-            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+             <ChoiceBox fx:id="numCartsChoiceBox" onAction="#onNumCartsChanged" prefWidth="150.0" value="Medium: 6 carts" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                 <items>
+                     <FXCollections fx:factory="observableArrayList">
+                         <String fx:value="Easy: 4 carts" />
+                         <String fx:value="Medium: 6 carts" />
+                         <String fx:value="Hard: 8 carts" />
+                     </FXCollections>
+                 </items>
+             </ChoiceBox>
+            <Label fx:id="gameDifficultyLabel" prefHeight="16.0" prefWidth="222.0" text="Game difficulty: _" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>

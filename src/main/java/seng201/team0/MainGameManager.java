@@ -20,8 +20,8 @@ public class MainGameManager {
     private final Consumer<MainGameManager> shopScreenLauncher;
     private final Consumer<MainGameManager> conclusionLauncher;
     private final Runnable clearScreen;
-    private String gameDifficulty;
-    private Integer roundDifficulty;
+    private String gameDifficulty = "Medium";
+    private String roundDifficulty;
     private String name;
     private Integer numRounds = 5; // Initialise default numRounds and currentRound to prevent "null" cases
     private Integer currentRound = 1;
@@ -108,7 +108,7 @@ public class MainGameManager {
      * Get difficulty of current round
      * @return roundDifficulty
      */
-    public Integer getRoundDifficulty() {
+    public String getRoundDifficulty() {
         return roundDifficulty;
     }
     public String getMoneyPerRound() {
@@ -173,7 +173,7 @@ public class MainGameManager {
         this.gameDifficulty = gameDifficulty;
     }
 
-    public void setRoundDifficulty(Integer roundDifficulty) {
+    public void setRoundDifficulty(String roundDifficulty) {
         this.roundDifficulty = roundDifficulty;
     }
 

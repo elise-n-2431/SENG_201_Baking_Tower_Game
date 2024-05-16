@@ -54,6 +54,7 @@ public class MainScreenController {
         moneyValue.setText(s);
         mainGameManager.setMoneyPerRound(s);
     }
+
     @FXML
     public void initialize(){
         List<Tower> playerTowers = towerManager.getPlayerTowers();
