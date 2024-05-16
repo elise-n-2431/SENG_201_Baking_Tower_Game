@@ -11,6 +11,7 @@ import seng201.team0.MainGameManager;
 import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
 import seng201.team0.services.NameService;
+import seng201.team0.services.TowerService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,7 @@ public class SetupController {
     MainGameManager mainGameManager;
 
     NameService nameService = new NameService();
+    TowerService towerService = new TowerService();
 
     private int selectedTowerIndex = -1;
 
@@ -131,10 +133,16 @@ public class SetupController {
     @FXML
     private void onStartClicked() {
         String name = nameTextField.getText();
-        if (nameService.isValidName(name)) {
+        if (nameService.isValidName(name) && towerService.areAllTowersSelected(selectedTowers)) {
             mainGameManager.setName(name);
             towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
             mainGameManager.closeSetupScreen();
+        }
+        else if (!nameService.isValidName(name)) {
+            errorLabel.setText("Name must be between 3 and 15 characters, and contain no special characters");
+        }
+        else if (!towerService.areAllTowersSelected(selectedTowers)) {
+            errorLabel.setText("Must select 3 towers");
         }
         else {
             errorLabel.setText("Name must be between 3 and 15 characters, and contain no special characters");
