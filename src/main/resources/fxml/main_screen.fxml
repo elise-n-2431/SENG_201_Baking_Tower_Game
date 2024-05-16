@@ -16,8 +16,8 @@
             <Image url="@IMG_0086.JPG" />
          </image>
       </ImageView>
-      <Button fx:id="backButton" onAction="#onBackClicked" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" text="Back" />
-      <Button fx:id="shopButton" onAction="#onShopClicked" layoutX="35.0" layoutY="76.0" mnemonicParsing="false" text="Shop" />
+      <Button fx:id="backButton" layoutX="37.0" layoutY="41.0" mnemonicParsing="false" onAction="#onBackClicked" text="Back" />
+      <Button fx:id="shopButton" layoutX="35.0" layoutY="76.0" mnemonicParsing="false" onAction="#onShopClicked" text="Shop" />
       <Label fx:id="moneyValue" layoutX="56.0" layoutY="117.0" text="100" />
       <GridPane layoutX="92.0" layoutY="208.0" prefHeight="61.0" prefWidth="360.0">
         <columnConstraints>
@@ -31,26 +31,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="imageOne" fitHeight="103.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Water.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageTwo" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@Flour.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageThree" fitHeight="150.0" fitWidth="50.0" layoutX="82.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@Butter.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageFour" fitHeight="150.0" fitWidth="50.0" layoutX="154.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-               <image>
-                  <Image url="@Sugar.JPG" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="imageOne" fitHeight="103.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageTwo" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fx:id="imageThree" fitHeight="150.0" fitWidth="50.0" layoutX="82.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fx:id="imageFour" fitHeight="150.0" fitWidth="50.0" layoutX="154.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
             <ImageView fx:id="imageFive" fitHeight="150.0" fitWidth="50.0" layoutX="226.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
                   <Image url="@flour_-9_16.png" />

@@ -15,7 +15,7 @@ public class MainScreenWindow extends Application {
         FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/main_screen.fxml"));
         Parent root = baseLoader.load();
 
-        SetupController baseController = baseLoader.getController();
+        MainScreenController baseController = baseLoader.getController();
         baseController.initialisation(primaryStage);
 
         primaryStage.setTitle("SENG201 Example App");

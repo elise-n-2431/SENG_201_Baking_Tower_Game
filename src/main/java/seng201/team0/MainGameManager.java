@@ -18,6 +18,7 @@ public class MainGameManager {
     private final Consumer<MainGameManager> preroundScreenLauncher;
     private final Consumer<MainGameManager> mainScreenLauncher;
     private final Consumer<MainGameManager> shopScreenLauncher;
+    private final Consumer<MainGameManager> conclusionLauncher;
     private final Runnable clearScreen;
     private String gameDifficulty;
     private Integer roundDifficulty;
@@ -28,13 +29,14 @@ public class MainGameManager {
 
     private String moneyPerRound;
 
-    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher) {
+    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher) {
         this.setupScreenLauncher = setupScreenLauncher;
         this.preroundScreenLauncher = preroundScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
         this.shopScreenLauncher = shopScreenLauncher;
         this.clearScreen = clearScreen;
         this.towerManager = new TowerManager();
+        this.conclusionLauncher = conclusionLauncher;
 
         launchSetupScreen();
     }
@@ -72,6 +74,16 @@ public class MainGameManager {
         clearScreen.run();
         launchShopScreen();
         //how is data stored - continue progress when return
+    }
+    public void launchConclusionScreen() {conclusionLauncher.accept(this);}
+    public void closeMainScreenConclusion() {
+        clearScreen.run();
+        launchConclusionScreen();
+        //how is data stored - continue progress when return
+    }
+    public void closeConclusionScreen() {
+        clearScreen.run();
+        launchSetupScreen();
     }
 
     public TowerManager getTowerManager() {

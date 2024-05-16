@@ -37,6 +37,10 @@ public class MainScreenController {
                     updateValue(increase);
                     increase += 100;
                     lastUpdate = now;
+                    if (increase > 1000){
+                        endGame();
+                        increase = 0;
+                    }
                 }
             }
         };
@@ -53,7 +57,7 @@ public class MainScreenController {
         //for selected tower, change the image in the output
         //Can't test as not initialising correctly
         List<Tower> playerTowers = towerManager.getPlayerTowers();
-        Image imgOne = new Image("src/main/resources/fxml/" + playerTowers.get(0) + ".png");
+        Image imgOne = new Image("Flour.png");
         imageOne.setImage(imgOne);
         Image imgTwo = new Image("src/main/resources/fxml/" + playerTowers.get(1) + ".png");
         imageTwo.setImage(imgTwo);
@@ -68,5 +72,8 @@ public class MainScreenController {
     @FXML
     private void onShopClicked () {
         mainGameManager.closeMainScreenShop();
+    }
+    private void endGame() {
+        mainGameManager.closeMainScreenConclusion();
     }
 }

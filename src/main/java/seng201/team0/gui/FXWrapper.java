@@ -1,4 +1,3 @@
-//TODO create towerManager, mainscreen(and its controllers) navigate to shopinventory
 
 
 package seng201.team0.gui;
@@ -19,7 +18,7 @@ public class FXWrapper {
     public void init(Stage stage){
         this.stage = stage;
         // Changes: TowerManager becomes MainGameInfo.
-        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane, this::launchShopInventoryScreen);
+        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane, this::launchShopInventoryScreen, this::launchConclusionScreen);
     }
 
     public void launchSetupScreen(MainGameManager mainGameManager) {
@@ -70,6 +69,17 @@ public class FXWrapper {
             Parent setupParent  = mainScreenLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Shop Inventory Screen");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void launchConclusionScreen(MainGameManager mainGameManager) {
+        try {
+            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/conclusion.fxml"));
+            setupLoader.setControllerFactory(param -> new ConclusionController(mainGameManager));
+            Parent setupParent  = setupLoader.load();
+            pane.getChildren().add(setupParent);
+            stage.setTitle("Win or Lose?");
         } catch (IOException e) {
             e.printStackTrace();
         }
