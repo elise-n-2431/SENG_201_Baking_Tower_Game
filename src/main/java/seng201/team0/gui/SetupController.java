@@ -84,7 +84,6 @@ public class SetupController {
         this.towerManager = mainGameManager.getTowerManager();
     }
 
-    // CHANGED TO TAKE primaryStage INPUT FROM SetupWindow.java
     @FXML
     public void initialize(){
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);

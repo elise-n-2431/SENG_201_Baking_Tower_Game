@@ -23,8 +23,8 @@ public class MainGameManager {
     private String gameDifficulty;
     private Integer roundDifficulty;
     private String name;
-    private Integer numRounds;
-    private Integer currentRound;
+    private Integer numRounds = 5; // Initialise default numRounds and currentRound to prevent "null" cases
+    private Integer currentRound = 1;
     private Integer remainingRounds;
 
     private String moneyPerRound;

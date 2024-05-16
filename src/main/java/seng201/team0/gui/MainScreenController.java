@@ -66,11 +66,11 @@ public class MainScreenController {
         moneyValue.setText(mainGameManager.getMoneyPerRound());
     }
     @FXML
-    private void onBackClicked () {
+    private void onBackClicked() {
         mainGameManager.closeMainScreenHome();
     }
     @FXML
-    private void onShopClicked () {
+    private void onShopClicked() {
         mainGameManager.closeMainScreenShop();
     }
     private void endGame() {
