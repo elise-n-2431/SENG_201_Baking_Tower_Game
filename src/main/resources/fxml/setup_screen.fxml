@@ -143,6 +143,14 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Label>
+            <Label fx:id="errorLabel" prefHeight="4.0" prefWidth="223.0" text="Error Message Label" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets top="60.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </children>

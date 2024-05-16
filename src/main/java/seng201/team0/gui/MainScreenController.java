@@ -53,7 +53,7 @@ public class MainScreenController {
         mainGameManager.setMoneyPerRound(s);
     }
     @FXML
-    public void initialisation (Stage primaryStage){
+    public void initialize(){
         //for selected tower, change the image in the output
         //Can't test as not initialising correctly
         List<Tower> playerTowers = towerManager.getPlayerTowers();

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import seng201.team0.MainGameManager;
 import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
+import seng201.team0.services.NameService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,8 @@ public class SetupController {
     // Instantiate manager objects to control game state
     TowerManager towerManager;
     MainGameManager mainGameManager;
+
+    NameService nameService = new NameService();
 
     private int selectedTowerIndex = -1;
 
@@ -62,6 +65,9 @@ public class SetupController {
     private Button startGameButton;
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     private Label statsResourceTypeLabel;
 
     @FXML
@@ -80,9 +86,10 @@ public class SetupController {
 
     // CHANGED TO TAKE primaryStage INPUT FROM SetupWindow.java
     @FXML
-    public void initialisation(Stage primaryStage){
+    public void initialize(){
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);
         List<Button> towerButtons = List.of(flourTowerButton, waterTowerButton, sugarTowerButton, milkTowerButton);
+        errorLabel.setText("");
 
         /* Loops through tower index and sets up on click functionality.
         * Calls updateStats. Sets selectedTowerIndex to index of clicked button. */
@@ -126,9 +133,15 @@ public class SetupController {
     /* Sends the information to the relevant classes - tower or */
     @FXML
     private void onStartClicked() {
-        mainGameManager.setName(nameTextField.getText());
-        towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
-        mainGameManager.closeSetupScreen();
+        String name = nameTextField.getText();
+        if (nameService.isValidName(name)) {
+            mainGameManager.setName(name);
+            towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
+            mainGameManager.closeSetupScreen();
+        }
+        else {
+            errorLabel.setText("Name must be between 3 and 15 characters, and contain no special characters");
+        }
     }
 
     @FXML
@@ -138,6 +151,7 @@ public class SetupController {
     }
 
     public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {
+        System.out.println("Number of rounds changed");
         mainGameManager.setNumRounds((int) numRoundsSlider.getValue());
     }
 

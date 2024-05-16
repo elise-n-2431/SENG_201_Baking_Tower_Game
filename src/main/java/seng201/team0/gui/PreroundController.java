@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import seng201.team0.MainGameManager;
 import seng201.team0.TowerManager;
 
-// MAY NOT END UP USING THIS
-
 public class PreroundController {
     private final TowerManager towerManager;
     MainGameManager mainGameManager;
@@ -22,7 +20,6 @@ public class PreroundController {
     }
 
     public void initialize() {
-        //greetingLabel.setText("Hellooooo");
         greetingLabel.setText("Good to see you " + mainGameManager.getName() + "! Prepare to start round...");
         currentRoundLabel.setText("Current round: " + mainGameManager.getCurrentRound() + " of " + mainGameManager.getNumRounds());
     }
