@@ -26,6 +26,7 @@ public class MainGameManager {
     private Integer numRounds = 5; // Initialise default numRounds and currentRound to prevent "null" cases
     private Integer currentRound = 1;
     private Integer remainingRounds;
+    private Boolean success = true;
 
     private String moneyPerRound;
 
@@ -85,6 +86,10 @@ public class MainGameManager {
         clearScreen.run();
         launchSetupScreen();
     }
+    public void closeMainScreenPreRound(){
+        clearScreen.run();
+        launchPreroundScreen();
+    }
 
     public TowerManager getTowerManager() {
         return towerManager;
@@ -109,6 +114,8 @@ public class MainGameManager {
     public String getMoneyPerRound() {
         return moneyPerRound;
     }
+
+    public Boolean getSuccess() { return success;}
 
     /**
      * Get name of player
@@ -140,7 +147,6 @@ public class MainGameManager {
     public void updateRounds(){
         currentRound += 1;
         remainingRounds -= 1;
-        //should it do anything if numRounds exceeded?
     }
 
     /**
@@ -150,7 +156,7 @@ public class MainGameManager {
     public Integer getRemainingRounds(){
         return remainingRounds;
     }
-
+    public void setSuccess(Boolean success) { this.success = success; }
     public void setName(String name) {
         this.name = name;
     }
@@ -160,7 +166,7 @@ public class MainGameManager {
     }
 
     public void setCurrentRound(Integer currentRound) {
-        this.currentRound = currentRound;
+        this.currentRound = 1;
     }
 
     public void setGameDifficulty(String gameDifficulty) {

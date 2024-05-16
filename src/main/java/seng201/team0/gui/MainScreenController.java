@@ -9,6 +9,8 @@ import seng201.team0.MainGameManager;
 import seng201.team0.TowerManager;
 import seng201.team0.models.Tower;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class MainScreenController {
@@ -38,7 +40,7 @@ public class MainScreenController {
                     increase += 100;
                     lastUpdate = now;
                     if (increase > 1000){
-                        endGame();
+                        endRound();
                         increase = 0;
                     }
                 }
@@ -54,14 +56,17 @@ public class MainScreenController {
     }
     @FXML
     public void initialize(){
-        //for selected tower, change the image in the output
-        //Can't test as not initialising correctly
         List<Tower> playerTowers = towerManager.getPlayerTowers();
-        Image imgOne = new Image("Flour.png");
+        String imagePath = "/images/"+playerTowers.get(0).getResourceType()+".png";
+        Image imgOne = new Image(getClass().getResourceAsStream(imagePath));
         imageOne.setImage(imgOne);
-        Image imgTwo = new Image("src/main/resources/fxml/" + playerTowers.get(1) + ".png");
+
+        String imagePath2 = "/images/" +playerTowers.get(1).getResourceType()+ ".png";
+        Image imgTwo = new Image(getClass().getResourceAsStream(imagePath2));
         imageTwo.setImage(imgTwo);
-        Image imgThree = new Image("src/main/resources/fxml/" + playerTowers.get(2) + ".png");
+
+        String imagePath3 = "/images/"+playerTowers.get(2).getResourceType()+".png";
+        Image imgThree = new Image(getClass().getResourceAsStream(imagePath3));
         imageThree.setImage(imgThree);
         moneyValue.setText(mainGameManager.getMoneyPerRound());
     }
@@ -73,7 +78,17 @@ public class MainScreenController {
     private void onShopClicked() {
         mainGameManager.closeMainScreenShop();
     }
-    private void endGame() {
+    private void endRound() {
+        mainGameManager.closeMainScreenConclusion();
+        /* if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())){
+            mainGameManager.closeMainScreenConclusion();
+        } else {
+            mainGameManager.closeMainScreenPreRound();
+            mainGameManager.updateRounds();
+        }*/
+    }
+    private void fail() {
+        mainGameManager.setSuccess(Boolean.FALSE);
         mainGameManager.closeMainScreenConclusion();
     }
 }
