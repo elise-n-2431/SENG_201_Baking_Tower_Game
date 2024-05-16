@@ -25,10 +25,9 @@ public class MainGameManager {
     private String name;
     private Integer numRounds = 5; // Initialise default numRounds and currentRound to prevent "null" cases
     private Integer currentRound = 1;
-    private Integer remainingRounds;
     private Boolean success = true;
 
-    private String moneyPerRound;
+    private Integer moneyPerRound = 0;
 
     public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher) {
         this.setupScreenLauncher = setupScreenLauncher;
@@ -111,7 +110,7 @@ public class MainGameManager {
     public String getRoundDifficulty() {
         return roundDifficulty;
     }
-    public String getMoneyPerRound() {
+    public Integer getMoneyPerRound() {
         return moneyPerRound;
     }
 
@@ -142,20 +141,12 @@ public class MainGameManager {
     }
 
     /**
-     * Increase current round by 1, and decrease remaining rounds by 1. Called after round completion.
+     * Increase current round by 1, Called after round completion.
      */
     public void updateRounds(){
         currentRound += 1;
-        remainingRounds -= 1;
     }
 
-    /**
-     * Get number of remaining rounds in current game.
-     * @return remainingRounds
-     */
-    public Integer getRemainingRounds(){
-        return remainingRounds;
-    }
     public void setSuccess(Boolean success) { this.success = success; }
     public void setName(String name) {
         this.name = name;
@@ -177,10 +168,7 @@ public class MainGameManager {
         this.roundDifficulty = roundDifficulty;
     }
 
-    public void setRemainingRounds(Integer remainingRounds) {
-        this.remainingRounds = remainingRounds;
-    }
-    public void setMoneyPerRound(String moneyPerRound) {
+    public void setMoneyPerRound(Integer moneyPerRound) {
         this.moneyPerRound = moneyPerRound;
     }
 }

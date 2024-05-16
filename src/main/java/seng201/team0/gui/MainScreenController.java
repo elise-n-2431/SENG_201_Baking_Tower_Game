@@ -30,7 +30,7 @@ public class MainScreenController {
         this.towerManager = mainGameManager.getTowerManager();
         AnimationTimer timer = new AnimationTimer() {
             private long lastUpdate = 0;
-            int increase = 0;
+            int increase = mainGameManager.getMoneyPerRound();
 
             @Override
             public void handle(long now) {
@@ -41,7 +41,9 @@ public class MainScreenController {
                     lastUpdate = now;
                     if (increase > 1000){
                         endRound();
+                        mainGameManager.setMoneyPerRound(0);
                         increase = 0;
+                        this.stop();
                     }
                 }
             }
@@ -50,9 +52,9 @@ public class MainScreenController {
     }
     @FXML
     private void updateValue(int increase) {
+        mainGameManager.setMoneyPerRound(increase);
         String s = String.valueOf(increase);
         moneyValue.setText(s);
-        mainGameManager.setMoneyPerRound(s);
     }
 
     @FXML
@@ -69,7 +71,8 @@ public class MainScreenController {
         String imagePath3 = "/images/"+playerTowers.get(2).getResourceType()+".png";
         Image imgThree = new Image(getClass().getResourceAsStream(imagePath3));
         imageThree.setImage(imgThree);
-        moneyValue.setText(mainGameManager.getMoneyPerRound());
+        String s = String.valueOf(mainGameManager.getMoneyPerRound());
+        moneyValue.setText(s);
     }
     @FXML
     private void onBackClicked() {
@@ -80,13 +83,12 @@ public class MainScreenController {
         mainGameManager.closeMainScreenShop();
     }
     private void endRound() {
-        mainGameManager.closeMainScreenConclusion();
-        /* if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())){
+        if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())){
             mainGameManager.closeMainScreenConclusion();
         } else {
-            mainGameManager.closeMainScreenPreRound();
             mainGameManager.updateRounds();
-        }*/
+            mainGameManager.closeMainScreenPreRound();
+        }
     }
     private void fail() {
         mainGameManager.setSuccess(Boolean.FALSE);

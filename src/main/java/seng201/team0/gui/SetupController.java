@@ -119,8 +119,6 @@ public class SetupController {
         /* Sets number of rounds based on user input */
         numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             mainGameManager.setNumRounds(newValue.intValue());
-            mainGameManager.setCurrentRound(1);
-            mainGameManager.setRemainingRounds(mainGameManager.getNumRounds() - 1);
         });
     }
     /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
