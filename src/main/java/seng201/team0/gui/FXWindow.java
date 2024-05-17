@@ -21,6 +21,7 @@ public class FXWindow extends Application {
         fxWrapper.init(primaryStage);
     }
 
+
     public static void launchWrapper(String[] args) {
         launch(args);
     }

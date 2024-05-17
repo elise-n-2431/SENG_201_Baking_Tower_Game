@@ -18,7 +18,7 @@ public class FXWrapper {
     public void init(Stage stage){
         this.stage = stage;
         // Changes: TowerManager becomes MainGameInfo.
-        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane, this::launchShopInventoryScreen, this::launchConclusionScreen);
+        new MainGameManager(this::launchSetupScreen, this::launchPreroundScreen, this::launchMainScreen, this::clearPane, this::launchShopInventoryScreen, this::launchConclusionScreen, this::launchRecipeBookScreen);
     }
 
     public void launchSetupScreen(MainGameManager mainGameManager) {
@@ -80,6 +80,17 @@ public class FXWrapper {
             Parent setupParent  = setupLoader.load();
             pane.getChildren().add(setupParent);
             stage.setTitle("Win or Lose?");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void launchRecipeBookScreen(MainGameManager mainGameManager) {
+        try {
+            FXMLLoader setupLoader = new FXMLLoader(getClass().getResource("/fxml/recipe_book.fxml"));
+            setupLoader.setControllerFactory(param -> new RecipeBookController(mainGameManager));
+            Parent setupParent  = setupLoader.load();
+            pane.getChildren().add(setupParent);
+            stage.setTitle("Recipes!");
         } catch (IOException e) {
             e.printStackTrace();
         }

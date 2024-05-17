@@ -35,8 +35,9 @@
             <ImageView fx:id="imageTwo" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
             <ImageView fx:id="imageThree" fitHeight="150.0" fitWidth="50.0" layoutX="82.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
             <ImageView fx:id="imageFour" fitHeight="150.0" fitWidth="50.0" layoutX="154.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-            <ImageView fx:id="imageFive" fitHeight="150.0" fitWidth="50.0" layoutX="226.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4"/>
+            <ImageView fx:id="imageFive" fitHeight="150.0" fitWidth="50.0" layoutX="226.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
          </children>
       </GridPane>
+      <Button fx:id="recipeButton" layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
    </children>
 </AnchorPane>

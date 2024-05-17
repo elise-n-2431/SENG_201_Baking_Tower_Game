@@ -90,6 +90,10 @@ public class MainScreenController {
             mainGameManager.closeMainScreenPreRound();
         }
     }
+    @FXML
+    private void onRecipeClicked(){
+        mainGameManager.launchRecipeBook("MainScreen");
+    }
     private void fail() {
         mainGameManager.setSuccess(Boolean.FALSE);
         mainGameManager.closeMainScreenConclusion();

@@ -1,5 +1,7 @@
 package seng201.team0;
 
+import seng201.team0.gui.SetupController;
+
 import java.util.function.Consumer;
 
 /**
@@ -16,6 +18,7 @@ public class MainGameManager {
     private final Consumer<MainGameManager> mainScreenLauncher;
     private final Consumer<MainGameManager> shopScreenLauncher;
     private final Consumer<MainGameManager> conclusionLauncher;
+    private final Consumer<MainGameManager> recipeBookLauncher;
     private final Runnable clearScreen;
     private String gameDifficulty = "Medium";
     private String roundDifficulty;
@@ -27,7 +30,7 @@ public class MainGameManager {
     private Integer moneyPerRound = 0;
     private String previousScreen;
 
-    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher) {
+    public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher, Consumer<MainGameManager> recipeBookLauncher) {
         this.setupScreenLauncher = setupScreenLauncher;
         this.preroundScreenLauncher = preroundScreenLauncher;
         this.mainScreenLauncher = mainScreenLauncher;
@@ -35,6 +38,7 @@ public class MainGameManager {
         this.clearScreen = clearScreen;
         this.towerManager = new TowerManager();
         this.conclusionLauncher = conclusionLauncher;
+        this.recipeBookLauncher = recipeBookLauncher;
 
         launchSetupScreen();
     }
@@ -86,6 +90,21 @@ public class MainGameManager {
     public void closeMainScreenPreRound(){
         clearScreen.run();
         launchPreroundScreen();
+    }
+    public void launchRecipeBook(String previousScreen1){
+        clearScreen.run();
+        previousScreen = previousScreen1;
+        System.out.println(previousScreen);
+        recipeBookLauncher.accept(this);}
+    public void closeRecipeBook(){
+        clearScreen.run();
+        switch (previousScreen) {
+            case "MainScreen" -> launchMainScreen();
+            case "Setup" -> launchSetupScreen();
+            case "ShopInventory" -> launchShopScreen();
+            case "Preround" -> launchPreroundScreen();
+        }
+
     }
 
     public TowerManager getTowerManager() {
