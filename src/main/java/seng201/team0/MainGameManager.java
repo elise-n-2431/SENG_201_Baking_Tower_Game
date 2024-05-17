@@ -1,8 +1,5 @@
 package seng201.team0;
 
-import seng201.team0.models.Tower;
-
-import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -28,6 +25,7 @@ public class MainGameManager {
     private Boolean success = true;
 
     private Integer moneyPerRound = 0;
+    private String previousScreen;
 
     public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher) {
         this.setupScreenLauncher = setupScreenLauncher;
