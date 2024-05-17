@@ -1,5 +1,6 @@
 package seng201.team0.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,4 +45,12 @@ public class ShopInventoryController {
     }
 
 
+    public void onBuyButtonClicked(ActionEvent actionEvent) {
+    }
+
+    public void onSellTowerClicked(ActionEvent actionEvent) {
+    }
+
+    public void onPlaceButtonClicked(ActionEvent actionEvent) {
+    }
 }
