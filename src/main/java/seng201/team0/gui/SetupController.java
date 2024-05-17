@@ -125,9 +125,9 @@ public class SetupController {
     }
     /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
     public void updateStats(Tower tower){
-        statsResourceTypeLabel.setText(tower.getResourceType());
-        statsReloadSpeedLabel.setText(String.valueOf(tower.getReloadSpeed()));
-        statsResourceAmountLabel.setText(String.valueOf(tower.getResourceAmount()));
+        statsResourceTypeLabel.setText("Resource Type: " + tower.getResourceType());
+        statsReloadSpeedLabel.setText("Reload Speed: " + String.valueOf(tower.getReloadSpeed()));
+        statsResourceAmountLabel.setText("Resource Amount: " + String.valueOf(tower.getResourceAmount()));
     }
     /* Sends the information to the relevant classes - tower or */
     @FXML

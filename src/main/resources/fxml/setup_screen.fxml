@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -7,103 +9,84 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.SetupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team0.gui.SetupController">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutY="220.0" prefHeight="380.0" prefWidth="800.0" AnchorPane.topAnchor="220.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="358.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.66668701171875" minWidth="4.0" prefWidth="9.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.33331298828125" minWidth="10.0" prefWidth="233.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="386.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.66668701171875" minWidth="4.0" prefWidth="27.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="387.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="64.33333206176758" minHeight="10.0" prefHeight="32.66667588551839" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="92.66665649414062" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="170.66665649414062" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="235.3333435058594" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="235.3333435058594" minHeight="0.0" prefHeight="14.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="7.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="235.3333435058594" minHeight="0.0" prefHeight="3.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="7.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="0.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="238.99998474121094" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="25.0" prefWidth="275.0" text="Welcome to Tower Game!" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets top="20.0" />
-               </opaqueInsets>
-            </Label>
-            <Label text="Name:" GridPane.rowIndex="1">
-               <padding>
-                  <Insets left="15.0" />
-               </padding></Label>
-            <Label text="Number of rounds:" GridPane.rowIndex="2">
-               <padding>
-                  <Insets left="15.0" />
-               </padding></Label>
-            <Label text="Game difficulty:" textAlignment="CENTER" GridPane.rowIndex="3">
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </Label>
-            <Slider fx:id="numRoundsSlider" majorTickUnit="1.0" max="15.0" min="5.0" minorTickCount="0" onDragDropped="#onNumRoundsChange" prefHeight="13.0" prefWidth="293.0" showTickLabels="true" snapToTicks="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="15.0" right="15.0" top="10.0" />
-               </GridPane.margin>
-            </Slider>
             
-            <Button fx:id="flourTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Flour" GridPane.rowIndex="6">
+            <Button fx:id="flourTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Flour" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="Used in pasta, pasta sauce, pancakes, carbonara, cake, and banana bread" />
+               </tooltip>
             </Button>
-            <Button fx:id="waterTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Water" GridPane.rowIndex="6">
+            <Button fx:id="waterTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Eggs" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="Used in fried eggs, scrambled eggs, pasta, pancakes, carbonara, cake, banana bread" />
+               </tooltip>
             </Button>
-            <Button fx:id="sugarTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Sugar" GridPane.rowIndex="6">
+            <Button fx:id="sugarTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Sugar" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="185.0" />
                </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="Used in cake and banana bread" />
+               </tooltip>
             </Button>
-            <Label text="Tower Stats" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Label text="Tower Stats" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Use your stations to fill bowls in a round with the given ingredient. Some stations have a higher cooldown speed than others. Towers can be levelled up to fill bowls faster." />
+               </tooltip>
             </Label>
-            <Label fx:id="statsResourceTypeLabel" text="Resource Type:" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.valignment="TOP">
+            <Label fx:id="statsResourceTypeLabel" text="Resource Type:" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="20.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="statsReloadSpeedLabel" text="Reload Speed:" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Label fx:id="statsReloadSpeedLabel" text="Reload Speed:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="20.0" left="20.0" top="20.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="statsResourceAmountLabel" text="Resource Amount:" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Label fx:id="statsResourceAmountLabel" text="Resource Amount:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" top="70.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="statsLevelLabel" text="Level: 1" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Label fx:id="statsLevelLabel" text="Level: 1" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" top="140.0" />
                </GridPane.margin>
             </Label>
-            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
-            <Label text="Selected Towers:" GridPane.rowIndex="7">
+            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" />
+            <Label text="Selected Towers:" GridPane.rowIndex="3">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -111,50 +94,85 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="selectedTower1Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="8">
+            <Button fx:id="selectedTower1Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="selectedTower2Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="8">
+            <Button fx:id="selectedTower2Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="selectedTower3Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="8">
+            <Button fx:id="selectedTower3Button" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="185.0" />
                </GridPane.margin>
             </Button>
-            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="4" />
-            <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#onStartClicked" text="Start Game!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <TextField fx:id="nameTextField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="181.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </TextField>
-            <Button fx:id="milkTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Milk" GridPane.rowIndex="6">
+            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+            <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#onStartClicked" text="Start Game!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button fx:id="milkTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Milk" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="270.0" />
                </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="Used in pasta sauce, scrambled eggs, pancakes, carbonara, cake, and banana bread" />
+               </tooltip>
             </Button>
-            <Label text="Choose from the following starter towers:" GridPane.rowIndex="5">
+            <Label prefHeight="20.0" prefWidth="228.0" text="Choose Your Starter Towers" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="Choose three ingredient stations from the starter selection. Different ingredient combinations will allow you to make different recipes, earning coins." />
+               </tooltip>
             </Label>
-            <Label fx:id="errorLabel" prefHeight="4.0" prefWidth="223.0" text="Error Message Label" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+            <Label fx:id="errorLabel" prefHeight="46.0" prefWidth="363.0" text="Error Message Label" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <GridPane.margin>
-                  <Insets top="60.0" />
+                  <Insets top="70.0" />
                </GridPane.margin>
                <font>
                   <Font name="System Italic" size="13.0" />
                </font>
             </Label>
-            <ChoiceBox value="Medium" fx:id="gameDifficultyChoiceBox" onAction="#onDifficultyChange" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+         </children>
+      </GridPane>
+      <GridPane layoutX="26.0" layoutY="42.0" prefHeight="136.0" prefWidth="794.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="245.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="252.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="223.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="30.0" prefWidth="350.0" text="Welcome to Flour Power!" textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets top="20.0" />
+               </opaqueInsets>
+            </Label>
+            <TextField fx:id="nameTextField" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="182.0" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="Name must be 3-15 characters and alphanumeric" />
+               </tooltip></TextField>
+            <Label text="Name:" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Label text="Number of rounds:" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Slider fx:id="numRoundsSlider" majorTickUnit="1.0" max="15.0" maxWidth="-Infinity" min="5.0" minorTickCount="0" onDragDropped="#onNumRoundsChange" prefHeight="43.0" prefWidth="239.0" showTickLabels="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+            <Label text="Game difficulty:" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <ChoiceBox fx:id="gameDifficultyChoiceBox" onAction="#onDifficultyChange" prefWidth="150.0" value="Medium" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Easy" />
@@ -162,6 +180,12 @@
                      <String fx:value="Hard" />
                   </FXCollections>
                </items>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+               <tooltip>
+                  <Tooltip text="The harder the difficulty, the less time you have to fill each bowl" />
+               </tooltip>
             </ChoiceBox>
          </children>
       </GridPane>

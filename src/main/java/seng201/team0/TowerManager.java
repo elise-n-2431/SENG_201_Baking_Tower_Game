@@ -21,10 +21,10 @@ public class TowerManager {
 //        this.mainScreenLauncher = mainScreenLauncher;
 //        this.clearScreen = clearScreen;
 
-        Tower flourTower = new Tower("Flour Mill", "Creates flour", 5, 3, "Flour", 10, 1);
-        Tower waterTower = new Tower("Water Tower", "Stores water", 5, 3, "Water", 20, 2);
-        Tower sugarTower = new Tower("Sugarcane Mill", "Processes sugar", 5, 3, "Sugar", 5, 2);
-        Tower dairyTower = new Tower("Dairy", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
+        Tower flourTower = new Tower("Flour", "Creates flour", 5, 3, "Flour", 10, 1);
+        Tower waterTower = new Tower("Eggs", "Eggs", 5, 3, "Water", 20, 2);
+        Tower sugarTower = new Tower("Sugar", "Processes sugar", 5, 3, "Sugar", 5, 2);
+        Tower dairyTower = new Tower("Milk", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
 
         defaultTowers.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
 //        launchSetupScreen();
