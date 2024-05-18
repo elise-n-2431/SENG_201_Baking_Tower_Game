@@ -55,4 +55,15 @@ IntelliJ has built-in support for Gradle. To import your project:
 1. Open a command line interface inside the project directory and run `./gradlew test` to run the tests.
 2. Test results should be printed to the command line
 
+## Image Credit
+Images by Elise Newman.
+
+## Background Audio Credit
+The background audio used in this project is:
+
+- **Track Name**: Groovy Ambient Funk
+- **Artist**: moodmode
+- **Source**: [Pixabay](https://pixabay.com/)
+- **License**: Royalty-Free Music from Pixabay
+
 **Note:** *This Jar is **NOT** cross-platform, so you **must** build the jar you submit on Linux.* 
