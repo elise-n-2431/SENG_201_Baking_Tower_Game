@@ -3,8 +3,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import seng201.team0.exceptions.NegativeBankException;
-import seng201.team0.models.Inventory;
+import seng201.team48.exceptions.NegativeBankException;
+import seng201.team48.models.Inventory;
 
 public class InventoryTest {
     static Inventory testInventory;
