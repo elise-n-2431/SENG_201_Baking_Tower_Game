@@ -55,12 +55,12 @@
                   <Font name="System Italic" size="13.0" />
                </font>
             </Label>
-             <ChoiceBox fx:id="numCartsChoiceBox" onAction="#onNumCartsChanged" prefWidth="150.0" value="Medium: 6 carts" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+             <ChoiceBox fx:id="numCartsChoiceBox" onAction="#onNumCartsChanged" prefWidth="150.0" value="Medium: 6 small" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                  <items>
                      <FXCollections fx:factory="observableArrayList">
-                         <String fx:value="Easy: 4 carts" />
-                         <String fx:value="Medium: 6 carts" />
-                         <String fx:value="Hard: 8 carts" />
+                         <String fx:value="Easy: 4 small" />
+                         <String fx:value="Medium: 6 small" />
+                         <String fx:value="Hard: 6 small + 2 large" />
                      </FXCollections>
                  </items>
              </ChoiceBox>

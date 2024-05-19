@@ -19,7 +19,7 @@ public class MainGameManager {
     private final Consumer<MainGameManager> recipeBookLauncher;
     private final Runnable clearScreen;
     private String gameDifficulty = "Medium";
-    private String roundDifficulty;
+    private String roundDifficulty = "Medium: 6 small";
     private String name;
     private Integer numRounds = 5; // Initialise default numRounds and currentRound to prevent "null" cases
     private Integer currentRound = 1;
@@ -124,6 +124,24 @@ public class MainGameManager {
      */
     public String getRoundDifficulty() {
         return roundDifficulty;
+    }
+    public Integer getNumSmall(){
+        switch (roundDifficulty) {
+            case "Hard: 6 small + 2 large", "Medium: 6 small" -> {
+                return 6;}
+            case "Easy: 4 small" -> {
+                return 4;}
+        }
+        return null;
+    }
+    public Integer getNumLarge(){
+        switch (roundDifficulty) {
+            case "Hard: 6 small + 2 large" -> {
+                return 2;}
+            case "Medium: 6 small", "Easy: 4 small" -> {
+                return 0;}
+        }
+        return null;
     }
     public Integer getMoneyPerRound() {
         return moneyPerRound;

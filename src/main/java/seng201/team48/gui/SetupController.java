@@ -18,6 +18,7 @@ import java.util.Objects;
  * @author seng201 teaching team
  */
 public class SetupController {
+
     // Instantiate manager objects to control game state
     TowerManager towerManager;
     MainGameManager mainGameManager;
@@ -28,6 +29,8 @@ public class SetupController {
     private int selectedTowerIndex = -1;
 
     private final Tower[] selectedTowers = new Tower[3];
+    @FXML
+    private Button recipeButton;
 
     @FXML
     private TextField nameTextField;
@@ -153,6 +156,11 @@ public class SetupController {
     public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {
         System.out.println("Number of rounds changed");
         mainGameManager.setNumRounds((int) numRoundsSlider.getValue());
+    }
+
+    @FXML
+    private void onRecipeClicked(){
+        mainGameManager.launchRecipeBook("Setup");
     }
 
     /* Prefilled in content

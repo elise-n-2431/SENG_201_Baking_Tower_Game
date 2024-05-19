@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import seng201.team48.MainGameManager;
+import seng201.team48.services.BowlService;
 
 import java.io.IOException;
 
