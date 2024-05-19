@@ -16,38 +16,13 @@ public class TowerManager {
      * Constructor
      */
     public TowerManager() {
-//        this.setupScreenLauncher = setupScreenLauncher; // MOVED TO MAIN GAME MANAGER
-//        this.mainScreenLauncher = mainScreenLauncher;
-//        this.clearScreen = clearScreen;
-
+        Tower eggTower = new Tower("Eggs", "Eggs", 5, 3, "Water", 20, 2);
+        Tower milkTower = new Tower("Milk", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
         Tower flourTower = new Tower("Flour", "Creates flour", 5, 3, "Flour", 10, 1);
-        Tower waterTower = new Tower("Eggs", "Eggs", 5, 3, "Water", 20, 2);
+        Tower bananaTower = new Tower("Banana", "is a tree", 7, 8, "Banana", 7, 4);
         Tower sugarTower = new Tower("Sugar", "Processes sugar", 5, 3, "Sugar", 5, 2);
-        Tower dairyTower = new Tower("Milk", "Creates butter, milk and cream", 6, 3, "Butter", 8, 3);
-
-        defaultTowers.addAll(List.of(flourTower, waterTower, sugarTower, dairyTower));
-//        launchSetupScreen();
+        defaultTowers.addAll(List.of(flourTower, eggTower, sugarTower, milkTower, bananaTower));
     }
-
-// MOVED TO MAIN GAME MANAGER
-//    public void launchSetupScreen() {
-//        setupScreenLauncher.accept(this);
-//    }
-//
-//    public void closeSetupScreen() {
-//        clearScreen.run();
-//        launchMainScreen();
-//    }
-//
-//    public void launchMainScreen() {
-//        // Screen where rounds will be played
-//        mainScreenLauncher.accept(this);
-//    }
-//
-//    public void closeRoundScreen() {
-//        clearScreen.run();
-//        // LAUNCH NEXT SCREEN -- Shop/Inventory? Also have a quit function with System.exit(0)
-//    }
 
     public List<Tower> getDefaultTowers() {
         return defaultTowers;

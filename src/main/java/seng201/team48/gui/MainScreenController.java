@@ -10,6 +10,7 @@ import seng201.team48.models.Bowl;
 import seng201.team48.models.Tower;
 import seng201.team48.services.BowlService;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MainScreenController {
@@ -21,40 +22,38 @@ public class MainScreenController {
     public ImageView imageThree;
     public ImageView imageFour;
     public ImageView imageFive;
+    public Label announcement;
+    public Button resetButton;
     public Bowl currentBowl = null;
     TowerManager towerManager;
     MainGameManager mainGameManager;
     BowlService bowlService = new BowlService();
+    public AnimationTimer timer;
 
     public MainScreenController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
 
-        AnimationTimer timer = new AnimationTimer() {
-            private long lastUpdate = 0;
-            int increase = mainGameManager.getMoneyPerRound();
-            int activeTime = 0;
+        timer = new AnimationTimer() {
+            private long bowlTime = 0;
             @Override
             public void handle(long now) {
-                // Check if 20 seconds have passed (20,000,000,000 nanoseconds)
-                if (now - lastUpdate >= 2_000_000_000L) { //time should change based on difficulty
-                    updateValue(increase);
-                    increase += 100;
-                    lastUpdate = now;
-                    if (increase > 1000){ //should end round when carts have all gone through
-                        endRound();
-                        mainGameManager.setMoneyPerRound(0);
-                        increase = 0;
-                        this.stop();
-                    }
-                }
-                if (now - activeTime >= 10_000_000_000L) {
-                    //loses game
 
+                if (now - bowlTime >= 10_000_000_000L) {
+                    this.stop();
+                    fail();
                 }
             }
+            public void restartTimer(long thisTime){
+                bowlTime = thisTime;
+            }
+
         };
         timer.start();
+    }
+    public void resetBowlTimer() {
+        //doesnt work :(
+        timer.restartTimer(System.nanoTime());
     }
     @FXML
     private void updateValue(int increase) {
@@ -112,6 +111,11 @@ public class MainScreenController {
         }
     }
     @FXML
+    private void onResetClicked(){
+        //should not restart from start of track
+        currentBowl = bowlService.getNewBowl();
+    }
+    @FXML
     private void onRecipeClicked(){
         mainGameManager.launchRecipeBook("MainScreen");
     }
@@ -121,15 +125,74 @@ public class MainScreenController {
     }
     private void addToBowl(Tower tower){
         // call for this method when the user clicks a tower
-        //currentBowl.addToBowl( "Tower goes here" );
+        currentBowl.addToBowl(tower);
         if(currentBowl.getFullBowl().equals(true)){
-            if(inRecipe()){
-                //destroy currentBowl
+            String product = inRecipe();
+            if(product != null){
+                announcement.setText("You have made: " + product);
                 currentBowl = bowlService.getNewBowl();
+                //should put new bowl back to start of track
+                resetBowlTimer();
+            } else {
+                announcement.setText("Sorry, that can't be baked, try again");
             }
         }
     }
-    private Boolean inRecipe(){
-        // check the items in bowl against recipes
+    private String inRecipe(){
+        String all = getString();
+        switch (all) {
+            case "30000" -> {
+                updateValue(20);
+                return "Fried Eggs";
+            }
+            case "02100" -> {
+                updateValue(20);
+                return "Pasta Sauce";
+            }
+            case "21000" -> {
+                updateValue(30);
+                return "Scrambled Eggs";
+            }
+            case "10200" -> {
+                updateValue(30);
+                return "Pasta";
+            }
+            case "11100" -> {
+                updateValue(50);
+                return "Pancakes";
+            }
+            case "02010" -> {
+                updateValue(70);
+                return "Banana Smoothie";
+            }
+            case "12200" -> {
+                updateValue(100);
+                return "Pasta Carbonara";
+            }
+            case "11201" -> {
+                updateValue(150);
+                return "Cake";
+            }
+            case "11111" -> {
+                updateValue(200);
+                return "Banana Bread";
+            }
+        } return null;
+    }
+    private String getString(){
+        List<Tower> allTowers = towerManager.getDefaultTowers();
+        Tower egg = allTowers.get(0);
+        Tower milk = allTowers.get(1);
+        Tower flour = allTowers.get(2);
+        Tower banana = allTowers.get(3);
+        Tower sugar = allTowers.get(4);
+
+        List<Tower> filled = currentBowl.getFilled();
+        int num_egg = Collections.frequency(filled, egg);
+        int num_milk = Collections.frequency(filled, milk);
+        int num_flour = Collections.frequency(filled, flour);
+        int num_banana = Collections.frequency(filled, banana);
+        int num_sugar = Collections.frequency(filled, sugar);
+        return "" + num_egg + num_milk + num_flour + num_banana + num_sugar;
     }
 }

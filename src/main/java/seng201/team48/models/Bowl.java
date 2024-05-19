@@ -7,7 +7,7 @@ public class Bowl {
     private final Integer capacity;
     private Integer currentIndex = 0;
     private Boolean fullBowl = Boolean.FALSE;
-    private List<Tower> filled = new ArrayList<>();
+    private List<Tower> filled;
     public Bowl(Integer newCapacity, List<Tower> newFilled){
         this.capacity = newCapacity;
         this.filled = newFilled;
@@ -26,5 +26,8 @@ public class Bowl {
     public Boolean getFullBowl(){return fullBowl;}
     public List<Tower> getFilled(){
         return filled;
+    }
+    public Integer getCapacity(){
+        return capacity;
     }
 }
