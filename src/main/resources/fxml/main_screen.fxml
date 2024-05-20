@@ -42,11 +42,11 @@
             <Button fx:id="imageTwo" disable="true" layoutX="117.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTwoClicked" prefHeight="116.0" prefWidth="74.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
             <Button fx:id="imageFive" disable="true" layoutX="330.0" layoutY="10.0" mnemonicParsing="false" onAction="#onFiveClicked" prefHeight="116.0" prefWidth="74.0" style="-fx-background-color: white;" GridPane.columnIndex="4" />
             <Button fx:id="imageFour" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onFourClicked" prefHeight="116.0" prefWidth="74.0" style="-fx-background-color: white;" GridPane.columnIndex="3" />
-            <ProgressBar fx:id="reloadOne" visible ="false" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reloadThree" visible ="false" layoutX="10.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reloadTwo" visible ="false" layoutX="10.0" layoutY="53.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reloadFour" visible ="false" layoutX="224.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reloadFive" visible ="false" layoutX="330.0" layoutY="116.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload1" visible ="false" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload3" visible ="false" layoutX="10.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload2" visible ="false" layoutX="10.0" layoutY="53.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload4" visible ="false" layoutX="224.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload5" visible ="false" layoutX="330.0" layoutY="116.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="recipeButton" layoutX="729.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />

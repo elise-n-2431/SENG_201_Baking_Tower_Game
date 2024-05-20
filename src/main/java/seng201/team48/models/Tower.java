@@ -12,7 +12,7 @@ package seng201.team48.models;
 public class Tower extends Purchasable {
     private String resourceType; /* WHAT TYPES OF RESOURCE DO WE WANT? */
     private int resourceAmount = 0; /* Default to zero. RENAME THIS? */
-    private int reloadSpeed; /* How often per second the tower donates resources */
+    private double reloadSpeed; /* Decimal value for progress bar increase (percent of 1) */
     private int level = 1; /* Towers can be levelled up, but start from level 1. */
     private boolean broken = false; /* Towers have chance of breaking after each round */
 
@@ -24,9 +24,9 @@ public class Tower extends Purchasable {
      * @param sellPrice Sell price of tower. Once sold, the user is remunerated the sellPrice amount into their bank.
      * @param resourceType Type of resource with which the tower can fill cart objects during a round.
      * @param resourceAmount Amount of resources to load into carts per action.
-     * @param reloadSpeed Amount of time (seconds) it takes after a cart fill before the tower can fill carts again.
+     * @param reloadSpeed Progress percent increase per second.
      */
-    public Tower(String name, String description, int purchasePrice, int sellPrice, String resourceType, int resourceAmount, int reloadSpeed) {
+    public Tower(String name, String description, int purchasePrice, int sellPrice, String resourceType, int resourceAmount, double reloadSpeed) {
         super(name, description, purchasePrice, sellPrice); /* Purchasable attributes */
         this.resourceType = resourceType;
         this.resourceAmount = resourceAmount;
@@ -38,7 +38,7 @@ public class Tower extends Purchasable {
         super("myTower", "For testing", 5, 3); /* Purchasable attributes */
         this.resourceType = "Eggs";
         this.resourceAmount = 5;
-        this.reloadSpeed = 1;
+        this.reloadSpeed = 0.1;
     }
 
     /** Returns string representation of Tower object. */
@@ -78,7 +78,7 @@ public class Tower extends Purchasable {
      *
      * @return reloadSpeed
      */
-    public int getReloadSpeed() {
+    public double getReloadSpeed() {
         return reloadSpeed;
     }
 
@@ -86,7 +86,7 @@ public class Tower extends Purchasable {
      * Set tower's reload speed.
      * @param reloadSpeed
      */
-    public void setReloadSpeed(int reloadSpeed) {
+    public void setReloadSpeed(double reloadSpeed) {
         this.reloadSpeed = reloadSpeed;
     }
 

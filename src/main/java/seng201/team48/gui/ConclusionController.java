@@ -23,7 +23,7 @@ public class ConclusionController {
             String successText = "Congratulations " + mainGameManager.getName() + ", you have won the game!";
             successOrFailure.setText(successText);
         } else{
-            successOrFailure.setText("Sorry, you have failed, try again");
+            successOrFailure.setText("You have failed as a person, your mother is not proud of you, try again");
         }
     }
     @FXML

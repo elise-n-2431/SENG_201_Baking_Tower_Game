@@ -24,7 +24,11 @@ public class MainGameManager {
     private Integer numRounds = 5; // Initialise default numRounds and currentRound to prevent "null" cases
     private Integer currentRound = 1;
     private Boolean success = true;
-
+    private double reload1Temp = 0;
+    private double reload2Temp = 0;
+    private double reload3Temp = 0;
+    private double reload4Temp = 0;
+    private double reload5Temp = 0;
     private Integer moneyPerRound = 0;
     private String previousScreen;
 
@@ -172,6 +176,11 @@ public class MainGameManager {
     public Integer getCurrentRound(){
         return currentRound;
     }
+    public double getReload1Temp() { return reload1Temp; }
+    public double getReload2Temp() { return reload2Temp; }
+    public double getReload3Temp() { return reload3Temp; }
+    public double getReload4Temp() { return reload4Temp; }
+    public double getReload5Temp() { return reload5Temp; }
 
     /**
      * Increase current round by 1, Called after round completion.
@@ -204,4 +213,21 @@ public class MainGameManager {
     public void setMoneyPerRound(Integer moneyPerRound) {
         this.moneyPerRound = moneyPerRound;
     }
+
+    public void setReload1Temp(double reload1Temp) {
+        this.reload1Temp = reload1Temp;
+    }
+    public void setReload2Temp(double reload2Temp) {
+        this.reload2Temp = reload2Temp;
+    }
+    public void setReload3Temp(double reload3Temp) {
+        this.reload3Temp = reload3Temp;
+    }
+    public void setReload4Temp(double reload4Temp) {
+        this.reload4Temp = reload4Temp;
+    }
+    public void setReload5Temp(double reload5Temp) {
+        this.reload5Temp = reload5Temp;
+    }
+
 }

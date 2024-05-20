@@ -1,14 +1,19 @@
 package seng201.team48.gui;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
+import javafx.scene.shape.Line;
+import javafx.util.Duration;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 import seng201.team48.models.Bowl;
 import seng201.team48.models.Tower;
 import seng201.team48.services.BowlService;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,21 +33,17 @@ public class MainScreenController {
     public Button resetBowl;
     public Bowl currentBowl = null;
     public Button recipeButton;
-    public ProgressBar reloadOne;
-    public ProgressBar reloadTwo;
-    public ProgressBar reloadThree;
-    public ProgressBar reloadFour;
-    public ProgressBar reloadFive;
+    public ProgressBar reload1;
+    public ProgressBar reload2;
+    public ProgressBar reload3;
+    public ProgressBar reload4;
+    public ProgressBar reload5;
     TowerManager towerManager;
     MainGameManager mainGameManager;
     BowlService bowlService = new BowlService();
     public AnimationTimer timer;
     private boolean resetTimer = false;
-    private double reloadOneTemp = 0;
-    private double reloadTwoTemp = 0;
-    private double reloadThreeTemp = 0;
-    private double reloadFourTemp = 0;
-    private double reloadFiveTemp = 0;
+    private List<Tower> playerTowers;
 
 
 
@@ -79,7 +80,7 @@ public class MainScreenController {
 
     @FXML
     public void initialize(){
-        List<Tower> playerTowers = towerManager.getPlayerTowers();
+        playerTowers = towerManager.getPlayerTowers();
         String imagePath = "/images/"+playerTowers.get(0).getResourceType()+".png";
         Image imgOne = new Image(getClass().getResourceAsStream(imagePath));
         ImageView view = new ImageView(imgOne);
@@ -87,7 +88,7 @@ public class MainScreenController {
         view.setPreserveRatio(true);
         imageOne.setGraphic(view);
         imageOne.setDisable(false); //disabled if not in use
-        reloadOne.setVisible(true);
+        reload1.setVisible(true);
 
         String imagePath2 = "/images/" +playerTowers.get(1).getResourceType()+ ".png";
         Image imgTwo = new Image(getClass().getResourceAsStream(imagePath2));
@@ -96,7 +97,7 @@ public class MainScreenController {
         view2.setPreserveRatio(true);
         imageTwo.setGraphic(view2);
         imageTwo.setDisable(false);
-        reloadTwo.setVisible(true);
+        reload2.setVisible(true);
 
         String imagePath3 = "/images/"+playerTowers.get(2).getResourceType()+".png";
         Image imgThree = new Image(getClass().getResourceAsStream(imagePath3));
@@ -105,7 +106,7 @@ public class MainScreenController {
         view3.setPreserveRatio(true);
         imageThree.setGraphic(view3);
         imageThree.setDisable(false);
-        reloadThree.setVisible(true);
+        reload3.setVisible(true);
 
         /* prevents bank balance continuing to new rounds */
         if(mainGameManager.getCurrentRound()!=1){
@@ -114,6 +115,7 @@ public class MainScreenController {
         } else{
             mainGameManager.setMoneyPerRound(0);
         }
+
         Integer numSmall = mainGameManager.getNumSmall();
         Integer numLarge = mainGameManager.getNumLarge();
         if (numSmall != null){
@@ -122,31 +124,45 @@ public class MainScreenController {
             }
         }
 
-        /* testing for recipe book
-        List<Tower> allTowers = towerManager.getDefaultTowers();
-        List<Tower> towers = new ArrayList<Tower>(3);
-        towers.add(allTowers.get(0));
-        towers.add(allTowers.get(0));
-        towers.add(allTowers.get(1));
-        String product = inRecipe(towers);
-        if(product != null){
-            System.out.println(product);
-        } */
-
     }
     public void increaseProgressBars() {
-        //get reload speed from somewhere - temp is same
-        reloadOne.setProgress(reloadOneTemp + 0.1);
-        reloadOneTemp += 0.1;
-        reloadTwo.setProgress(reloadTwoTemp + 0.1);
-        reloadTwoTemp += 0.1;
-        reloadThree.setProgress(reloadThreeTemp + 0.1);
-        reloadThreeTemp += 0.1;
-        reloadFour.setProgress(reloadFourTemp + 0.1);
-        reloadFourTemp += 0.1;
-        reloadFive.setProgress(reloadFiveTemp + 0.1);
-        reloadFiveTemp += 0.1;
+        //updates progress bars for each active tower in towers
+        for (int i = 0; i < playerTowers.size(); i++) {
+            double reloadSpeed = playerTowers.get(i).getReloadSpeed();
+            double currentReload = 0;
+            switch (i) {
+                case 0:
+                    currentReload = mainGameManager.getReload1Temp() + reloadSpeed;
+                    mainGameManager.setReload1Temp(currentReload);
+                    reload1.setProgress(currentReload);
+                    break;
+                case 1:
+                    currentReload = mainGameManager.getReload2Temp() + reloadSpeed;
+                    mainGameManager.setReload2Temp(currentReload);
+                    reload2.setProgress(currentReload);
+                    break;
+                case 2:
+                    currentReload = mainGameManager.getReload3Temp() + reloadSpeed;
+                    mainGameManager.setReload3Temp(currentReload);
+                    reload3.setProgress(currentReload);
+                    break;
+                case 3:
+                    currentReload = mainGameManager.getReload4Temp() + reloadSpeed;
+                    mainGameManager.setReload4Temp(currentReload);
+                    reload4.setProgress(currentReload);
+                    break;
+                case 4:
+                    currentReload = mainGameManager.getReload5Temp() + reloadSpeed;
+                    mainGameManager.setReload5Temp(currentReload);
+                    reload5.setProgress(currentReload);
+                    break;
+                default:
+                    System.out.println("error - cannot identify tower");
+            }
+        }
     }
+
+
 
     public void resetBowlTimer() {
         resetTimer = true;
@@ -165,30 +181,40 @@ public class MainScreenController {
 
     @FXML
     private void onOneClicked(){
-        reloadOne.setProgress(0);
-        reloadOneTemp = 0;
+        if (mainGameManager.getReload1Temp() >= 1){
+            reload1.setProgress(0);
+            mainGameManager.setReload1Temp(0);
+            addToBowl(playerTowers.get(0));}
     }
     @FXML
     private void onTwoClicked(){
-        reloadTwo.setProgress(0);
-        reloadTwoTemp = 0;
+        if (mainGameManager.getReload2Temp() >= 1){
+            reload2.setProgress(0);
+            mainGameManager.setReload2Temp(0);
+            addToBowl(playerTowers.get(1));}
     }
     @FXML
     private void onThreeClicked(){
-        reloadThree.setProgress(0);
-        reloadThreeTemp = 0;
+        if (mainGameManager.getReload3Temp() >= 1) {
+            reload3.setProgress(0);
+            mainGameManager.setReload3Temp(0);
+            addToBowl(playerTowers.get(2));}
     }
     @FXML
     private void onFourClicked(){
-        reloadFour.setProgress(0);
-        reloadFourTemp = 0;
+        if (mainGameManager.getReload4Temp() >= 1){
+            reload4.setProgress(0);
+            mainGameManager.setReload4Temp(0);
+            addToBowl(playerTowers.get(3));}
     }
     @FXML
     private void onFiveClicked(){
-        reloadFive.setProgress(0);
-        reloadFiveTemp = 0;
+        if (mainGameManager.getReload5Temp() >= 1){
+            reload5.setProgress(0);
+            mainGameManager.setReload5Temp(0);
+            addToBowl(playerTowers.get(4));}
     }
-    //TESTING ENDS
+
 
     @FXML
     private void onBackClicked() {
@@ -220,10 +246,14 @@ public class MainScreenController {
         mainGameManager.closeMainScreenConclusion();
     }
     private void addToBowl(Tower tower){
-        // call for this method when the user clicks a tower
+        if(currentBowl == null){
+            currentBowl = bowlService.getNewBowl();
+        }
         currentBowl.addToBowl(tower);
+        System.out.println(currentBowl.getFullBowl());
         if(currentBowl.getFullBowl().equals(true)){
             String product = inRecipe();
+            System.out.println(product);
             if(product != null){
                 announcement.setText("You have made: " + product);
                 resetBowlTimer();
@@ -281,11 +311,12 @@ public class MainScreenController {
     }
     private String getString(){
         List<Tower> allTowers = towerManager.getDefaultTowers();
-        Tower egg = allTowers.get(0);
-        Tower milk = allTowers.get(1);
-        Tower flour = allTowers.get(2);
-        Tower banana = allTowers.get(3);
-        Tower sugar = allTowers.get(4);
+        System.out.println(allTowers);
+        Tower egg = allTowers.get(1);
+        Tower milk = allTowers.get(3);
+        Tower flour = allTowers.get(0);
+        Tower banana = allTowers.get(4);
+        Tower sugar = allTowers.get(2);
 
         List<Tower> filled = currentBowl.getFilled();
         int num_egg = Collections.frequency(filled, egg);
