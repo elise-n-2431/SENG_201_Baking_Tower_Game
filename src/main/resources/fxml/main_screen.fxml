@@ -20,9 +20,9 @@
       </ImageView>
       <Button fx:id="backButton" layoutX="59.0" layoutY="66.0" mnemonicParsing="false" onAction="#onBackClicked" text="Back" />
       <Button fx:id="shopButton" layoutX="57.0" layoutY="104.0" mnemonicParsing="false" onAction="#onShopClicked" text="Shop" />
-      <Label fx:id="moneyValue" layoutX="77.0" layoutY="157.0" text="100">
+      <Label fx:id="moneyValue" layoutX="77.0" layoutY="157.0" text="0">
          <font>
-            <Font size="18.0" />
+            <Font name="Cambria" size="18.0" />
          </font></Label>
       <GridPane layoutX="92.0" layoutY="259.0" prefHeight="116.0" prefWidth="532.0">
         <columnConstraints>
@@ -42,11 +42,11 @@
             <Button fx:id="imageTwo" disable="true" layoutX="117.0" layoutY="10.0" mnemonicParsing="false" onAction="#onTwoClicked" prefHeight="116.0" prefWidth="74.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
             <Button fx:id="imageFive" disable="true" layoutX="330.0" layoutY="10.0" mnemonicParsing="false" onAction="#onFiveClicked" prefHeight="116.0" prefWidth="74.0" style="-fx-background-color: white;" GridPane.columnIndex="4" />
             <Button fx:id="imageFour" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onFourClicked" prefHeight="116.0" prefWidth="74.0" style="-fx-background-color: white;" GridPane.columnIndex="3" />
-            <ProgressBar fx:id="reload1" visible ="false" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reload3" visible ="false" layoutX="10.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reload2" visible ="false" layoutX="10.0" layoutY="53.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reload4" visible ="false" layoutX="224.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ProgressBar fx:id="reload5" visible ="false" layoutX="330.0" layoutY="116.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload1" prefHeight="10.0" prefWidth="103.0" progress="0.0" visible="false" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload3" layoutX="10.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload2" layoutX="10.0" layoutY="53.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload4" layoutX="224.0" layoutY="112.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="reload5" layoutX="330.0" layoutY="116.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="recipeButton" layoutX="729.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
@@ -57,5 +57,15 @@
       </Label>
       <Button fx:id="resetButton" layoutX="732.0" layoutY="53.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Reset" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="resetBowl" layoutX="710.0" layoutY="244.0" mnemonicParsing="false" onAction="#resetBowlClicked" text="ResetTimer" />
+      <Label fx:id="header" layoutX="236.0" layoutY="100.0" text="In ______ Bowl:">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="ingredient1" alignment="TOP_LEFT" layoutX="260.0" layoutY="130.0" prefHeight="140.0" prefWidth="141.0">
+         <font>
+            <Font name="Cambria" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

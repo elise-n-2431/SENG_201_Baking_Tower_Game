@@ -38,6 +38,9 @@ public class MainScreenController {
     public ProgressBar reload3;
     public ProgressBar reload4;
     public ProgressBar reload5;
+    public Label ingredient1;
+    public Label header;
+    public String ingredient1Contents = "";
     TowerManager towerManager;
     MainGameManager mainGameManager;
     BowlService bowlService = new BowlService();
@@ -123,6 +126,9 @@ public class MainScreenController {
                 bowlService.setNumBowlsSelected(numSmall, numLarge);
             }
         }
+        currentBowl = bowlService.getNewBowl();
+        header.setText("In " + currentBowl.getSize() + " Bowl: ");
+
 
     }
     public void increaseProgressBars() {
@@ -174,8 +180,9 @@ public class MainScreenController {
     }
     @FXML
     private void updateValue(int increase) {
-        mainGameManager.setMoneyPerRound(increase);
-        String s = String.valueOf(increase);
+        Integer newTotal = mainGameManager.getMoneyPerRound() + increase;
+        mainGameManager.setMoneyPerRound(newTotal);
+        String s = String.valueOf(newTotal);
         moneyValue.setText(s);
     }
 
@@ -225,17 +232,12 @@ public class MainScreenController {
         mainGameManager.closeMainScreenShop();
     }
     private void endRound() {
-        if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())){
+        if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())) {
             mainGameManager.closeMainScreenConclusion();
         } else {
             mainGameManager.updateRounds();
             mainGameManager.closeMainScreenPreRound();
         }
-    }
-    @FXML
-    private void onResetClicked(){
-        //resets the bowl contents by creating a new bowl at same location
-        currentBowl = bowlService.getNewBowl();
     }
     @FXML
     private void onRecipeClicked(){
@@ -246,11 +248,9 @@ public class MainScreenController {
         mainGameManager.closeMainScreenConclusion();
     }
     private void addToBowl(Tower tower){
-        if(currentBowl == null){
-            currentBowl = bowlService.getNewBowl();
-        }
         currentBowl.addToBowl(tower);
-        System.out.println(currentBowl.getFullBowl());
+        ingredient1Contents = ingredient1Contents + "- " + tower.getResourceType() + "\n";
+        ingredient1.setText(ingredient1Contents);
         if(currentBowl.getFullBowl().equals(true)){
             String product = inRecipe();
             System.out.println(product);
@@ -262,9 +262,16 @@ public class MainScreenController {
                     endRound();
                 } else {
                     currentBowl = bowlService.getNewBowl();
+                    header.setText("In " + currentBowl.getSize() + " Bowl: ");
+                    ingredient1Contents = "";
+                    ingredient1.setText("");
                 }
             } else {
                 announcement.setText("Sorry, that can't be baked, try again");
+                currentBowl = bowlService.getNewBowl();
+                header.setText("In " + currentBowl.getSize() + " Bowl: ");
+                ingredient1Contents = "";
+                ingredient1.setText("");
             }
         }
     }

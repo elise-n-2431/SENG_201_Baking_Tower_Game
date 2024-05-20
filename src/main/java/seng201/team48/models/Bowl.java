@@ -6,12 +6,15 @@ import java.util.List;
 public class Bowl {
     private final Integer capacity;
     private Integer currentIndex = 0;
+    private String size;
     private Boolean fullBowl = Boolean.FALSE;
     private List<Tower> filled;
-    public Bowl(Integer newCapacity, List<Tower> newFilled){
-        this.capacity = newCapacity;
-        this.filled = newFilled;
+    public Bowl(Integer newCapacity, String newSize, List<Tower> newFilled){
+        capacity = newCapacity;
+        filled = newFilled;
         fullBowl = false;
+        size = newSize;
+
     }
     public void addToBowl(Tower content){
         filled.set(currentIndex, content);
@@ -25,11 +28,16 @@ public class Bowl {
     public void setFullBowl(Boolean trueOrFalse) {
         fullBowl = trueOrFalse;
     }
-    public Boolean getFullBowl(){return fullBowl;}
+    public Boolean getFullBowl(){
+        return fullBowl;
+    }
     public List<Tower> getFilled(){
         return filled;
     }
     public Integer getCapacity(){
         return capacity;
+    }
+    public String getSize(){
+        return size;
     }
 }

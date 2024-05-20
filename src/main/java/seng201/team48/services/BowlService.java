@@ -42,7 +42,7 @@ public class BowlService {
             newFilled.add(null);
             newFilled.add(null);
             numLargeBowlsSent += 1;
-            return new Bowl(5, newFilled);
+            return new Bowl(5, "Large", newFilled);
         } else{
             //send a small bowl
             List<Tower> newFilled = new ArrayList<Tower> (3);
@@ -50,7 +50,7 @@ public class BowlService {
             newFilled.add(null);
             newFilled.add(null);
             numSmallBowlsSent += 1;
-            return new Bowl(3, newFilled);
+            return new Bowl(3, "Small", newFilled);
         }
     }
 }
