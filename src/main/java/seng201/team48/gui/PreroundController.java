@@ -9,6 +9,7 @@ import seng201.team48.TowerManager;
 
 public class PreroundController {
     private final TowerManager towerManager;
+    private String greetingText = "Welcome to the game, ";
     MainGameManager mainGameManager;
     @FXML
     private Label greetingLabel;
@@ -25,7 +26,13 @@ public class PreroundController {
     }
 
     public void initialize() {
-        greetingLabel.setText("Good to see you " + mainGameManager.getName() + "! Prepare to start round...");
+        if (mainGameManager.getCurrentRound() > 1) {
+            setGreetingText("Congrats, you've completed round " + (mainGameManager.getCurrentRound() - 1) + "! Ready for the next one?");
+        }
+        else {
+            setGreetingText("Welcome to the game, " + mainGameManager.getName() + "! Prepare to get baking...");
+        }
+        greetingLabel.setText(greetingText);
         currentRoundLabel.setText("Current round: " + mainGameManager.getCurrentRound() + " of " + mainGameManager.getNumRounds());
         gameDifficultyLabel.setText("Game difficulty: " + mainGameManager.getGameDifficulty());
     }
@@ -36,5 +43,13 @@ public class PreroundController {
 
     public void onStartClicked(ActionEvent actionEvent) {
         mainGameManager.closePreroundScreen();
+    }
+
+    public String getGreetingText() {
+        return greetingText;
+    }
+
+    public void setGreetingText(String greetingText) {
+        this.greetingText = greetingText;
     }
 }

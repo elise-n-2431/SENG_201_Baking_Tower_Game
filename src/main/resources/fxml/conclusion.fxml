@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team48.gui.ConclusionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team48.gui.ConclusionController">
    <children>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackClicked" text="Back" />
+      <Button fx:id="backButton" layoutX="249.0" layoutY="297.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="24.0" prefWidth="102.0" text="Play Again" />
       <Label fx:id="successOrFailure" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="145.0" prefHeight="109.0" prefWidth="398.0" text="THREE LINES THREE LINES THREE LINES  THREE LINES THREE LINES THREE LINES" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Cambria" size="28.0" />
