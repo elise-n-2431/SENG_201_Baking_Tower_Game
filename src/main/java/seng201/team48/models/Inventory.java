@@ -23,7 +23,7 @@ public class Inventory {
      * @param increase The amount (positive integer) to be added to player's bank balance.
      * */
     public void increaseBank(int increase) {
-        bankBalance += increase;
+        setBankBalance(bankBalance + increase);
     }
 
     /**
@@ -31,12 +31,16 @@ public class Inventory {
      * @param decrease The amount (positive integer) to be subtracted from player's bank balance.
     * */
     public void decreaseBank(int decrease) throws NegativeBankException {
-        if (bankBalance - decrease >= 0) {
+        if (getBankBalance() - decrease >= 0) {
             bankBalance -= decrease;
         }
         else {
             throw new NegativeBankException("Bank balance below 0");
         }
+    }
+
+    public void setBankBalance(int bankBalance) {
+        this.bankBalance = bankBalance;
     }
 
     /**

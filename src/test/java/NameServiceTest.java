@@ -1,5 +1,3 @@
-package seng201.team48.unittests.services;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng201.team48.services.NameService;

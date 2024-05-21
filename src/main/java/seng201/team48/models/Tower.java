@@ -10,8 +10,8 @@ package seng201.team48.models;
  */
 
 public class Tower extends Purchasable {
-    private String resourceType; /* WHAT TYPES OF RESOURCE DO WE WANT? */
-    private int resourceAmount = 0; /* Default to zero. RENAME THIS? */
+    private String resourceType;
+    private int resourceAmount;
     private double reloadSpeed; /* Decimal value for progress bar increase (percent of 1) */
     private int level = 1; /* Towers can be levelled up, but start from level 1. */
     private boolean broken = false; /* Towers have chance of breaking after each round */
