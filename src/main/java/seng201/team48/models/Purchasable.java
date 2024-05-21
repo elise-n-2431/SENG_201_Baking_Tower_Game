@@ -12,7 +12,6 @@ public class Purchasable {
 
     /**
      * Constructor which is invoked by all children of Purchasable.
-     * @param name Name of Purchasable object
      * @param description Description of object
      * @param purchasePrice Amount of coins required to purchase from shop
      * @param sellPrice Amount of coins which player can sell the item for

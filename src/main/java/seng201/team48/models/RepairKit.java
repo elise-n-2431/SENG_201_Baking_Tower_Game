@@ -8,10 +8,9 @@ package seng201.team48.models;
 
 public class RepairKit extends Purchasable {
     /** Calls constructor of the Purchasable superclass.
-     * @param name Name of the repair kit.
      */
-    public RepairKit(String name) {
-        super(name, "Repair kit", 5, 3);
+    public RepairKit() {
+        super("Repair kit", "Repairs a broken tower", 5, 3);
     }
 
     /**
