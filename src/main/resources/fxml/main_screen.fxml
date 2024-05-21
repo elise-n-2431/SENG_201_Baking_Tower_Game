@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team48.gui.MainScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team48.gui.MainScreenController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -66,8 +66,8 @@
             <Font name="Cambria" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="731.0" layoutY="56.0" prefHeight="20.0" prefWidth="32.0" text="Bowl:" wrapText="true" />
-      <Label layoutX="731.0" layoutY="115.0" prefHeight="20.0" prefWidth="41.0" text="Round:" wrapText="true" />
+      <Label layoutX="731.0" layoutY="56.0" prefHeight="20.0" prefWidth="41.0" text="Bowl:" wrapText="true" />
+      <Label layoutX="731.0" layoutY="115.0" prefHeight="20.0" prefWidth="51.0" text="Round:" wrapText="true" />
       <Label fx:id="bowlNumber" layoutX="738.0" layoutY="76.0" text="5/7" />
       <Label fx:id="roundNumber" layoutX="738.0" layoutY="135.0" text="5/7" />
       <ImageView fx:id="bowlImage" fitHeight="53.0" fitWidth="90.0" layoutX="-25.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">

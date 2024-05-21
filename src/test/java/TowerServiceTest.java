@@ -2,7 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng201.team48.models.Tower;
 import seng201.team48.services.TowerService;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
