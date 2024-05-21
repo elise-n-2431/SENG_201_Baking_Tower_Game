@@ -21,13 +21,12 @@ public class Tower extends Purchasable {
      * @param description Description of the tower.
      * @param purchasePrice Purchase price of the tower, which the user pays from their bank balance
      * @param sellPrice Sell price of tower. Once sold, the user is remunerated the sellPrice amount into their bank.
-     * @param resourceType Type of resource with which the tower can fill cart objects during a round.
      * @param resourceAmount Amount of resources to load into carts per action.
      * @param reloadSpeed Progress percent increase per second.
      */
-    public Tower(String description, int purchasePrice, int sellPrice, String resourceType, int resourceAmount, double reloadSpeed) {
-        super(description, purchasePrice, sellPrice); /* Purchasable attributes */
-        this.resourceType = resourceType;
+    public Tower(String name, String description, int purchasePrice, int sellPrice, int resourceAmount, double reloadSpeed) {
+        super(name, description, purchasePrice, sellPrice); /* Purchasable attributes */
+        this.resourceType = description;
         this.resourceAmount = resourceAmount;
         this.reloadSpeed = reloadSpeed;
     }

@@ -18,11 +18,11 @@ public class TowerManager {
      * Constructor
      */
     public TowerManager() {
-        Tower eggTower = new Tower("Eggs", 5, 3, "Eggs", 20, 0.2);
-        Tower milkTower = new Tower("Creates butter, milk and cream", 6, 3, "Milk", 8, 0.15);
-        Tower flourTower = new Tower("Creates flour", 5, 3, "Flour", 10, 0.1);
-        Tower bananaTower = new Tower("is a tree", 7, 8, "Banana", 7, 0.04);
-        Tower sugarTower = new Tower("Processes sugar", 5, 3, "Sugar", 5, 0.02);
+        Tower eggTower = new Tower("Eggs", "Used in fried eggs, scrambled eggs, pasta, pancakes, carbonara, cake, banana bread", 5, 3, 20, 0.2);
+        Tower milkTower = new Tower("Milk", "Used in pasta sauce, scrambled eggs, pancakes, carbonara, cake, and banana bread", 6, 3, 8, 0.15);
+        Tower flourTower = new Tower("Flour", "Used in pasta, pasta sauce, pancakes, carbonara, cake, and banana bread", 5, 3, 10, 0.1);
+        Tower bananaTower = new Tower("Banana", "Used in smoothie and banana bread", 8, 7, 8, 0.04);
+        Tower sugarTower = new Tower("Sugar", "Used in cake and banana bread", 5, 3, 5, 0.02);
         defaultTowers.addAll(List.of(flourTower, eggTower, sugarTower, milkTower, bananaTower));
         playerTowers = new ArrayList<>();
         reserveTowers = new ArrayList<>();

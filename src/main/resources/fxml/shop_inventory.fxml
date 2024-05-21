@@ -60,21 +60,21 @@
                   <Insets left="160.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="item2Button" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.rowIndex="10">
+            <Button fx:id="upgrade2Button" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="item3Button" layoutX="110.0" layoutY="282.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.rowIndex="10">
+            <Button fx:id="upgrade3Button" layoutX="110.0" layoutY="282.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="160.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="item5Button" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.rowIndex="10">
+            <Button fx:id="upgrade5Button" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="320.0" />
                </GridPane.margin></Button>
-            <Button fx:id="buyButton" layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#onBuyButtonClicked" text="Buy" GridPane.columnIndex="2" GridPane.rowIndex="10">
+            <Button fx:id="buyButton" layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#onBuyButtonClicked" prefHeight="24.0" prefWidth="77.0" text="Buy Item" GridPane.columnIndex="2" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
@@ -144,14 +144,14 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </Button>
-            <Separator prefWidth="200.0" GridPane.rowIndex="5" />
+            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
             <Separator orientation="VERTICAL" prefHeight="57.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowSpan="2147483647" />
             <Label prefHeight="16.0" prefWidth="104.0" text="Tower Shop" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label prefHeight="16.0" prefWidth="93.0" text="Item Shop" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+            <Label prefHeight="16.0" prefWidth="110.0" text="Upgrade Shop" GridPane.halignment="CENTER" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -166,18 +166,28 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Label>
-            <Button fx:id="item4Button" layoutX="170.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="10">
+            <Button fx:id="upgrade4Button" layoutX="170.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="item1Button" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" GridPane.rowIndex="10" />
+            <Button fx:id="upgrade1Button" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" GridPane.rowIndex="10" />
             <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSellTowerClicked" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Button fx:id="placeButton" layoutX="523.0" layoutY="535.0" mnemonicParsing="false" onAction="#onPlaceButtonClicked" text="Place" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
+            <Label fx:id="viewDescriptionLabel" prefHeight="49.0" prefWidth="341.0" text="Item description" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="viewItemNameLabel" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="View Item" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </children>

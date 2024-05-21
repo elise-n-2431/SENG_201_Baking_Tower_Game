@@ -3,6 +3,7 @@ package seng201.team48.gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 import seng201.team48.UpgradeManager;
@@ -71,6 +72,10 @@ public class ShopInventoryController {
     private Button upgrade4Button;
     @FXML
     private Button upgrade5Button;
+    @FXML
+    private Label viewItemNameLabel;
+    @FXML
+    private Label viewDescriptionLabel;
 
     public ShopInventoryController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
@@ -86,16 +91,17 @@ public class ShopInventoryController {
         List<Button> activeTowerButtons = List.of(active1Button, active2Button, active3Button, active4Button, active5Button);
         List<Button> reserveTowerButtons = List.of(reserve1Button, reserve2Button, reserve3Button, reserve4Button, reserve5Button);
 
-        // UNFINISHED -- MUST CHANGE
-        /* Loops through item shop indexes and sets up on click functionality.
-         * Calls updateStats. Sets selectedTowerIndex to index of clicked button. */
+        /*
+        * Set up click functionality for purchasable tower buttons in shop
+        *
+        * */
         for (int i = 0; i < buyTowerButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
-            towerButtons.get(i).setOnAction(event -> {
-                updateStats(towerManager.getDefaultTowers().get(finalI));
+            buyTowerButtons.get(i).setOnAction(event -> {
+                updateShopDisplay(towerManager.getDefaultTowers().get(finalI));
                 selectedTowerIndex = finalI;
-                towerButtons.forEach(button -> {
-                    if (button == towerButtons.get(finalI)) {
+                buyTowerButtons.forEach(button -> {
+                    if (button == buyTowerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
                     } else {
                         button.setStyle("");
@@ -103,6 +109,12 @@ public class ShopInventoryController {
                 });
             });
         }
+    }
+
+    /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
+    public void updateShopDisplay(Purchasable purchasable){
+        viewItemNameLabel.setText("Available in shop: " + purchasable.getName());
+        viewDescriptionLabel.setText(purchasable.getDescription());
     }
 
 
