@@ -26,7 +26,7 @@ public class Tower extends Purchasable {
      */
     public Tower(String name, String description, int purchasePrice, int sellPrice, int resourceAmount, double reloadSpeed) {
         super(name, description, purchasePrice, sellPrice); /* Purchasable attributes */
-        this.resourceType = description;
+        this.resourceType = name;
         this.resourceAmount = resourceAmount;
         this.reloadSpeed = reloadSpeed;
     }
