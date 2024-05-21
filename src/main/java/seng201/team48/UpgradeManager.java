@@ -5,9 +5,12 @@ import seng201.team48.models.RepairKit;
 import seng201.team48.models.Upgrade;
 
 import java.util.List;
+import java.util.Random;
 
 public class UpgradeManager {
-    private List<Purchasable> defaultShopList;
+    private Random random = new Random();
+    private List<Purchasable> defaultUpgradesList;
+    private List<Purchasable> upgradesForSale;
 
     /**
      * Constructor which initialises list of default upgrades used by the shop.
@@ -19,14 +22,35 @@ public class UpgradeManager {
         Upgrade level2Upgrade = new Upgrade("2");
         Upgrade level3Upgrade = new Upgrade("3");
         RepairKit repairKit = new RepairKit();
-        defaultShopList.addAll(List.of(level1Upgrade, level1Upgrade2, level2Upgrade, level3Upgrade, repairKit));
+        defaultUpgradesList.addAll(List.of(level1Upgrade, level1Upgrade2, level2Upgrade, level3Upgrade, repairKit));
+        upgradesForSale = defaultUpgradesList; // Initialise upgradesForSale
     }
 
-    public List<Purchasable> getDefaultShopList() {
-        return defaultShopList;
+    /**
+     * Generates random list of upgrades for sale
+     */
+    public List<Purchasable> generateUpgradesForSale() {
+        for (int i = 0; i < upgradesForSale.size(); i++) {
+            int randomIndex = random.nextInt(defaultUpgradesList.size());
+            upgradesForSale.set(i, defaultUpgradesList.get(randomIndex));
+        }
+        return upgradesForSale;
+
     }
 
-    public void setDefaultShopList(List<Purchasable> defaultShopList) {
-        this.defaultShopList = defaultShopList;
+    public List<Purchasable> getDefaultUpgradesList() {
+        return defaultUpgradesList;
+    }
+
+    public void setDefaultUpgradesList(List<Purchasable> defaultShopList) {
+        this.defaultUpgradesList = defaultShopList;
+    }
+
+    public List<Purchasable> getUpgradesForSale() {
+        return upgradesForSale;
+    }
+
+    public void setUpgradesForSale(List<Purchasable> upgradesForSale) {
+        this.upgradesForSale = upgradesForSale;
     }
 }
