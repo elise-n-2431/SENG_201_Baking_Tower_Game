@@ -33,8 +33,8 @@ public class Tower extends Purchasable {
 
     /** Returns string representation of Tower object. */
     public String toString() {
-        return "Tower{description=" + getDescription() + ", purchasePrice=" + getPurchasePrice()
-                + ", sellPrice=" + getSellPrice() + ", resourceType: " + resourceType
+        return "Tower{description: " + getDescription() + ", purchasePrice: " + getPurchasePrice()
+                + ", sellPrice: " + getSellPrice() + ", resourceType: " + resourceType
                 + ", resourceAmount: " + resourceAmount + ", reloadSpeed: " + reloadSpeed + "}";
 
     }

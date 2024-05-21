@@ -4,12 +4,13 @@ import seng201.team48.models.Purchasable;
 import seng201.team48.models.RepairKit;
 import seng201.team48.models.Upgrade;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class UpgradeManager {
     private Random random = new Random();
-    private List<Purchasable> defaultUpgradesList;
+    private List<Purchasable> defaultUpgradesList = new ArrayList<>();
     private List<Purchasable> upgradesForSale;
 
     /**

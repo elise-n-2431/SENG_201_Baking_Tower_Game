@@ -20,7 +20,7 @@ import java.util.List;
 public class ShopInventoryController {
     TowerManager towerManager;
     MainGameManager mainGameManager;
-    UpgradeManager upgradeManager = new UpgradeManager();
+    UpgradeManager upgradeManager;
     private List<Tower> towersForSale;
 
     private int selectedTowerIndex = -1;
@@ -80,6 +80,8 @@ public class ShopInventoryController {
     public ShopInventoryController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
+        upgradeManager = new UpgradeManager();
+        System.out.println(upgradeManager.getDefaultUpgradesList());
     }
 
     public void initialize() {

@@ -11,7 +11,7 @@ public class Upgrade extends Purchasable {
      * @param towerLevel Numerical level of the tower which it can upgrade, passed in as a String.
      */
     public Upgrade(String towerLevel) {
-        super(towerLevel, 5, 3);
+        super(towerLevel, towerLevel, 5, 3);
     }
 
     /**
