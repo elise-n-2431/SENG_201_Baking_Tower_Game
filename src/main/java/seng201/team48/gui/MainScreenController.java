@@ -29,7 +29,8 @@ public class MainScreenController {
     public Button imageFour;
     public Button imageFive;
     public Label announcement;
-    public Button resetButton;
+    public Label bowlNumber;
+    public Label roundNumber;
     public Button resetBowl;
     public Bowl currentBowl = null;
     public Button recipeButton;
@@ -46,7 +47,9 @@ public class MainScreenController {
     BowlService bowlService = new BowlService();
     public AnimationTimer timer;
     private boolean resetTimer = false;
+    private boolean endTimer = false;
     private List<Tower> playerTowers;
+    public ImageView bowlImage;
 
 
 
@@ -67,13 +70,14 @@ public class MainScreenController {
                     bowlTime = now;
                     resetTimer = false;
                 }
-                if(now - reloadTimer >= 1_000_000_000L){
-                    increaseProgressBars();
-                    reloadTimer = now;
-                }
-                if (now - bowlTime >= 30_000_000_000L) {
+                if (endTimer){
                     this.stop();
                     fail();
+                }
+                if(now - reloadTimer >= 200_000_000L){
+                    increaseProgressBars();
+                    moveBowlVisual();
+                    reloadTimer = now;
                 }
             }
 
@@ -126,11 +130,44 @@ public class MainScreenController {
                 bowlService.setNumBowlsSelected(numSmall, numLarge);
             }
         }
-        currentBowl = bowlService.getNewBowl();
+        if (mainGameManager.getIsStartOfRound()){
+            mainGameManager.setIsStartOfRound(false);
+            currentBowl = bowlService.getNewBowl();
+            updateBowlNumber();
+            mainGameManager.setBowlStepSize();
+        } else{ //continue progress from before shop or recipe book
+            currentBowl = mainGameManager.getCurrentBowl();
+            bowlImage.setTranslateX(mainGameManager.getBowlLocation());
+            mainGameManager.setMoneyPerRound(0);
+            for (int i = 0; i < playerTowers.size(); i++) {
+                switch (i) {
+                    case 0:
+                        reload1.setProgress(mainGameManager.getReload1Temp());
+
+                    case 1:
+                        reload2.setProgress(mainGameManager.getReload2Temp());
+                    case 2:
+                        reload3.setProgress(mainGameManager.getReload3Temp());
+                    case 3:
+                        reload4.setProgress(mainGameManager.getReload4Temp());
+                    case 4:
+                        reload5.setProgress(mainGameManager.getReload5Temp());
+                    default:
+                        System.out.println("error - cannot identify tower");
+                }
+            }
+            ingredient1Contents = mainGameManager.getIngredient1Contents();
+            ingredient1.setText(ingredient1Contents);
+        }
         header.setText("In " + currentBowl.getSize() + " Bowl: ");
-
-
+        String setCurrentRoundStats = mainGameManager.getCurrentRound() + " / " + mainGameManager.getNumRounds();
+        roundNumber.setText(setCurrentRoundStats);
     }
+    public void updateBowlNumber(){
+        String setCurrentBowlStats = bowlService.getNumBowlsSent() + " / " + bowlService.getNumBowlsSelected();
+        bowlNumber.setText(setCurrentBowlStats);
+    }
+
     public void increaseProgressBars() {
         //updates progress bars for each active tower in towers
         for (int i = 0; i < playerTowers.size(); i++) {
@@ -175,8 +212,9 @@ public class MainScreenController {
     }
     @FXML
     private void resetBowlClicked(){
-        //temporary way to test bowl timer
-        resetBowlTimer();
+        currentBowl.setEmpty();
+        ingredient1Contents = "";
+        ingredient1.setText("");
     }
     @FXML
     private void updateValue(int increase) {
@@ -229,6 +267,8 @@ public class MainScreenController {
     }
     @FXML
     private void onShopClicked() {
+        mainGameManager.setCurrentBowl(currentBowl);
+        mainGameManager.setIngredient1Contents(ingredient1Contents);
         mainGameManager.closeMainScreenShop();
     }
     private void endRound() {
@@ -236,11 +276,14 @@ public class MainScreenController {
             mainGameManager.closeMainScreenConclusion();
         } else {
             mainGameManager.updateRounds();
+            mainGameManager.setIsStartOfRound(true);
             mainGameManager.closeMainScreenPreRound();
         }
     }
     @FXML
     private void onRecipeClicked(){
+        mainGameManager.setCurrentBowl(currentBowl);
+        mainGameManager.setIngredient1Contents(ingredient1Contents);
         mainGameManager.launchRecipeBook("MainScreen");
     }
     private void fail() {
@@ -262,16 +305,18 @@ public class MainScreenController {
                     endRound();
                 } else {
                     currentBowl = bowlService.getNewBowl();
+                    resetBowlVisual();
                     header.setText("In " + currentBowl.getSize() + " Bowl: ");
                     ingredient1Contents = "";
                     ingredient1.setText("");
+                    updateBowlNumber();
+
                 }
             } else {
                 announcement.setText("Sorry, that can't be baked, try again");
-                currentBowl = bowlService.getNewBowl();
+                resetBowlClicked();
                 header.setText("In " + currentBowl.getSize() + " Bowl: ");
-                ingredient1Contents = "";
-                ingredient1.setText("");
+
             }
         }
     }
@@ -333,4 +378,22 @@ public class MainScreenController {
         int num_sugar = Collections.frequency(filled, sugar);
         return "" + num_egg + num_milk + num_flour + num_banana + num_sugar;
     }
+
+    /* CONTROL BOWL MOVEMENT BELOW */
+    public void moveBowlVisual(){
+        double x_value = mainGameManager.updateBowlStepSize();
+        bowlImage.setTranslateX(x_value);
+        if (x_value >= 720){
+            endTimer = true;
+        }
+    }
+    public void resetBowlVisual(){
+        if (currentBowl.getSize() == "Large"){
+            bowlImage.setFitHeight(120);
+            bowlImage.setFitWidth(120);
+            bowlImage.setTranslateY(-40);
+        }
+        mainGameManager.resetBowlLocation();
+    }
+
 }

@@ -1,5 +1,8 @@
 package seng201.team48;
 
+import seng201.team48.models.Bowl;
+
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -31,6 +34,12 @@ public class MainGameManager {
     private double reload5Temp = 0;
     private Integer moneyPerRound = 0;
     private String previousScreen;
+    private double bowlStepSize;
+    private double bowlLocation = -25;
+    private boolean isStartOfRound = true;
+    private Bowl currentBowl;
+    private String ingredient1Contents;
+
 
     public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher, Consumer<MainGameManager> recipeBookLauncher) {
         this.setupScreenLauncher = setupScreenLauncher;
@@ -109,6 +118,7 @@ public class MainGameManager {
 
     }
 
+
     public TowerManager getTowerManager() {
         return towerManager;
     }
@@ -182,6 +192,7 @@ public class MainGameManager {
     public double getReload4Temp() { return reload4Temp; }
     public double getReload5Temp() { return reload5Temp; }
 
+
     /**
      * Increase current round by 1, Called after round completion.
      */
@@ -229,5 +240,39 @@ public class MainGameManager {
     public void setReload5Temp(double reload5Temp) {
         this.reload5Temp = reload5Temp;
     }
-
+    public double updateBowlStepSize(){
+        bowlLocation = bowlLocation + bowlStepSize;
+        return bowlLocation;
+    }
+    public void setBowlStepSize(){
+        switch (gameDifficulty) {
+            case "Small" -> bowlStepSize = 2;
+            case "Medium" -> bowlStepSize = 4;
+            case "Large" -> bowlStepSize = 6;
+        }
+    }
+    public double getBowlLocation(){
+        return bowlLocation;
+    }
+    public void resetBowlLocation(){
+        bowlLocation = -25 - bowlStepSize;
+    }
+    public void setIsStartOfRound(boolean isStartOfRound){
+        this.isStartOfRound = isStartOfRound;
+    }
+    public boolean getIsStartOfRound(){
+        return isStartOfRound;
+    }
+    public void setCurrentBowl(Bowl currentBowl){
+        this.currentBowl = currentBowl;
+    }
+    public Bowl getCurrentBowl(){
+        return currentBowl;
+    }
+    public void setIngredient1Contents(String ingredient1Contents){
+        this.ingredient1Contents = ingredient1Contents;
+    }
+    public String getIngredient1Contents(){
+        return ingredient1Contents;
+    }
 }

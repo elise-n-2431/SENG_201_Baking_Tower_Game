@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bowl {
-    private final Integer capacity;
+    private Integer capacity = 0;
     private Integer currentIndex = 0;
     private String size;
     private Boolean fullBowl = Boolean.FALSE;
@@ -27,6 +27,12 @@ public class Bowl {
     }
     public void setFullBowl(Boolean trueOrFalse) {
         fullBowl = trueOrFalse;
+    }
+    public void setEmpty(){
+        for(int i = 0; i < capacity; i++){
+            filled.set(i, null);
+        }
+        currentIndex = 0;
     }
     public Boolean getFullBowl(){
         return fullBowl;
