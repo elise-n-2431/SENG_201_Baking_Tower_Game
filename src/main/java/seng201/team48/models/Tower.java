@@ -18,7 +18,6 @@ public class Tower extends Purchasable {
 
     /**
      * Default constructor for Tower objects.
-     * @param name Name of the tower object.
      * @param description Description of the tower.
      * @param purchasePrice Purchase price of the tower, which the user pays from their bank balance
      * @param sellPrice Sell price of tower. Once sold, the user is remunerated the sellPrice amount into their bank.
@@ -26,19 +25,11 @@ public class Tower extends Purchasable {
      * @param resourceAmount Amount of resources to load into carts per action.
      * @param reloadSpeed Progress percent increase per second.
      */
-    public Tower(String name, String description, int purchasePrice, int sellPrice, String resourceType, int resourceAmount, double reloadSpeed) {
-        super(name, description, purchasePrice, sellPrice); /* Purchasable attributes */
+    public Tower(String description, int purchasePrice, int sellPrice, String resourceType, int resourceAmount, double reloadSpeed) {
+        super(description, purchasePrice, sellPrice); /* Purchasable attributes */
         this.resourceType = resourceType;
         this.resourceAmount = resourceAmount;
         this.reloadSpeed = reloadSpeed;
-    }
-
-    /* Blank constructor for testing purposes. */
-    public Tower() {
-        super("myTower", "For testing", 5, 3); /* Purchasable attributes */
-        this.resourceType = "Eggs";
-        this.resourceAmount = 5;
-        this.reloadSpeed = 0.1;
     }
 
     /** Returns string representation of Tower object. */
@@ -141,15 +132,4 @@ public class Tower extends Purchasable {
         setBroken(false);
     }
 
-    public static void main(String[] args) {
-        /* Testing of Tower object creation */
-        Tower myTower = new Tower();
-        System.out.println(myTower);
-        System.out.println(myTower.isBroken());
-        myTower.setBroken(true);
-        System.out.println(myTower.isBroken());
-        RepairKit myKit = new RepairKit("hihi");
-        myKit.repairTower(myTower);
-        System.out.println(myTower.isBroken());
-    }
 }

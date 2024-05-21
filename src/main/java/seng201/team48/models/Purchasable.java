@@ -17,7 +17,7 @@ public class Purchasable {
      * @param purchasePrice Amount of coins required to purchase from shop
      * @param sellPrice Amount of coins which player can sell the item for
      */
-    public Purchasable(String name, String description, int purchasePrice, int sellPrice) {
+    public Purchasable(String description, int purchasePrice, int sellPrice) {
         this.name = name;
         this.description = description;
         this.purchasePrice = purchasePrice;
