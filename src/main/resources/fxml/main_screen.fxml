@@ -49,14 +49,13 @@
             <ProgressBar fx:id="reload5" layoutX="330.0" layoutY="116.0" prefHeight="10.0" prefWidth="103.0" progress="0.0" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="recipeButton" layoutX="729.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
+      <Button fx:id="recipeButton" layoutX="727.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
       <Label fx:id="announcement" layoutX="183.0" layoutY="13.0" prefHeight="26.0" prefWidth="360.0" textAlignment="RIGHT" wrapText="true">
          <font>
             <Font name="Cambria" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="resetButton" layoutX="732.0" layoutY="53.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Reset" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="resetBowl" layoutX="710.0" layoutY="244.0" mnemonicParsing="false" onAction="#resetBowlClicked" text="ResetTimer" />
+      <Button fx:id="resetBowl" layoutX="718.0" layoutY="244.0" mnemonicParsing="false" onAction="#resetBowlClicked" text="Reset Bowl" />
       <Label fx:id="header" layoutX="236.0" layoutY="100.0" text="In ______ Bowl:">
          <font>
             <Font name="Cambria" size="17.0" />
@@ -67,5 +66,14 @@
             <Font name="Cambria" size="16.0" />
          </font>
       </Label>
+      <Label layoutX="731.0" layoutY="56.0" prefHeight="20.0" prefWidth="32.0" text="Bowl:" wrapText="true" />
+      <Label layoutX="731.0" layoutY="115.0" prefHeight="20.0" prefWidth="41.0" text="Round:" wrapText="true" />
+      <Label fx:id="bowlNumber" layoutX="738.0" layoutY="76.0" text="5/7" />
+      <Label fx:id="roundNumber" layoutX="738.0" layoutY="135.0" text="5/7" />
+      <ImageView fx:id="bowlImage" fitHeight="53.0" fitWidth="90.0" layoutX="-25.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bowl.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

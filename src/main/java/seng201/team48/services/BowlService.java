@@ -15,6 +15,7 @@ public class BowlService {
     Integer numLargeBowlsSent = 0;
     TowerManager towerManager = new TowerManager();
 
+
     public void setNumBowlsSelected(Integer small, Integer large){
         numSmallBowlsSelected = small;
         numLargeBowlsSelected = large;
@@ -53,4 +54,11 @@ public class BowlService {
             return new Bowl(3, "Small", newFilled);
         }
     }
+    public Integer getNumBowlsSent(){
+        return numSmallBowlsSent + numLargeBowlsSent;
+    }
+    public Integer getNumBowlsSelected(){
+        return numSmallBowlsSelected + numLargeBowlsSelected;
+    }
+
 }

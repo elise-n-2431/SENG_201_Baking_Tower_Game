@@ -16,9 +16,9 @@ public class TowerManager {
      * Constructor
      */
     public TowerManager() {
-        Tower eggTower = new Tower("Eggs", "Eggs", 5, 3, "Eggs", 20, 0.2);
-        Tower milkTower = new Tower("Milk", "Creates butter, milk and cream", 6, 3, "Milk", 8, 0.15);
-        Tower flourTower = new Tower("Flour", "Creates flour", 5, 3, "Flour", 10, 0.1);
+        Tower eggTower = new Tower("Eggs", "Eggs", 5, 3, "Eggs", 20, 0.05);
+        Tower milkTower = new Tower("Milk", "Creates butter, milk and cream", 6, 3, "Milk", 8, 0.035);
+        Tower flourTower = new Tower("Flour", "Creates flour", 5, 3, "Flour", 10, 0.05);
         Tower bananaTower = new Tower("Banana", "is a tree", 7, 8, "Banana", 7, 0.04);
         Tower sugarTower = new Tower("Sugar", "Processes sugar", 5, 3, "Sugar", 5, 0.02);
         defaultTowers.addAll(List.of(flourTower, eggTower, sugarTower, milkTower, bananaTower));
