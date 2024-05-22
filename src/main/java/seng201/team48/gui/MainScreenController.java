@@ -111,7 +111,7 @@ public class MainScreenController {
         imageThree.setGraphic(view3);
         imageThree.setDisable(false);
         reload3.setVisible(true);
-        String s = String.valueOf(mainGameManager.getMoneyPerRound());
+        String s = String.valueOf(mainGameManager.getTotalMoney());
         moneyValue.setText(s);
         Integer numSmall = mainGameManager.getNumSmall();
         Integer numLarge = mainGameManager.getNumLarge();
@@ -132,7 +132,7 @@ public class MainScreenController {
             currentBowl = mainGameManager.getCurrentBowl();
             bowlImage.setTranslateX(mainGameManager.getBowlLocation());
             System.out.println(currentBowl.getFilled());
-            mainGameManager.setMoneyPerRound(0);
+            mainGameManager.setTotalMoney(0);
             for (int i = 0; i < playerTowers.size(); i++) {
                 switch (i) {
                     case 0:
@@ -348,8 +348,8 @@ public class MainScreenController {
     }
     @FXML
     private void updateValue(int increase) {
-        Integer newTotal = mainGameManager.getMoneyPerRound() + increase;
-        mainGameManager.setMoneyPerRound(newTotal);
+        Integer newTotal = mainGameManager.getTotalMoney() + increase;
+        mainGameManager.setTotalMoney(newTotal);
         String s = String.valueOf(newTotal);
         moneyValue.setText(s);
     }
@@ -365,7 +365,7 @@ public class MainScreenController {
     public void resetValuesEndGame(){
         mainGameManager.setIsStartOfRound(true);
         mainGameManager.resetBowlLocation();
-        mainGameManager.setMoneyPerRound(0);
+        mainGameManager.setTotalMoney(0);
     }
 
     /* LEAVE MAIN GAME SCREEN */
