@@ -11,7 +11,25 @@ public class Upgrade extends Purchasable {
      * @param towerLevel Numerical level of the tower which it can upgrade, passed in as a String.
      */
     public Upgrade(String towerLevel) {
-        super(towerLevel, towerLevel, 5, 3);
+        super("Level " + towerLevel + " Upgrade", towerLevel, computePurchasePrice(towerLevel), 3);
+    }
+
+    public static int computePurchasePrice(String towerLevel) {
+        int purchasePrice;
+        switch (towerLevel) {
+            case "1":
+                purchasePrice = 20;
+                break;
+            case "2":
+                purchasePrice = 30;
+                break;
+            case "3":
+                purchasePrice = 40;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid upgrade level: " + towerLevel);
+        }
+        return purchasePrice;
     }
 
     /**
@@ -20,5 +38,10 @@ public class Upgrade extends Purchasable {
      */
     public void repairTower(Tower brokenTower) {
         brokenTower.setBroken(false);
+    }
+
+    public String toString() {
+        return "Upgrade for level " + this.getDescription() + " tower. Price: " + this.getPurchasePrice();
+
     }
 }

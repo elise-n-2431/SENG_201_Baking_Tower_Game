@@ -23,7 +23,7 @@ public class ShopInventoryController {
     UpgradeManager upgradeManager;
     private List<Tower> towersForSale;
 
-    private int selectedTowerIndex = -1;
+    private int selectedItemIndex = -1;
     @FXML
     private Button back_button;
     @FXML
@@ -73,9 +73,21 @@ public class ShopInventoryController {
     @FXML
     private Button upgrade5Button;
     @FXML
+    private Label upgrade1PriceLabel;
+    @FXML
+    private Label upgrade2PriceLabel;
+    @FXML
+    private Label upgrade3PriceLabel;
+    @FXML
+    private Label upgrade4PriceLabel;
+    @FXML
+    private Label upgrade5PriceLabel;
+    @FXML
     private Label viewItemNameLabel;
     @FXML
     private Label viewDescriptionLabel;
+    @FXML
+    private Label playerCoinsLabel;
 
     public ShopInventoryController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
@@ -89,6 +101,7 @@ public class ShopInventoryController {
 
         List<Button> buyTowerButtons = List.of(tower1Button, tower2Button, tower3Button, tower4Button, tower5Button);
         List<Button> buyUpgradeButtons = List.of(upgrade1Button, upgrade2Button, upgrade3Button, upgrade4Button, upgrade5Button);
+        List<Label> upgradePriceLabels = List.of(upgrade1PriceLabel, upgrade2PriceLabel, upgrade3PriceLabel, upgrade4PriceLabel, upgrade5PriceLabel);
 
         List<Button> activeTowerButtons = List.of(active1Button, active2Button, active3Button, active4Button, active5Button);
         List<Button> reserveTowerButtons = List.of(reserve1Button, reserve2Button, reserve3Button, reserve4Button, reserve5Button);
@@ -101,9 +114,29 @@ public class ShopInventoryController {
             int finalI = i; // variables used within lambdas must be final
             buyTowerButtons.get(i).setOnAction(event -> {
                 updateShopDisplay(towerManager.getDefaultTowers().get(finalI));
-                selectedTowerIndex = finalI;
+                selectedItemIndex = finalI;
                 buyTowerButtons.forEach(button -> {
                     if (button == buyTowerButtons.get(finalI)) {
+                        button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+                    } else {
+                        button.setStyle("");
+                    }
+                });
+            });
+        }
+
+        // Assign upgrade items & repair kits to shop buttons
+        List<Purchasable> upgradesForSale = upgradeManager.getUpgradesForSale();
+        for (int i = 0; i < buyUpgradeButtons.size(); i++) {
+            int finalI = i;
+            buyUpgradeButtons.get(i).setText(upgradesForSale.get(i).getName());
+            upgradePriceLabels.get(i).setText(String.valueOf(upgradesForSale.get(i).getPurchasePrice()));
+            // Set on click functionality
+            buyUpgradeButtons.get(i).setOnAction(event -> {
+                updateShopDisplay(upgradesForSale.get(finalI));
+                selectedItemIndex = finalI;
+                buyUpgradeButtons.forEach(button -> {
+                    if (button == buyUpgradeButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
                     } else {
                         button.setStyle("");

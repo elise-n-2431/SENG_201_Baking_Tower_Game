@@ -10,7 +10,7 @@ public class RepairKit extends Purchasable {
     /** Calls constructor of the Purchasable superclass.
      */
     public RepairKit() {
-        super("Repair kit", "Repairs a broken tower", 5, 3);
+        super("Repair kit", "Repairs a broken tower", 20, 3);
     }
 
     /**
@@ -19,5 +19,10 @@ public class RepairKit extends Purchasable {
      */
     public void repairTower(Tower brokenTower) {
         brokenTower.setBroken(false);
+    }
+
+    public String toString() {
+        return "Repair kit";
+
     }
 }
