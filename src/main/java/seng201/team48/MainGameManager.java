@@ -40,6 +40,7 @@ public class MainGameManager {
     private Bowl currentBowl;
     private String ingredient1Contents;
     private BowlService bowlService = new BowlService();
+    private String previousScreenShop;
 
 
 
@@ -69,9 +70,13 @@ public class MainGameManager {
         preroundScreenLauncher.accept(this);
     }
 
-    public void closePreroundScreen() {
+    public void closePreroundStart() {
         clearScreen.run();
         launchMainScreen();
+    }
+    public void closePreroundSetup() {
+        clearScreen.run();
+        launchSetupScreen();
     }
 
     public void launchMainScreen() { mainScreenLauncher.accept(this); }
@@ -80,21 +85,21 @@ public class MainGameManager {
         clearScreen.run();
         launchSetupScreen();
     }
-    public void launchShopScreen() { shopScreenLauncher.accept(this); }
+    public void launchShopScreen(String previousScreen1){
+        clearScreen.run();
+        previousScreenShop = previousScreen1;
+        shopScreenLauncher.accept(this);}
     public void closeShopScreen(){
         clearScreen.run();
-        launchMainScreen();}
-
-    public void closeMainScreenShop() {
-        clearScreen.run();
-        launchShopScreen();
-        //how is data stored - continue progress when return
+        switch (previousScreenShop) {
+            case "MainScreen" -> launchMainScreen();
+            case "Preround" -> launchPreroundScreen();
+        }
     }
     public void launchConclusionScreen() {conclusionLauncher.accept(this);}
     public void closeMainScreenConclusion() {
         clearScreen.run();
         launchConclusionScreen();
-        //how is data stored - continue progress when return
     }
     public void closeConclusionScreen() {
         clearScreen.run();
@@ -107,14 +112,12 @@ public class MainGameManager {
     public void launchRecipeBook(String previousScreen1){
         clearScreen.run();
         previousScreen = previousScreen1;
-        System.out.println(previousScreen);
         recipeBookLauncher.accept(this);}
     public void closeRecipeBook(){
         clearScreen.run();
         switch (previousScreen) {
             case "MainScreen" -> launchMainScreen();
             case "Setup" -> launchSetupScreen();
-            case "ShopInventory" -> launchShopScreen();
             case "Preround" -> launchPreroundScreen();
         }
 

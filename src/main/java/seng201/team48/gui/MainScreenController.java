@@ -120,7 +120,6 @@ public class MainScreenController {
                 bowlService.setNumBowlsSelected(numSmall, numLarge);
             }//comment
         }
-        updateBowlNumber();
         if (mainGameManager.getIsStartOfRound()){
             mainGameManager.setIsStartOfRound(false);
             currentBowl = bowlService.getNewBowl();
@@ -132,7 +131,6 @@ public class MainScreenController {
             currentBowl = mainGameManager.getCurrentBowl();
             bowlImage.setTranslateX(mainGameManager.getBowlLocation());
             System.out.println(currentBowl.getFilled());
-            mainGameManager.setTotalMoney(0);
             for (int i = 0; i < playerTowers.size(); i++) {
                 switch (i) {
                     case 0:
@@ -155,9 +153,11 @@ public class MainScreenController {
                         break;
                 }
             }
+
             ingredient1Contents = mainGameManager.getIngredient1Contents();
             ingredient1.setText(ingredient1Contents);
         }
+        updateBowlNumber();
         header.setText("In " + currentBowl.getSize() + " Bowl: ");
         String setCurrentRoundStats = mainGameManager.getCurrentRound() + " / " + mainGameManager.getNumRounds();
         roundNumber.setText(setCurrentRoundStats);
@@ -372,7 +372,7 @@ public class MainScreenController {
     @FXML
     private void onShopClicked() {
         saveValuesMidRound();
-        mainGameManager.closeMainScreenShop();
+        mainGameManager.launchShopScreen("MainScreen");
     }
     @FXML
     private void onRecipeClicked(){
