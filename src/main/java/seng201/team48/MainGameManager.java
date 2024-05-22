@@ -1,6 +1,7 @@
 package seng201.team48;
 
 import seng201.team48.models.Bowl;
+import seng201.team48.services.BowlService;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -39,6 +40,8 @@ public class MainGameManager {
     private boolean isStartOfRound = true;
     private Bowl currentBowl;
     private String ingredient1Contents;
+    private BowlService bowlService = new BowlService();
+
 
 
     public MainGameManager(Consumer<MainGameManager> setupScreenLauncher, Consumer<MainGameManager> preroundScreenLauncher, Consumer<MainGameManager> mainScreenLauncher, Runnable clearScreen, Consumer<MainGameManager> shopScreenLauncher, Consumer<MainGameManager> conclusionLauncher, Consumer<MainGameManager> recipeBookLauncher) {
@@ -245,10 +248,11 @@ public class MainGameManager {
         return bowlLocation;
     }
     public void setBowlStepSize(){
+        System.out.println(gameDifficulty);
         switch (gameDifficulty) {
-            case "Small" -> bowlStepSize = 2;
-            case "Medium" -> bowlStepSize = 4;
-            case "Large" -> bowlStepSize = 6;
+            case "Easy" -> { bowlStepSize = 2;}
+            case "Medium" -> { bowlStepSize = 4;}
+            case "Hard" -> { bowlStepSize = 6;}
         }
     }
     public double getBowlLocation(){
@@ -274,5 +278,11 @@ public class MainGameManager {
     }
     public String getIngredient1Contents(){
         return ingredient1Contents;
+    }
+    public void setBowlService(BowlService bowlService){
+        this.bowlService = bowlService;
+    }
+    public BowlService getBowlService(){
+        return bowlService;
     }
 }

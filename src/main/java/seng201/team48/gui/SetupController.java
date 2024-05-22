@@ -151,6 +151,7 @@ public class SetupController {
     @FXML
     private void onDifficultyChange() {
         mainGameManager.setGameDifficulty(gameDifficultyChoiceBox.getValue());
+        System.out.println("game difficulty has been changed to: " + gameDifficultyChoiceBox.getValue() + " = " + mainGameManager.getGameDifficulty());
     }
 
     public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {

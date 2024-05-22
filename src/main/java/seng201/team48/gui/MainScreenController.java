@@ -32,7 +32,7 @@ public class MainScreenController {
     public Label bowlNumber;
     public Label roundNumber;
     public Button resetBowl;
-    public Bowl currentBowl = null;
+    public Bowl currentBowl;
     public Button recipeButton;
     public ProgressBar reload1;
     public ProgressBar reload2;
@@ -44,7 +44,7 @@ public class MainScreenController {
     public String ingredient1Contents = "";
     TowerManager towerManager;
     MainGameManager mainGameManager;
-    BowlService bowlService = new BowlService();
+    BowlService bowlService;
     public AnimationTimer timer;
     private boolean resetTimer = false;
     private boolean endTimer = false;
@@ -56,7 +56,7 @@ public class MainScreenController {
     public MainScreenController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
-
+        /* TIME */
         timer = new AnimationTimer() {
             private long bowlTime = 0;
             private long reloadTimer = 0;
@@ -65,10 +65,6 @@ public class MainScreenController {
                 if(bowlTime == 0){
                     bowlTime = now;
                     reloadTimer = now;
-                }
-                if (resetTimer){
-                    bowlTime = now;
-                    resetTimer = false;
                 }
                 if (endTimer){
                     this.stop();
@@ -84,10 +80,11 @@ public class MainScreenController {
         };
         timer.start();
     }
-
+    /* ON STARTUP */
     @FXML
     public void initialize(){
         playerTowers = towerManager.getPlayerTowers();
+        bowlService = mainGameManager.getBowlService();
         String imagePath = "/images/"+playerTowers.get(0).getResourceType()+".png";
         Image imgOne = new Image(getClass().getResourceAsStream(imagePath));
         ImageView view = new ImageView(imgOne);
@@ -114,15 +111,8 @@ public class MainScreenController {
         imageThree.setGraphic(view3);
         imageThree.setDisable(false);
         reload3.setVisible(true);
-
-        /* prevents bank balance continuing to new rounds */
-        if(mainGameManager.getCurrentRound()!=1){
-            String s = String.valueOf(mainGameManager.getMoneyPerRound());
-            moneyValue.setText(s);
-        } else{
-            mainGameManager.setMoneyPerRound(0);
-        }
-
+        String s = String.valueOf(mainGameManager.getMoneyPerRound());
+        moneyValue.setText(s);
         Integer numSmall = mainGameManager.getNumSmall();
         Integer numLarge = mainGameManager.getNumLarge();
         if (numSmall != null){
@@ -130,30 +120,39 @@ public class MainScreenController {
                 bowlService.setNumBowlsSelected(numSmall, numLarge);
             }
         }
+        updateBowlNumber();
         if (mainGameManager.getIsStartOfRound()){
             mainGameManager.setIsStartOfRound(false);
             currentBowl = bowlService.getNewBowl();
-            updateBowlNumber();
+            mainGameManager.resetBowlLocation();
             mainGameManager.setBowlStepSize();
+
         } else{ //continue progress from before shop or recipe book
+            System.out.println("This was called");
             currentBowl = mainGameManager.getCurrentBowl();
             bowlImage.setTranslateX(mainGameManager.getBowlLocation());
+            System.out.println(currentBowl.getFilled());
             mainGameManager.setMoneyPerRound(0);
             for (int i = 0; i < playerTowers.size(); i++) {
                 switch (i) {
                     case 0:
                         reload1.setProgress(mainGameManager.getReload1Temp());
-
+                        break;
                     case 1:
                         reload2.setProgress(mainGameManager.getReload2Temp());
+                        break;
                     case 2:
                         reload3.setProgress(mainGameManager.getReload3Temp());
+                        break;
                     case 3:
                         reload4.setProgress(mainGameManager.getReload4Temp());
+                        break;
                     case 4:
                         reload5.setProgress(mainGameManager.getReload5Temp());
+                        break;
                     default:
                         System.out.println("error - cannot identify tower");
+                        break;
                 }
             }
             ingredient1Contents = mainGameManager.getIngredient1Contents();
@@ -163,11 +162,7 @@ public class MainScreenController {
         String setCurrentRoundStats = mainGameManager.getCurrentRound() + " / " + mainGameManager.getNumRounds();
         roundNumber.setText(setCurrentRoundStats);
     }
-    public void updateBowlNumber(){
-        String setCurrentBowlStats = bowlService.getNumBowlsSent() + " / " + bowlService.getNumBowlsSelected();
-        bowlNumber.setText(setCurrentBowlStats);
-    }
-
+    /* PROGRESS BARS */
     public void increaseProgressBars() {
         //updates progress bars for each active tower in towers
         for (int i = 0; i < playerTowers.size(); i++) {
@@ -204,26 +199,7 @@ public class MainScreenController {
             }
         }
     }
-
-
-
-    public void resetBowlTimer() {
-        resetTimer = true;
-    }
-    @FXML
-    private void resetBowlClicked(){
-        currentBowl.setEmpty();
-        ingredient1Contents = "";
-        ingredient1.setText("");
-    }
-    @FXML
-    private void updateValue(int increase) {
-        Integer newTotal = mainGameManager.getMoneyPerRound() + increase;
-        mainGameManager.setMoneyPerRound(newTotal);
-        String s = String.valueOf(newTotal);
-        moneyValue.setText(s);
-    }
-
+    /* ADD ITEMS TO BOWLS */
     @FXML
     private void onOneClicked(){
         if (mainGameManager.getReload1Temp() >= 1){
@@ -259,37 +235,6 @@ public class MainScreenController {
             mainGameManager.setReload5Temp(0);
             addToBowl(playerTowers.get(4));}
     }
-
-
-    @FXML
-    private void onBackClicked() {
-        mainGameManager.closeMainScreenHome();
-    }
-    @FXML
-    private void onShopClicked() {
-        mainGameManager.setCurrentBowl(currentBowl);
-        mainGameManager.setIngredient1Contents(ingredient1Contents);
-        mainGameManager.closeMainScreenShop();
-    }
-    private void endRound() {
-        if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())) {
-            mainGameManager.closeMainScreenConclusion();
-        } else {
-            mainGameManager.updateRounds();
-            mainGameManager.setIsStartOfRound(true);
-            mainGameManager.closeMainScreenPreRound();
-        }
-    }
-    @FXML
-    private void onRecipeClicked(){
-        mainGameManager.setCurrentBowl(currentBowl);
-        mainGameManager.setIngredient1Contents(ingredient1Contents);
-        mainGameManager.launchRecipeBook("MainScreen");
-    }
-    private void fail() {
-        mainGameManager.setSuccess(Boolean.FALSE);
-        mainGameManager.closeMainScreenConclusion();
-    }
     private void addToBowl(Tower tower){
         currentBowl.addToBowl(tower);
         ingredient1Contents = ingredient1Contents + "- " + tower.getResourceType() + "\n";
@@ -299,7 +244,6 @@ public class MainScreenController {
             System.out.println(product);
             if(product != null){
                 announcement.setText("You have made: " + product);
-                resetBowlTimer();
                 if(bowlService.getBowlsUsed()){
                     //no more bowls
                     endRound();
@@ -320,6 +264,7 @@ public class MainScreenController {
             }
         }
     }
+    /* RECIPE BOOK CONFIRMATION */
     private String inRecipe(){
         String all = getString();
         switch (all) {
@@ -363,7 +308,6 @@ public class MainScreenController {
     }
     private String getString(){
         List<Tower> allTowers = towerManager.getDefaultTowers();
-        System.out.println(allTowers);
         Tower egg = allTowers.get(1);
         Tower milk = allTowers.get(3);
         Tower flour = allTowers.get(0);
@@ -379,7 +323,7 @@ public class MainScreenController {
         return "" + num_egg + num_milk + num_flour + num_banana + num_sugar;
     }
 
-    /* CONTROL BOWL MOVEMENT BELOW */
+    /* CONTROL BOWL MOVEMENT */
     public void moveBowlVisual(){
         double x_value = mainGameManager.updateBowlStepSize();
         bowlImage.setTranslateX(x_value);
@@ -394,6 +338,67 @@ public class MainScreenController {
             bowlImage.setTranslateY(-40);
         }
         mainGameManager.resetBowlLocation();
+    }
+    /* RESET OR UPDATE VALUES */
+    @FXML
+    private void resetBowlClicked(){
+        currentBowl.setEmpty();
+        ingredient1Contents = "";
+        ingredient1.setText("");
+    }
+    @FXML
+    private void updateValue(int increase) {
+        Integer newTotal = mainGameManager.getMoneyPerRound() + increase;
+        mainGameManager.setMoneyPerRound(newTotal);
+        String s = String.valueOf(newTotal);
+        moneyValue.setText(s);
+    }
+    public void updateBowlNumber(){
+        String setCurrentBowlStats = bowlService.getNumBowlsSent() + " / " + bowlService.getNumBowlsSelected();
+        bowlNumber.setText(setCurrentBowlStats);
+    }
+    public void saveValuesMidRound(){
+        mainGameManager.setCurrentBowl(currentBowl);
+        mainGameManager.setIngredient1Contents(ingredient1Contents);
+        mainGameManager.setBowlService(bowlService);
+    }
+    public void resetValuesEndGame(){
+        mainGameManager.setIsStartOfRound(true);
+        mainGameManager.resetBowlLocation();
+        mainGameManager.setMoneyPerRound(0);
+    }
+
+    /* LEAVE MAIN GAME SCREEN */
+    @FXML
+    private void onShopClicked() {
+        saveValuesMidRound();
+        mainGameManager.closeMainScreenShop();
+    }
+    @FXML
+    private void onRecipeClicked(){
+        saveValuesMidRound();
+        mainGameManager.launchRecipeBook("MainScreen");
+    }
+    @FXML
+    private void onBackClicked() {
+        resetValuesEndGame();
+        mainGameManager.closeMainScreenHome();
+    }
+    private void endRound() {
+        if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())) {
+            resetValuesEndGame();
+            mainGameManager.closeMainScreenConclusion();
+        } else {
+            mainGameManager.updateRounds();
+            mainGameManager.setIsStartOfRound(true);
+            mainGameManager.resetBowlLocation();
+            mainGameManager.closeMainScreenPreRound();
+        }
+    }
+    private void fail() {
+        mainGameManager.setSuccess(Boolean.FALSE);
+        resetValuesEndGame();
+        mainGameManager.closeMainScreenConclusion();
     }
 
 }
