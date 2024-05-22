@@ -2,6 +2,7 @@ package seng201.team48.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import seng201.team48.MainGameManager;
@@ -9,7 +10,10 @@ import seng201.team48.TowerManager;
 import seng201.team48.UpgradeManager;
 import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
+import seng201.team48.models.Upgrade;
+import seng201.team48.services.ShopService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,13 +25,16 @@ public class ShopInventoryController {
     TowerManager towerManager;
     MainGameManager mainGameManager;
     UpgradeManager upgradeManager;
+    ShopService shopService = new ShopService();
     private List<Tower> towersForSale;
-
+    private List<Purchasable> totalShopItems = new ArrayList<Purchasable>();
     private int selectedItemIndex = -1;
     @FXML
     private Button back_button;
     @FXML
-    private Button buyTower;
+    private Button buyTowerButton;
+    @FXML
+    private Button buyItemButton;
     @FXML
     private Button sell_tower;
     @FXML
@@ -52,6 +59,16 @@ public class ShopInventoryController {
     private Button reserve4Button;
     @FXML
     private Button reserve5Button;
+    @FXML
+    private Button boughtItem1Button;
+    @FXML
+    private Button boughtItem2Button;
+    @FXML
+    private Button boughtItem3Button;
+    @FXML
+    private Button boughtItem4Button;
+    @FXML
+    private Button boughtItem5Button;
     @FXML
     private Button tower1Button;
     @FXML
@@ -88,6 +105,13 @@ public class ShopInventoryController {
     private Label viewDescriptionLabel;
     @FXML
     private Label playerCoinsLabel;
+    List<Button> buyTowerButtons;
+    List<Button> buyUpgradeButtons;
+    List<Label> upgradePriceLabels;
+    List<Button> activeTowerButtons;
+    List<Button> reserveTowerButtons;
+    List<Button> boughtItemButtons;
+    Alert alert = new Alert(Alert.AlertType.ERROR);
 
     public ShopInventoryController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
@@ -99,21 +123,32 @@ public class ShopInventoryController {
     public void initialize() {
         refreshShop();
 
-        List<Button> buyTowerButtons = List.of(tower1Button, tower2Button, tower3Button, tower4Button, tower5Button);
-        List<Button> buyUpgradeButtons = List.of(upgrade1Button, upgrade2Button, upgrade3Button, upgrade4Button, upgrade5Button);
-        List<Label> upgradePriceLabels = List.of(upgrade1PriceLabel, upgrade2PriceLabel, upgrade3PriceLabel, upgrade4PriceLabel, upgrade5PriceLabel);
+        buyItemButton.setVisible(false);
+        buyTowerButton.setVisible(false);
 
-        List<Button> activeTowerButtons = List.of(active1Button, active2Button, active3Button, active4Button, active5Button);
-        List<Button> reserveTowerButtons = List.of(reserve1Button, reserve2Button, reserve3Button, reserve4Button, reserve5Button);
+        buyTowerButtons = List.of(tower1Button, tower2Button, tower3Button, tower4Button, tower5Button);
+        buyUpgradeButtons = List.of(upgrade1Button, upgrade2Button, upgrade3Button, upgrade4Button, upgrade5Button);
+        upgradePriceLabels = List.of(upgrade1PriceLabel, upgrade2PriceLabel, upgrade3PriceLabel, upgrade4PriceLabel, upgrade5PriceLabel);
+
+        activeTowerButtons = List.of(active1Button, active2Button, active3Button, active4Button, active5Button);
+        reserveTowerButtons = List.of(reserve1Button, reserve2Button, reserve3Button, reserve4Button, reserve5Button);
+        boughtItemButtons = List.of(boughtItem1Button, boughtItem2Button, boughtItem3Button, boughtItem4Button, boughtItem5Button);
+
+        // List containing everything from List<Tower> defaultTowers and List<Purchasable> upgradesForSale
+        for (Tower tower : towerManager.getDefaultTowers()) {
+            totalShopItems.add(tower);
+        }
+        totalShopItems.addAll(upgradeManager.getUpgradesForSale());
 
         /*
-        * Set up click functionality for purchasable tower buttons in shop
-        *
-        * */
+         * Set up click functionality for purchasable tower buttons in shop
+         *
+         * */
         for (int i = 0; i < buyTowerButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             buyTowerButtons.get(i).setOnAction(event -> {
                 updateShopDisplay(towerManager.getDefaultTowers().get(finalI));
+                buyTowerButton.setVisible(true);
                 selectedItemIndex = finalI;
                 buyTowerButtons.forEach(button -> {
                     if (button == buyTowerButtons.get(finalI)) {
@@ -134,7 +169,8 @@ public class ShopInventoryController {
             // Set on click functionality
             buyUpgradeButtons.get(i).setOnAction(event -> {
                 updateShopDisplay(upgradesForSale.get(finalI));
-                selectedItemIndex = finalI;
+                buyItemButton.setVisible(true);
+                selectedItemIndex = finalI + 5;
                 buyUpgradeButtons.forEach(button -> {
                     if (button == buyUpgradeButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
@@ -144,14 +180,33 @@ public class ShopInventoryController {
                 });
             });
         }
+
+        // TO-DO: Assign inventory
+        for (int i = 0; i < activeTowerButtons.size(); i++) {
+            int finalI = i;
+            buyUpgradeButtons.get(i).setText(upgradesForSale.get(i).getName());
+            upgradePriceLabels.get(i).setText(String.valueOf(upgradesForSale.get(i).getPurchasePrice()));
+            // Set on click functionality
+            buyUpgradeButtons.get(i).setOnAction(event -> {
+                updateShopDisplay(upgradesForSale.get(finalI));
+                buyItemButton.setVisible(true);
+                selectedItemIndex = finalI + 5;
+                buyUpgradeButtons.forEach(button -> {
+                    if (button == buyUpgradeButtons.get(finalI)) {
+                        button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+                    } else {
+                        button.setStyle("");
+                    }
+                });
+            });
+        }
+
     }
 
-    /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
     public void updateShopDisplay(Purchasable purchasable){
         viewItemNameLabel.setText("Available in shop: " + purchasable.getName());
         viewDescriptionLabel.setText(purchasable.getDescription());
     }
-
 
     /**
      * Resets the lists of towers and upgrades available for purchase in the shop.
@@ -172,16 +227,53 @@ public class ShopInventoryController {
     }
 
     @FXML
-    public void onBuyTowerClicked(){
-        //change tower from shop to inventory
-    }
-    @FXML
     private void onBackClicked(){
         mainGameManager.closeShopScreen();
     }
 
 
-    public void onBuyButtonClicked(ActionEvent actionEvent) {
+    public void onBuyTowerButtonClicked(ActionEvent actionEvent) {
+        int moneyRequired = totalShopItems.get(selectedItemIndex).getPurchasePrice();
+        boolean hasEnoughMoney = shopService.canPurchase(mainGameManager.getTotalMoney(), moneyRequired);
+        boolean hasInventorySpace = shopService.hasTowerInventorySpace(towerManager.getPlayerTowers(), towerManager.getReserveTowers());
+        if (selectedItemIndex != -1 && hasEnoughMoney && hasInventorySpace) {
+            // Remove item from shop and place in first available spot in player inventory
+            buyTowerButtons.get(selectedItemIndex).setVisible(false);
+            // Add last clicked tower to player inventory
+            shopService.getNonemptyTowerList().add(shopService.getNonemptyTowerIndex(), (Tower) totalShopItems.get(selectedItemIndex));
+        } else if (!hasEnoughMoney) {
+            alert.setTitle("Error");
+            alert.setHeaderText("Not enough money");
+            alert.setContentText("Earn more money by creating recipes during the next round!");
+            alert.showAndWait();
+        } else if (!hasInventorySpace) {
+            alert.setTitle("Error");
+            alert.setHeaderText("Not enough inventory space");
+            alert.setContentText("Your active and reserve tower slots are full. Try upgrading your towers instead!");
+            alert.showAndWait();
+        }
+    }
+
+    public void onBuyItemButtonClicked(ActionEvent actionEvent) {
+        int moneyRequired = totalShopItems.get(selectedItemIndex).getPurchasePrice();
+        boolean hasEnoughMoney = shopService.canPurchase(mainGameManager.getTotalMoney(), moneyRequired);
+        boolean hasInventorySpace = shopService.hasItemInventorySpace(upgradeManager.getPlayerUpgrades());
+        if (selectedItemIndex != -1 && hasEnoughMoney && hasInventorySpace) {
+            // Remove item from shop and place in first available spot in player inventory
+            buyUpgradeButtons.get(selectedItemIndex).setVisible(false);
+            upgradeManager.getPlayerUpgrades().add(shopService.getNonemptyUpgradeIndex(), (Upgrade) totalShopItems.get(selectedItemIndex));
+        } else if (!hasEnoughMoney) {
+            alert.setTitle("Error");
+            alert.setHeaderText("Not enough money");
+            alert.setContentText("Earn more money by creating recipes during the next round!");
+            alert.showAndWait();
+        } else if (!hasInventorySpace) {
+            alert.setTitle("Error");
+            alert.setHeaderText("Not enough inventory space");
+            alert.setContentText("You can only store up to 5 items at a time. Try upgrading your towers or selling items!");
+            alert.showAndWait();
+        }
+
     }
 
     public void onSellTowerClicked(ActionEvent actionEvent) {
