@@ -15,6 +15,7 @@ import seng201.team48.services.ShopService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Controller class for the shop/inventory window.
@@ -29,6 +30,8 @@ public class ShopInventoryController {
     private List<Tower> towersForSale;
     private List<Purchasable> totalShopItems = new ArrayList<Purchasable>();
     private int selectedItemIndex = -1;
+    private int selectedActiveItemIndex = -1;
+    private int selectedReserveItemIndex = -1;
     @FXML
     private Button back_button;
     @FXML
@@ -112,6 +115,7 @@ public class ShopInventoryController {
     List<Button> reserveTowerButtons;
     List<Button> boughtItemButtons;
     Alert alert = new Alert(Alert.AlertType.ERROR);
+    Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
 
     public ShopInventoryController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
@@ -125,6 +129,7 @@ public class ShopInventoryController {
 
         buyItemButton.setVisible(false);
         buyTowerButton.setVisible(false);
+        playerCoinsLabel.setText(String.valueOf(mainGameManager.getTotalMoney()));
 
         buyTowerButtons = List.of(tower1Button, tower2Button, tower3Button, tower4Button, tower5Button);
         buyUpgradeButtons = List.of(upgrade1Button, upgrade2Button, upgrade3Button, upgrade4Button, upgrade5Button);
@@ -135,9 +140,7 @@ public class ShopInventoryController {
         boughtItemButtons = List.of(boughtItem1Button, boughtItem2Button, boughtItem3Button, boughtItem4Button, boughtItem5Button);
 
         // List containing everything from List<Tower> defaultTowers and List<Purchasable> upgradesForSale
-        for (Tower tower : towerManager.getDefaultTowers()) {
-            totalShopItems.add(tower);
-        }
+        totalShopItems.addAll(towerManager.getDefaultTowers());
         totalShopItems.addAll(upgradeManager.getUpgradesForSale());
 
         /*
@@ -181,18 +184,30 @@ public class ShopInventoryController {
             });
         }
 
-        // TO-DO: Assign inventory
+        // PLAYER INVENTORY: ACTIVE TOWERS, RESERVE TOWERS, BOUGHT ITEMS
         for (int i = 0; i < activeTowerButtons.size(); i++) {
             int finalI = i;
-            buyUpgradeButtons.get(i).setText(upgradesForSale.get(i).getName());
-            upgradePriceLabels.get(i).setText(String.valueOf(upgradesForSale.get(i).getPurchasePrice()));
+            // Set names of the player's active towers
+            if (i < towerManager.getPlayerTowers().size()) {
+                activeTowerButtons.get(i).setText(towerManager.getPlayerTowers().get(i).getName());
+            }
+            else {
+                // Hide buttons
+                activeTowerButtons.get(i).setVisible(false);
+            }
             // Set on click functionality
-            buyUpgradeButtons.get(i).setOnAction(event -> {
-                updateShopDisplay(upgradesForSale.get(finalI));
-                buyItemButton.setVisible(true);
-                selectedItemIndex = finalI + 5;
-                buyUpgradeButtons.forEach(button -> {
-                    if (button == buyUpgradeButtons.get(finalI)) {
+            activeTowerButtons.get(i).setOnAction(event -> {
+                selectedActiveItemIndex = finalI;
+                if (selectedReserveItemIndex != -1) {
+                    // Swap active and reserve tower
+                    Tower reserveTower = towerManager.getReserveTowers().get(selectedReserveItemIndex);
+                    Tower activeTower = towerManager.getPlayerTowers().get(finalI);
+                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
+                    activeTowerButtons.get(finalI).setText(reserveTower.getName());
+                    reserveTowerButtons.get(selectedReserveItemIndex).setText(activeTower.getName());
+                }
+                activeTowerButtons.forEach(button -> {
+                    if (button == activeTowerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
                     } else {
                         button.setStyle("");
@@ -239,8 +254,23 @@ public class ShopInventoryController {
         if (selectedItemIndex != -1 && hasEnoughMoney && hasInventorySpace) {
             // Remove item from shop and place in first available spot in player inventory
             buyTowerButtons.get(selectedItemIndex).setVisible(false);
-            // Add last clicked tower to player inventory
-            shopService.getNonemptyTowerList().add(shopService.getNonemptyTowerIndex(), (Tower) totalShopItems.get(selectedItemIndex));
+            int price = totalShopItems.get(selectedItemIndex).getPurchasePrice();
+            String name = totalShopItems.get(selectedItemIndex).getName();
+            mainGameManager.deductTotalMoney(price);
+            playerCoinsLabel.setText(String.valueOf(mainGameManager.getTotalMoney()));
+            infoAlert.setTitle("Tower Purchase Successful");
+            infoAlert.setHeaderText("You have bought " + name);
+            //infoAlert.setContentText("You have bought " + name);
+            infoAlert.showAndWait();
+
+            // Add last clicked tower to player inventory in the correct list
+            if (Objects.equals(shopService.getNonemptyTowerList(), "playerTower")) {
+                towerManager.addPlayerTower((Tower) totalShopItems.get(selectedItemIndex));
+            }
+            else {
+                towerManager.addReserveTower((Tower) totalShopItems.get(selectedItemIndex));
+            }
+
         } else if (!hasEnoughMoney) {
             alert.setTitle("Error");
             alert.setHeaderText("Not enough money");
@@ -259,9 +289,19 @@ public class ShopInventoryController {
         boolean hasEnoughMoney = shopService.canPurchase(mainGameManager.getTotalMoney(), moneyRequired);
         boolean hasInventorySpace = shopService.hasItemInventorySpace(upgradeManager.getPlayerUpgrades());
         if (selectedItemIndex != -1 && hasEnoughMoney && hasInventorySpace) {
+
+            int price = totalShopItems.get(selectedItemIndex).getPurchasePrice();
+            String name = totalShopItems.get(selectedItemIndex).getName();
+            mainGameManager.deductTotalMoney(price);
+            playerCoinsLabel.setText(String.valueOf(mainGameManager.getTotalMoney()));
+            infoAlert.setTitle("Item Purchase Successful");
+            infoAlert.setContentText("You have bought " + name);
+            infoAlert.showAndWait();
+
             // Remove item from shop and place in first available spot in player inventory
             buyUpgradeButtons.get(selectedItemIndex).setVisible(false);
-            upgradeManager.getPlayerUpgrades().add(shopService.getNonemptyUpgradeIndex(), (Upgrade) totalShopItems.get(selectedItemIndex));
+            upgradeManager.addPlayerUpgrade((Upgrade) totalShopItems.get(selectedItemIndex));
+
         } else if (!hasEnoughMoney) {
             alert.setTitle("Error");
             alert.setHeaderText("Not enough money");

@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class ShopService {
-    private List<Tower> nonemptyTowerList;
+    private String nonemptyTowerList;
     private int nonemptyTowerIndex;
     private int nonemptyUpgradeIndex;
     public boolean canPurchase(int moneyAvailable, int moneyRequired) {
@@ -28,20 +28,29 @@ public class ShopService {
      * @return true if playerTowers or reserveTowers lists are not both full, false if both lists are full.
      */
     public boolean hasTowerInventorySpace(List<Tower> playerTowers, List<Tower> reserveTowers) {
-        for(int i = 0; i < playerTowers.size(); i++) {
-            if(playerTowers.get(i) == null) {
-                nonemptyTowerList = playerTowers;
-                nonemptyTowerIndex = i;
-                return true;
-            }
+        if (playerTowers.size() < 5) {
+            nonemptyTowerList = "playerTower";
+            return true;
         }
-        for(int i = 0; i < reserveTowers.size(); i++) {
-            if(reserveTowers.get(i) == null) {
-                nonemptyTowerList = reserveTowers;
-                nonemptyTowerIndex = i;
-                return true;
-            }
+        else if (reserveTowers.size() < 5) {
+            nonemptyTowerList = "reserveTower";
+            return true;
         }
+
+//        for(int i = 0; i < playerTowers.size(); i++) {
+//            if(playerTowers.get(i) == null) {
+//                nonemptyTowerList = playerTowers;
+//                nonemptyTowerIndex = i;
+//                return true;
+//            }
+//        }
+//        for(int i = 0; i < reserveTowers.size(); i++) {
+//            if(reserveTowers.get(i) == null) {
+//                nonemptyTowerList = reserveTowers;
+//                nonemptyTowerIndex = i;
+//                return true;
+//            }
+//        }
         return false;
     }
 
@@ -61,11 +70,11 @@ public class ShopService {
         return false;
     }
 
-    public List<Tower> getNonemptyTowerList() {
+    public String getNonemptyTowerList() {
         return nonemptyTowerList;
     }
 
-    public void setNonemptyTowerList(List<Tower> nonemptyTowerList) {
+    public void setNonemptyTowerList(String nonemptyTowerList) {
         this.nonemptyTowerList = nonemptyTowerList;
     }
 

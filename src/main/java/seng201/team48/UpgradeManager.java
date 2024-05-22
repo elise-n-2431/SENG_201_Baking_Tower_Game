@@ -26,7 +26,7 @@ public class UpgradeManager {
         RepairKit repairKit = new RepairKit();
         defaultUpgradesList.addAll(List.of(level1Upgrade, level1Upgrade2, level2Upgrade, level3Upgrade, repairKit));
         upgradesForSale = defaultUpgradesList; // Initialise upgradesForSale
-        playerUpgrades = new ArrayList<>();
+        playerUpgrades = new ArrayList<>(5);
     }
 
     /**
@@ -63,5 +63,9 @@ public class UpgradeManager {
 
     public void setPlayerUpgrades(List<Upgrade> playerUpgrades) {
         this.playerUpgrades = playerUpgrades;
+    }
+
+    public void addPlayerUpgrade(Upgrade boughtUpgrade) {
+        this.playerUpgrades.add(boughtUpgrade);
     }
 }
