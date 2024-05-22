@@ -21,17 +21,19 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="408.0" minWidth="10.0" prefWidth="373.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="8.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="357.0" minHeight="7.0" prefHeight="19.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="357.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="6.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="4.0" prefHeight="11.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="17.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -44,7 +46,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label prefHeight="25.0" prefWidth="68.0" text="Shop" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+            <Label prefHeight="25.0" prefWidth="68.0" text="Shop" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -64,21 +66,21 @@
                   <Insets left="160.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="upgrade2Button" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.rowIndex="11">
+            <Button fx:id="upgrade2Button" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="upgrade3Button" layoutX="110.0" layoutY="282.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.rowIndex="11">
+            <Button fx:id="upgrade3Button" layoutX="110.0" layoutY="282.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="160.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="upgrade5Button" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.rowIndex="11">
+            <Button fx:id="upgrade5Button" layoutX="303.0" layoutY="62.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="320.0" />
                </GridPane.margin></Button>
-            <Button fx:id="buyButton" layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#onBuyButtonClicked" prefHeight="24.0" prefWidth="77.0" text="Buy Item" GridPane.columnIndex="2" GridPane.rowIndex="11">
+            <Button fx:id="buyItemButton" layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#onBuyItemButtonClicked" prefHeight="24.0" prefWidth="77.0" text="Buy Item" GridPane.columnIndex="2" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
@@ -93,7 +95,7 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </Button>
-            <Label prefHeight="23.0" prefWidth="201.0" text="Active Ingredient Stations" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Label prefHeight="23.0" prefWidth="126.0" text="Active Stations" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -127,72 +129,72 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower1Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Flour" GridPane.rowIndex="8" />
-            <Button fx:id="tower2Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Egg" GridPane.rowIndex="8">
+            <Button fx:id="tower1Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Flour" GridPane.rowIndex="10" />
+            <Button fx:id="tower2Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Egg" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower3Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Sugar" GridPane.rowIndex="8">
+            <Button fx:id="tower3Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Sugar" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="160.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower4Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Milk" GridPane.rowIndex="8">
+            <Button fx:id="tower4Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Milk" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="tower5Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Banana" GridPane.rowIndex="8">
+            <Button fx:id="tower5Button" layoutX="10.0" layoutY="370.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Banana" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="320.0" />
                </GridPane.margin>
             </Button>
-            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
+            <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
             <Separator orientation="VERTICAL" prefHeight="57.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowSpan="2147483647" />
-            <Label prefHeight="16.0" prefWidth="184.0" text="Ingredient Station Shop" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+            <Label prefHeight="16.0" prefWidth="184.0" text="Ingredient Station Shop" GridPane.halignment="CENTER" GridPane.rowIndex="9">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label prefHeight="16.0" prefWidth="110.0" text="Upgrade Shop" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+            <Label prefHeight="16.0" prefWidth="110.0" text="Upgrade Shop" GridPane.halignment="CENTER" GridPane.rowIndex="12">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label prefHeight="35.0" prefWidth="309.0" text="You can use ingredients from these stations to fill bowls during each round." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Label prefHeight="14.0" prefWidth="399.0" text="You can use ingredients from these stations to fill bowls during each round." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
-                  <Font name="System Italic" size="11.0" />
+                  <Font name="System Italic" size="10.0" />
                </font>
             </Label>
-            <Label prefHeight="35.0" prefWidth="339.0" text="Keep these stations in reserve, ready to swap out if a station breaks..." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+            <Label prefHeight="19.0" prefWidth="385.0" text="Keep these stations in reserve, ready to swap out if a station breaks..." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                <font>
-                  <Font name="System Italic" size="11.0" />
+                  <Font name="System Italic" size="10.0" />
                </font>
             </Label>
-            <Button fx:id="upgrade4Button" layoutX="170.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="11">
+            <Button fx:id="upgrade4Button" layoutX="170.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="upgrade1Button" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" GridPane.rowIndex="11" />
+            <Button fx:id="upgrade1Button" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" GridPane.rowIndex="13" />
             <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSellTowerClicked" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Button fx:id="placeButton" layoutX="523.0" layoutY="535.0" mnemonicParsing="false" onAction="#onPlaceButtonClicked" text="Place" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="viewDescriptionLabel" prefHeight="49.0" prefWidth="341.0" text="Item description" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="TOP">
+            <Label fx:id="viewDescriptionLabel" prefHeight="85.0" prefWidth="341.0" text="Item description" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="10" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="viewItemNameLabel" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="View Item" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+            <Label fx:id="viewItemNameLabel" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="View Item" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="coinImage" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <ImageView fx:id="coinImage" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -200,7 +202,7 @@
                   <Insets top="10.0" />
                </GridPane.margin>
             </ImageView>
-            <Label fx:id="playerCoinsLabel" prefHeight="20.0" prefWidth="52.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Label fx:id="playerCoinsLabel" prefHeight="20.0" prefWidth="52.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="45.0" top="10.0" />
                </GridPane.margin>
@@ -208,7 +210,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="12" GridPane.valignment="TOP">
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.valignment="TOP">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -216,7 +218,7 @@
                   <Insets left="80.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="12" GridPane.valignment="TOP">
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.valignment="TOP">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -224,7 +226,7 @@
                   <Insets left="160.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="12" GridPane.valignment="TOP">
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.valignment="TOP">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -232,7 +234,7 @@
                   <Insets left="240.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="12" GridPane.valignment="TOP">
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.valignment="TOP">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -240,7 +242,7 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="12" GridPane.valignment="TOP">
+            <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="14" GridPane.valignment="TOP">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -248,12 +250,12 @@
                   <Insets />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="90.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9">
+            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="90.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="11">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="170.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9">
+            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="170.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="11">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -261,7 +263,7 @@
                   <Insets left="80.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="250.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9">
+            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="250.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="11">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -269,7 +271,7 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="330.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9">
+            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="330.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="11">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -277,7 +279,7 @@
                   <Insets left="160.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="10.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9">
+            <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="10.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="11">
                <image>
                   <Image url="@../images/Coin.png" />
                </image>
@@ -285,56 +287,83 @@
                   <Insets left="240.0" />
                </GridPane.margin>
             </ImageView>
-            <Label fx:id="tower1PriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="9">
+            <Label fx:id="tower1PriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="tower3PriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="9">
+            <Label fx:id="tower3PriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="185.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="tower2PriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="9">
+            <Label fx:id="tower2PriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="105.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="tower4PriceLabel" layoutX="35.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="9">
+            <Label fx:id="tower4PriceLabel" layoutX="35.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="265.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="tower5PriceLabel" prefHeight="16.0" prefWidth="43.0" text="150" GridPane.rowIndex="9">
+            <Label fx:id="tower5PriceLabel" prefHeight="16.0" prefWidth="43.0" text="150" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="345.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="upgrade5PriceLabel" layoutX="35.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="12">
+            <Label fx:id="upgrade5PriceLabel" layoutX="35.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="14">
                <GridPane.margin>
                   <Insets left="345.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="upgrade1PriceLabel" layoutX="195.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="12">
+            <Label fx:id="upgrade1PriceLabel" layoutX="195.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="14">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="upgrade4PriceLabel" layoutX="115.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="12">
+            <Label fx:id="upgrade4PriceLabel" layoutX="115.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="14">
                <GridPane.margin>
                   <Insets left="265.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="upgrade3PriceLabel" layoutX="275.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="12">
+            <Label fx:id="upgrade3PriceLabel" layoutX="275.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="14">
                <GridPane.margin>
                   <Insets left="185.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="upgrade2PriceLabel" layoutX="355.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="12">
+            <Label fx:id="upgrade2PriceLabel" layoutX="355.0" layoutY="442.0" prefHeight="16.0" prefWidth="43.0" text="Price" GridPane.rowIndex="14">
                <GridPane.margin>
                   <Insets left="105.0" />
                </GridPane.margin>
             </Label>
+            <Button fx:id="boughtItem1Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" GridPane.rowIndex="6" />
+            <Button fx:id="boughtItem2Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="boughtItem3Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="160.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="boughtItem4Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="240.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="boughtItem5Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="320.0" />
+               </GridPane.margin>
+            </Button>
+            <Label prefHeight="16.0" prefWidth="129.0" text="Item Inventory" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="buyTowerButton" mnemonicParsing="false" onAction="#onBuyTowerButtonClicked" prefHeight="24.0" prefWidth="97.0" text="Buy Station" GridPane.columnIndex="2" GridPane.rowIndex="13" />
          </children>
       </GridPane>
    </children>

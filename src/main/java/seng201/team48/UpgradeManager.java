@@ -12,6 +12,7 @@ public class UpgradeManager {
     private Random random = new Random();
     private List<Purchasable> defaultUpgradesList = new ArrayList<>();
     private List<Purchasable> upgradesForSale;
+    private List<Upgrade> playerUpgrades;
 
     /**
      * Constructor which initialises list of default upgrades used by the shop.
@@ -25,6 +26,7 @@ public class UpgradeManager {
         RepairKit repairKit = new RepairKit();
         defaultUpgradesList.addAll(List.of(level1Upgrade, level1Upgrade2, level2Upgrade, level3Upgrade, repairKit));
         upgradesForSale = defaultUpgradesList; // Initialise upgradesForSale
+        playerUpgrades = new ArrayList<>();
     }
 
     /**
@@ -53,5 +55,13 @@ public class UpgradeManager {
 
     public void setUpgradesForSale(List<Purchasable> upgradesForSale) {
         this.upgradesForSale = upgradesForSale;
+    }
+
+    public List<Upgrade> getPlayerUpgrades() {
+        return playerUpgrades;
+    }
+
+    public void setPlayerUpgrades(List<Upgrade> playerUpgrades) {
+        this.playerUpgrades = playerUpgrades;
     }
 }

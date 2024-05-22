@@ -3,7 +3,6 @@ package seng201.team48;
 import seng201.team48.models.Bowl;
 import seng201.team48.services.BowlService;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -33,7 +32,7 @@ public class MainGameManager {
     private double reload3Temp = 0;
     private double reload4Temp = 0;
     private double reload5Temp = 0;
-    private Integer moneyPerRound = 0;
+    private Integer totalMoney = 0;
     private String previousScreen;
     private double bowlStepSize;
     private double bowlLocation = -25;
@@ -160,8 +159,8 @@ public class MainGameManager {
         }
         return null;
     }
-    public Integer getMoneyPerRound() {
-        return moneyPerRound;
+    public Integer getTotalMoney() {
+        return totalMoney;
     }
 
     public Boolean getSuccess() { return success;}
@@ -224,8 +223,8 @@ public class MainGameManager {
         this.roundDifficulty = roundDifficulty;
     }
 
-    public void setMoneyPerRound(Integer moneyPerRound) {
-        this.moneyPerRound = moneyPerRound;
+    public void setTotalMoney(Integer totalMoney) {
+        this.totalMoney = totalMoney;
     }
 
     public void setReload1Temp(double reload1Temp) {
