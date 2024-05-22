@@ -278,7 +278,7 @@ public class MainGameManager {
     }
     public String getIngredient1Contents(){
         return ingredient1Contents;
-    }
+    } //comment
     public void setBowlService(BowlService bowlService){
         this.bowlService = bowlService;
     }

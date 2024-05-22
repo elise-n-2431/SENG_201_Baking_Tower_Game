@@ -147,7 +147,7 @@ public class SetupController {
             errorLabel.setText("Name must be between 3 and 15 characters, and contain no special characters");
         }
     }
-
+//commit
     @FXML
     private void onDifficultyChange() {
         mainGameManager.setGameDifficulty(gameDifficultyChoiceBox.getValue());

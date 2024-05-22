@@ -118,7 +118,7 @@ public class MainScreenController {
         if (numSmall != null){
             if (numLarge != null){
                 bowlService.setNumBowlsSelected(numSmall, numLarge);
-            }
+            }//comment
         }
         updateBowlNumber();
         if (mainGameManager.getIsStartOfRound()){
