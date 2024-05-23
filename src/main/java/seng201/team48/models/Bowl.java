@@ -34,6 +34,7 @@ public class Bowl {
             filled.set(i, null);
         }
         currentIndex = 0;
+        fullBowl = false;
     }
     public Boolean getFullBowl(){
         return fullBowl;

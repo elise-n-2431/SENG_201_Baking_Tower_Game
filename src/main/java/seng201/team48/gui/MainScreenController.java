@@ -40,7 +40,6 @@ public class MainScreenController {
     MainGameManager mainGameManager;
     BowlService bowlService;
     public AnimationTimer timer;
-    private boolean resetTimer = false;
     private boolean endTimer = false;
     private List<Tower> playerTowers;
     public ImageView bowlImage;
@@ -79,32 +78,41 @@ public class MainScreenController {
     public void initialize(){
         playerTowers = towerManager.getPlayerTowers();
         bowlService = mainGameManager.getBowlService();
-        String imagePath = "/images/"+playerTowers.get(0).getResourceType()+".png";
-        Image imgOne = new Image(getClass().getResourceAsStream(imagePath));
-        ImageView view = new ImageView(imgOne);
-        view.setFitHeight(100);
-        view.setPreserveRatio(true);
-        imageOne.setGraphic(view);
-        imageOne.setDisable(false); //disabled if not in use
-        reload1.setVisible(true);
+        for (int i = 0; i < playerTowers.size(); i++) {
+            String imagePath = "/images/"+playerTowers.get(i).getResourceType()+".png";
+            Image imageI = new Image(getClass().getResourceAsStream(imagePath));
+            ImageView viewI = new ImageView(imageI);
+            viewI.setFitHeight(100);
+            viewI.setPreserveRatio(true);
+            switch (i) {
+                case 0:
+                    imageOne.setGraphic(viewI);
+                    imageOne.setDisable(false);
+                    reload1.setVisible(true);
+                    break;
+                case 1:
+                    imageTwo.setGraphic(viewI);
+                    imageTwo.setDisable(false);
+                    reload2.setVisible(true);
+                    break;
+                case 2:
+                    imageThree.setGraphic(viewI);
+                    imageThree.setDisable(false);
+                    reload3.setVisible(true);
+                    break;
+                case 3:
+                    imageFour.setGraphic(viewI);
+                    imageFour.setDisable(false);
+                    reload4.setVisible(true);
+                    break;
+                case 4:
+                    imageFive.setGraphic(viewI);
+                    imageFive.setDisable(false);
+                    reload5.setVisible(true);
+                    break;
+            }
+        }
 
-        String imagePath2 = "/images/" +playerTowers.get(1).getResourceType()+ ".png";
-        Image imgTwo = new Image(getClass().getResourceAsStream(imagePath2));
-        ImageView view2 = new ImageView(imgTwo);
-        view2.setFitHeight(100);
-        view2.setPreserveRatio(true);
-        imageTwo.setGraphic(view2);
-        imageTwo.setDisable(false);
-        reload2.setVisible(true);
-
-        String imagePath3 = "/images/"+playerTowers.get(2).getResourceType()+".png";
-        Image imgThree = new Image(getClass().getResourceAsStream(imagePath3));
-        ImageView view3 = new ImageView(imgThree);
-        view3.setFitHeight(100);
-        view3.setPreserveRatio(true);
-        imageThree.setGraphic(view3);
-        imageThree.setDisable(false);
-        reload3.setVisible(true);
         String s = String.valueOf(mainGameManager.getTotalMoney());
         moneyValue.setText(s);
         Integer numSmall = mainGameManager.getNumSmall();
@@ -123,7 +131,6 @@ public class MainScreenController {
         } else{ //continue progress from before shop or recipe book
             currentBowl = mainGameManager.getCurrentBowl();
             bowlImage.setTranslateX(mainGameManager.getBowlLocation());
-            System.out.println(currentBowl.getFilled());
             for (int i = 0; i < playerTowers.size(); i++) {
                 switch (i) {
                     case 0:
@@ -250,9 +257,8 @@ public class MainScreenController {
                 }
             } else {
                 announcement.setText("Sorry, that can't be baked, try again");
-                resetBowlClicked();
+                resetBowlContents();
                 header.setText("In " + currentBowl.getSize() + " Bowl: ");
-
             }
         }
     }
@@ -332,6 +338,13 @@ public class MainScreenController {
         mainGameManager.resetBowlLocation();
     }
     /* RESET OR UPDATE VALUES */
+    private void resetBowlContents(){
+        currentBowl.setEmpty();
+        ingredient1Contents = "";
+        mainGameManager.setIngredient1Contents("");
+        ingredient1.setText("");
+    }
+
     @FXML
     private void resetBowlClicked(){
         currentBowl.setEmpty();

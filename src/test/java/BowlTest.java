@@ -37,7 +37,6 @@ public class BowlTest {
         testBowl.addToBowl(testTower);
         testBowl.addToBowl(testTower);
         assertTrue(testBowl.getFullBowl());
-
     }
     @Test
     void setEmptyFromEmpty(){

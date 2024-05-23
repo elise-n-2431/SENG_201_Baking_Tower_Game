@@ -1,3 +1,5 @@
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng201.team48.MainGameManager;
@@ -10,9 +12,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainGameManagerTest {
     MainGameManager testMainGameManager;
+    MockStage mockStage;
+    Pane mockPane;
     @BeforeEach
     public void init(){
-        testMainGameManager = new MainGameManager(null, null, null, null, null, null, null);
+        mockStage = new MockStage();
+        mockPane = new Pane();
+
+        testMainGameManager = new MainGameManager(
+                this::launchSetupScreen,
+                this::launchPreroundScreen,
+                this::launchMainScreen,
+                this::clearPane,
+                this::launchShopInventoryScreen,
+                this::launchConclusionScreen,
+                this::launchRecipeBookScreen
+        );
+        testMainGameManager.init(mockStage);
+
     }
     @Test
     public void updateRounds() {
