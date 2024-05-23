@@ -131,7 +131,7 @@
             </Button>
             <Button fx:id="tower1Button" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="10">
                <graphic>
-                  <ImageView fitHeight="48.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/FlourButton.png" />
                      </image>
@@ -142,7 +142,7 @@
                   <Insets left="80.0" />
                </GridPane.margin>
                <graphic>
-                  <ImageView fitHeight="48.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/EggsButton.png" />
                      </image>
@@ -154,7 +154,7 @@
                   <Insets left="160.0" />
                </GridPane.margin>
                <graphic>
-                  <ImageView fitHeight="48.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/SugarButton.png" />
                      </image>
@@ -166,7 +166,7 @@
                   <Insets left="240.0" />
                </GridPane.margin>
                <graphic>
-                  <ImageView fitHeight="48.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/MilkButton.png" />
                      </image>
@@ -178,7 +178,7 @@
                   <Insets left="320.0" />
                </GridPane.margin>
                <graphic>
-                  <ImageView fitHeight="48.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/BananaButton.png" />
                      </image>

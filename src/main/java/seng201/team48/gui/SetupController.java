@@ -2,6 +2,8 @@ package seng201.team48.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
@@ -113,9 +115,18 @@ public class SetupController {
             int finalI = i; // variables used within lambdas must be final
             selectedTowerButtons.get(i).setOnAction(event -> {
                 if (selectedTowerIndex != -1) {
-                    selectedTowerButtons.get(finalI).setText(towerManager.getDefaultTowers().get(selectedTowerIndex).getName());
-                    selectedTowers[finalI] = towerManager.getDefaultTowers().get(selectedTowerIndex);
                     selectedTowersImages[finalI] = towerManager.getDefaultTowersImages().get(selectedTowerIndex);
+
+                    String imagePath = selectedTowersImages[finalI];
+                    Image image = new Image(imagePath);
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(55);
+                    imageView.setFitHeight(55);
+
+                    selectedTowerButtons.get(finalI).setGraphic(imageView);
+                    //selectedTowerButtons.get(finalI).setText(towerManager.getDefaultTowers().get(selectedTowerIndex).getName());
+                    selectedTowers[finalI] = towerManager.getDefaultTowers().get(selectedTowerIndex);
+
                 }
             });
         }

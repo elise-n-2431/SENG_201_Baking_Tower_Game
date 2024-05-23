@@ -10,13 +10,15 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team48.gui.SetupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng201.team48.gui.SetupController">
    <children>
       <GridPane layoutY="220.0" prefHeight="380.0" prefWidth="800.0" AnchorPane.topAnchor="220.0">
         <columnConstraints>
@@ -33,31 +35,52 @@
         </rowConstraints>
          <children>
             
-            <Button fx:id="flourTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Flour" GridPane.rowIndex="2">
+            <Button fx:id="flourTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
                <tooltip>
                   <Tooltip text="Used in pasta, pasta sauce, pancakes, carbonara, cake, and banana bread" />
                </tooltip>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/FlourButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="waterTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Eggs" GridPane.rowIndex="2">
+            <Button fx:id="waterTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
                <tooltip>
                   <Tooltip text="Used in fried eggs, scrambled eggs, pasta, pancakes, carbonara, cake, banana bread" />
                </tooltip>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/EggsButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="sugarTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Sugar" GridPane.rowIndex="2">
+            <Button fx:id="sugarTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="185.0" />
                </GridPane.margin>
                <tooltip>
                   <Tooltip text="Used in cake and banana bread" />
                </tooltip>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/SugarButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Label text="Tower Stats" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label prefHeight="19.0" prefWidth="223.0" text="Ingredient Station Stats" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
@@ -86,7 +109,7 @@
                </GridPane.margin>
             </Label>
             <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" />
-            <Label text="Selected Towers:" GridPane.rowIndex="3">
+            <Label text="Selected Stations:" GridPane.rowIndex="3">
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -111,15 +134,22 @@
             </Button>
             <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
             <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#onStartClicked" text="Start Game!" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Button fx:id="milkTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" text="Milk" GridPane.rowIndex="2">
+            <Button fx:id="milkTowerButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="270.0" />
                </GridPane.margin>
                <tooltip>
                   <Tooltip text="Used in pasta sauce, scrambled eggs, pancakes, carbonara, cake, and banana bread" />
                </tooltip>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/MilkButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Label prefHeight="20.0" prefWidth="228.0" text="Choose Your Starter Towers" GridPane.rowIndex="1">
+            <Label prefHeight="20.0" prefWidth="356.0" text="Choose Your Starter Ingredient Stations" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -189,6 +219,6 @@
             </ChoiceBox>
          </children>
       </GridPane>
-      <Button fx:id="recipeButton" layoutX="729.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
+      <Button fx:id="recipeButton" layoutX="703.0" layoutY="18.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
    </children>
 </AnchorPane>

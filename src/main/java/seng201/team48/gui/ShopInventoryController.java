@@ -205,7 +205,7 @@ public class ShopInventoryController {
                 String imagePath = towerManager.getPlayerTowersImages().get(i);
                 Image image = new Image(imagePath);
                 ImageView imageView = new ImageView(image);
-                imageView.setFitWidth(20);
+                imageView.setFitWidth(40);
                 imageView.setFitHeight(40);
                 activeTowerButtons.get(i).setGraphic(imageView);
                 //activeTowerButtons.get(i).setText(towerManager.getPlayerTowers().get(i).getName());
