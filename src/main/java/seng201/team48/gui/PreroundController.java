@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 
+import java.util.Objects;
+import java.util.Random;
+
 public class PreroundController {
     private final TowerManager towerManager;
     private String greetingText = "Welcome to the game, ";
@@ -23,6 +26,8 @@ public class PreroundController {
     public Button backButton;
     public Button shopButton;
     public Button recipeButton;
+    private Random rand;
+    private Integer randInt;
 
 
     public PreroundController(MainGameManager mainGameManager){
@@ -33,6 +38,20 @@ public class PreroundController {
     public void initialize() {
         if (mainGameManager.getCurrentRound() > 1) {
             setGreetingText("Congrats, you've completed round " + (mainGameManager.getCurrentRound() - 1) + "! Ready for the next one?");
+            rand = new Random();
+            switch(mainGameManager.getGameDifficulty()) {
+                case "Easy": {randInt = rand.nextInt(60);}
+                case "Medium": {randInt = rand.nextInt(45);}
+                case "Hard" :{randInt = rand.nextInt(6);}
+            }
+            System.out.println(randInt); //prints random integer chosen in terminal
+            for (int i = 0; i < towerManager.getPlayerTowers().size(); i++) {
+                if((randInt - 1) == i){
+                    towerManager.getPlayerTowers().get(i).setBroken(true);
+                    System.out.println(towerManager.getPlayerTowers().get(i).getResourceType() + " Tower is broken.");
+                    //can the line above be put into an error message?
+                }
+            }
         }
         else {
             setGreetingText("Welcome to the game, " + mainGameManager.getName() + "! Prepare to get baking...");
