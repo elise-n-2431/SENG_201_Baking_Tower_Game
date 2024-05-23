@@ -45,12 +45,14 @@ public class BowlTest {
         testBowl.addToBowl(testTower);
         testBowl.addToBowl(testTower);
         testBowl.setEmpty();
-        assertEquals(null, testBowl.getFilled().get(0));
+        assertNull(testBowl.getFilled().get(0));
     }
     @Test
     void setEmptyFromFull(){
         testBowl.setEmpty();
-        assertEquals(null, testBowl.getFilled().get(0));
+        assertNull(testBowl.getFilled().get(0));
+        assertNull(testBowl.getFilled().get(1));
+        assertNull(testBowl.getFilled().get(2));
     }
     @Test
     void getCapacity(){
