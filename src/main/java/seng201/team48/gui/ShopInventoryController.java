@@ -109,6 +109,10 @@ public class ShopInventoryController {
     private Label viewDescriptionLabel;
     @FXML
     private Label playerCoinsLabel;
+    @FXML
+    private Label invItemNameLabel;
+    @FXML
+    private Label invDescriptionLabel;
     List<Button> buyTowerButtons;
     List<Button> buyUpgradeButtons;
     List<Label> upgradePriceLabels;
@@ -144,6 +148,8 @@ public class ShopInventoryController {
         // List containing everything from List<Tower> defaultTowers and List<Purchasable> upgradesForSale
         totalShopItems.addAll(towerManager.getDefaultTowers());
         totalShopItems.addAll(upgradeManager.getUpgradesForSale());
+
+        // Show first item in inventory active stations and first item in shop
 
         /*
          * Set up click functionality for purchasable tower buttons in shop
@@ -217,6 +223,7 @@ public class ShopInventoryController {
             // Set on click functionality
             activeTowerButtons.get(i).setOnAction(event -> {
                 selectedActiveItemIndex = finalI;
+                updateInvDisplay(towerManager.getPlayerTowers().get(finalI));
                 if (selectedReserveItemIndex != -1) {
                     // Swap active and reserve tower
                     Tower reserveTower = towerManager.getReserveTowers().get(selectedReserveItemIndex);
@@ -253,6 +260,11 @@ public class ShopInventoryController {
     public void updateShopDisplay(Purchasable purchasable){
         viewItemNameLabel.setText("Available in shop: " + purchasable.getName());
         viewDescriptionLabel.setText(purchasable.getDescription());
+    }
+
+    public void updateInvDisplay(Purchasable purchasable) {
+        invItemNameLabel.setText(("In Inventory: " + purchasable.getName()));
+        invDescriptionLabel.setText((purchasable.getDescription()));
     }
 
     /**
@@ -297,6 +309,7 @@ public class ShopInventoryController {
 
                 // Set relevant button's image in inventory
                 String imagePath = towerManager.getDefaultTowersImages().get(selectedItemIndex);
+                towerManager.addPlayerTowersImage(imagePath);
                 Image image = new Image(imagePath);
                 ImageView imageView = new ImageView(image);
                 imageView.setFitWidth(20);

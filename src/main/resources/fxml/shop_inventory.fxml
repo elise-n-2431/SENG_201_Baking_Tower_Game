@@ -213,15 +213,18 @@
                </GridPane.margin>
             </Button>
             <Button fx:id="upgrade1Button" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="13" />
-            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSellTowerClicked" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button fx:id="placeButton" layoutX="523.0" layoutY="535.0" mnemonicParsing="false" onAction="#onPlaceButtonClicked" text="Place" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSellTowerClicked" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <GridPane.margin>
-                  <Insets left="100.0" />
+                  <Insets left="230.0" />
+               </GridPane.margin></Button>
+            <Button fx:id="placeButton" layoutX="523.0" layoutY="535.0" mnemonicParsing="false" onAction="#onPlaceButtonClicked" prefHeight="24.0" prefWidth="102.0" text="Make Active" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="120.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="viewDescriptionLabel" prefHeight="85.0" prefWidth="341.0" text="Item description" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="10" GridPane.valignment="TOP">
+            <Label fx:id="viewDescriptionLabel" prefHeight="117.0" prefWidth="341.0" text="Item description" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="10" GridPane.rowSpan="4" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="20.0" />
+                  <Insets left="20.0" top="10.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="viewItemNameLabel" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="View Item" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
@@ -399,6 +402,17 @@
                </font>
             </Label>
             <Button fx:id="buyTowerButton" mnemonicParsing="false" onAction="#onBuyTowerButtonClicked" prefHeight="24.0" prefWidth="97.0" text="Buy Station" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+            <Label fx:id="invItemNameLabel" alignment="CENTER" prefHeight="25.0" prefWidth="310.0" text="In Inventory: Your Item" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="invDescriptionLabel" prefHeight="170.0" prefWidth="341.0" text="Item description" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="4" />
+            <Button fx:id="makeReserveButton" mnemonicParsing="false" onAction="#onPlaceButtonClicked" prefHeight="24.0" prefWidth="112.0" text="Make Reserve" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </children>

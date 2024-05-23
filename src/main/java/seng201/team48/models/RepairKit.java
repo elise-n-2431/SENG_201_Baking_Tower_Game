@@ -10,7 +10,7 @@ public class RepairKit extends Purchasable {
     /** Calls constructor of the Purchasable superclass.
      */
     public RepairKit() {
-        super("Repair kit", "Repairs a broken tower", 20, 3);
+        super("Repair kit", "Be prepared in case your ingredient stations run out!\nRepairs a broken station.", 20, 3);
     }
 
     /**

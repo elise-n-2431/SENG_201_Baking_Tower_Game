@@ -7,11 +7,14 @@ package seng201.team48.models;
  */
 
 public class Upgrade extends Purchasable {
+    private String towerLevel;
     /** Calls constructor of the Purchasable superclass.
      * @param towerLevel Numerical level of the tower which it can upgrade, passed in as a String.
      */
     public Upgrade(String towerLevel) {
-        super("Level " + towerLevel + " Upgrade", towerLevel, computePurchasePrice(towerLevel), 3);
+        super("Level " + towerLevel + " Upgrade",
+                "Upgrades a level " + towerLevel + "station to level "+(towerLevel+1), computePurchasePrice(towerLevel), 3);
+        this.towerLevel = towerLevel;
     }
 
     public static int computePurchasePrice(String towerLevel) {
