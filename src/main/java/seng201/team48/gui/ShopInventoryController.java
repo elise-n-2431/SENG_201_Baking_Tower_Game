@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 import seng201.team48.UpgradeManager;
@@ -168,8 +170,16 @@ public class ShopInventoryController {
         List<Purchasable> upgradesForSale = upgradeManager.getUpgradesForSale();
         for (int i = 0; i < buyUpgradeButtons.size(); i++) {
             int finalI = i;
-            buyUpgradeButtons.get(i).setText(upgradesForSale.get(i).getName());
+            // Set item shop buttons
+            String imagePath = upgradeManager.getUpgradesForSaleImages().get(i);
+            Image image = new Image(imagePath);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
+            buyUpgradeButtons.get(i).setGraphic(imageView);
+
             upgradePriceLabels.get(i).setText(String.valueOf(upgradesForSale.get(i).getPurchasePrice()));
+
             // Set on click functionality
             buyUpgradeButtons.get(i).setOnAction(event -> {
                 updateShopDisplay(upgradesForSale.get(finalI));
@@ -191,7 +201,14 @@ public class ShopInventoryController {
             int finalI = i;
             // Set names of the player's active towers
             if (i < towerManager.getPlayerTowers().size()) {
-                activeTowerButtons.get(i).setText(towerManager.getPlayerTowers().get(i).getName());
+                // Set relevant button's image in inventory
+                String imagePath = towerManager.getPlayerTowersImages().get(i);
+                Image image = new Image(imagePath);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(20);
+                imageView.setFitHeight(40);
+                activeTowerButtons.get(i).setGraphic(imageView);
+                //activeTowerButtons.get(i).setText(towerManager.getPlayerTowers().get(i).getName());
             }
             else {
                 // Hide buttons
@@ -273,18 +290,21 @@ public class ShopInventoryController {
             String name = totalShopItems.get(selectedItemIndex).getName();
             mainGameManager.deductTotalMoney(price);
             playerCoinsLabel.setText(String.valueOf(mainGameManager.getTotalMoney()));
-            infoAlert.setTitle("Tower Purchase Successful");
-            infoAlert.setHeaderText("You have bought " + name);
-            //infoAlert.setContentText("You have bought " + name);
-            infoAlert.showAndWait();
 
             // Add last clicked tower to player inventory in the correct list
             if (Objects.equals(shopService.getNonemptyTowerList(), "playerTower")) {
                 towerManager.addPlayerTower((Tower) totalShopItems.get(selectedItemIndex));
-                // Make button of new index visible
+
+                // Set relevant button's image in inventory
+                String imagePath = towerManager.getDefaultTowersImages().get(selectedItemIndex);
+                Image image = new Image(imagePath);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(20);
+                imageView.setFitHeight(40);
                 Button newButton = activeTowerButtons.get(towerManager.getPlayerTowers().size() - 1);
                 newButton.setVisible(true);
-                newButton.setText(totalShopItems.get(selectedItemIndex).getName());
+                newButton.setGraphic(imageView);
+
             }
             else {
                 towerManager.addReserveTower((Tower) totalShopItems.get(selectedItemIndex));
@@ -293,6 +313,9 @@ public class ShopInventoryController {
                 newButton.setVisible(true);
                 newButton.setText(totalShopItems.get(selectedItemIndex).getName());
             }
+            infoAlert.setTitle("Tower Purchase Successful");
+            infoAlert.setHeaderText("You have bought " + name);
+            infoAlert.showAndWait();
 
 
         } else if (!hasEnoughMoney) {
@@ -318,17 +341,24 @@ public class ShopInventoryController {
             String name = totalShopItems.get(selectedItemIndex).getName();
             mainGameManager.deductTotalMoney(price);
             playerCoinsLabel.setText(String.valueOf(mainGameManager.getTotalMoney()));
-            infoAlert.setTitle("Item Purchase Successful");
-            infoAlert.setContentText("You have bought " + name);
-            infoAlert.showAndWait();
 
             // Remove item from shop and place in first available spot in player inventory
             buyUpgradeButtons.get(selectedItemIndex - 5).setVisible(false);
             upgradeManager.addPlayerUpgrade(totalShopItems.get(selectedItemIndex));
 
+            // Set relevant button's image in inventory
+            String imagePath = upgradeManager.getUpgradesForSaleImages().get(selectedItemIndex - 5);
+            Image image = new Image(imagePath);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
             Button newButton = boughtItemButtons.get(upgradeManager.getPlayerUpgrades().size() - 1);
             newButton.setVisible(true);
-            newButton.setText(totalShopItems.get(selectedItemIndex).getName());
+            newButton.setGraphic(imageView);
+
+            infoAlert.setTitle("Item Purchase Successful");
+            infoAlert.setContentText("You have bought " + name);
+            infoAlert.showAndWait();
 
         } else if (!hasEnoughMoney) {
             alert.setTitle("Error");

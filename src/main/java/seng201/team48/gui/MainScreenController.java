@@ -1,21 +1,15 @@
 package seng201.team48.gui;
 import javafx.animation.AnimationTimer;
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
-import javafx.scene.shape.Line;
-import javafx.util.Duration;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 import seng201.team48.models.Bowl;
 import seng201.team48.models.Tower;
 import seng201.team48.services.BowlService;
 
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -127,7 +121,6 @@ public class MainScreenController {
             mainGameManager.setBowlStepSize();
 
         } else{ //continue progress from before shop or recipe book
-            System.out.println("This was called");
             currentBowl = mainGameManager.getCurrentBowl();
             bowlImage.setTranslateX(mainGameManager.getBowlLocation());
             System.out.println(currentBowl.getFilled());
@@ -241,7 +234,6 @@ public class MainScreenController {
         ingredient1.setText(ingredient1Contents);
         if(currentBowl.getFullBowl().equals(true)){
             String product = inRecipe();
-            System.out.println(product);
             if(product != null){
                 announcement.setText("You have made: " + product);
                 if(bowlService.getBowlsUsed()){

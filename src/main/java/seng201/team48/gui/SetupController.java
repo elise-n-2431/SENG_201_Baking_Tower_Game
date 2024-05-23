@@ -30,6 +30,7 @@ public class SetupController {
     private int selectedTowerIndex = -1;
 
     private final Tower[] selectedTowers = new Tower[3];
+    private final String[] selectedTowersImages = new String[3];
     @FXML
     private Button recipeButton;
 
@@ -114,6 +115,7 @@ public class SetupController {
                 if (selectedTowerIndex != -1) {
                     selectedTowerButtons.get(finalI).setText(towerManager.getDefaultTowers().get(selectedTowerIndex).getName());
                     selectedTowers[finalI] = towerManager.getDefaultTowers().get(selectedTowerIndex);
+                    selectedTowersImages[finalI] = towerManager.getDefaultTowersImages().get(selectedTowerIndex);
                 }
             });
         }
@@ -136,6 +138,7 @@ public class SetupController {
         if (nameService.isValidName(name) && towerService.areAllTowersSelected(selectedTowers)) {
             mainGameManager.setName(name);
             towerManager.setPlayerTowers(new ArrayList<>(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList()));
+            towerManager.setPlayerTowersImages(new ArrayList<>(Arrays.stream(selectedTowersImages).filter((Objects::nonNull)).toList()));
             mainGameManager.closeSetupScreen();
         }
         else if (!nameService.isValidName(name)) {
