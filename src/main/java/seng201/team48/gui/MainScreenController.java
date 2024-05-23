@@ -201,7 +201,7 @@ public class MainScreenController {
     }
     /* ADD ITEMS TO BOWLS */
     @FXML
-    private void onOneClicked(){
+    public void onOneClicked(){
         if (mainGameManager.getReload1Temp() >= 1){
             reload1.setProgress(0);
             mainGameManager.setReload1Temp(0);

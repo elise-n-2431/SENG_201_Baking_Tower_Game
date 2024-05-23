@@ -28,6 +28,7 @@ public class Bowl {
     public void setFullBowl(Boolean trueOrFalse) {
         fullBowl = trueOrFalse;
     }
+
     public void setEmpty(){
         for(int i = 0; i < capacity; i++){
             filled.set(i, null);
