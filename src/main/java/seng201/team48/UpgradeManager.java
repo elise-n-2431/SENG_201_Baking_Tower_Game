@@ -12,7 +12,7 @@ public class UpgradeManager {
     private Random random = new Random();
     private List<Purchasable> defaultUpgradesList = new ArrayList<>();
     private List<Purchasable> upgradesForSale;
-    private List<Upgrade> playerUpgrades;
+    private List<Purchasable> playerUpgrades;
 
     /**
      * Constructor which initialises list of default upgrades used by the shop.
@@ -33,10 +33,7 @@ public class UpgradeManager {
      * Generates random list of upgrades for sale
      */
     public List<Purchasable> generateUpgradesForSale() {
-        for (int i = 0; i < upgradesForSale.size(); i++) {
-            int randomIndex = random.nextInt(defaultUpgradesList.size());
-            upgradesForSale.set(i, defaultUpgradesList.get(randomIndex));
-        }
+        upgradesForSale.replaceAll(ignored -> defaultUpgradesList.get(random.nextInt(defaultUpgradesList.size())));
         return upgradesForSale;
 
     }
@@ -57,15 +54,15 @@ public class UpgradeManager {
         this.upgradesForSale = upgradesForSale;
     }
 
-    public List<Upgrade> getPlayerUpgrades() {
+    public List<Purchasable> getPlayerUpgrades() {
         return playerUpgrades;
     }
 
-    public void setPlayerUpgrades(List<Upgrade> playerUpgrades) {
+    public void setPlayerUpgrades(List<Purchasable> playerUpgrades) {
         this.playerUpgrades = playerUpgrades;
     }
 
-    public void addPlayerUpgrade(Upgrade boughtUpgrade) {
+    public void addPlayerUpgrade(Purchasable boughtUpgrade) {
         this.playerUpgrades.add(boughtUpgrade);
     }
 }

@@ -108,23 +108,23 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="reserve1Button" layoutX="10.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" GridPane.rowIndex="4" />
-            <Button fx:id="reserve2Button" layoutX="90.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" GridPane.rowIndex="4">
+            <Button fx:id="reserve1Button" layoutX="10.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="4" />
+            <Button fx:id="reserve2Button" layoutX="90.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="reserve3Button" layoutX="170.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" GridPane.rowIndex="4">
+            <Button fx:id="reserve3Button" layoutX="170.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="160.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="reserve4Button" layoutX="250.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" GridPane.rowIndex="4">
+            <Button fx:id="reserve4Button" layoutX="250.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="240.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="reserve5Button" layoutX="330.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" GridPane.rowIndex="4">
+            <Button fx:id="reserve5Button" layoutX="330.0" layoutY="117.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="320.0" />
                </GridPane.margin>

@@ -1,8 +1,7 @@
 package seng201.team48.services;
 
+import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
-import seng201.team48.models.Upgrade;
-
 import java.util.List;
 
 /**
@@ -14,10 +13,7 @@ public class ShopService {
     private int nonemptyTowerIndex;
     private int nonemptyUpgradeIndex;
     public boolean canPurchase(int moneyAvailable, int moneyRequired) {
-        if (moneyAvailable - moneyRequired >= 0) {
-            return true;
-        }
-        return false;
+        return moneyAvailable - moneyRequired >= 0;
     }
 
     /**
@@ -36,21 +32,6 @@ public class ShopService {
             nonemptyTowerList = "reserveTower";
             return true;
         }
-
-//        for(int i = 0; i < playerTowers.size(); i++) {
-//            if(playerTowers.get(i) == null) {
-//                nonemptyTowerList = playerTowers;
-//                nonemptyTowerIndex = i;
-//                return true;
-//            }
-//        }
-//        for(int i = 0; i < reserveTowers.size(); i++) {
-//            if(reserveTowers.get(i) == null) {
-//                nonemptyTowerList = reserveTowers;
-//                nonemptyTowerIndex = i;
-//                return true;
-//            }
-//        }
         return false;
     }
 
@@ -60,14 +41,8 @@ public class ShopService {
      * @param playerUpgrades List of items (upgrades and repair kits) in the player's inventory (up to 5 items)
      * @return true if playerUpgrades list is not full, false otherwise
      */
-    public boolean hasItemInventorySpace(List<Upgrade> playerUpgrades) {
-        for(int i = 0; i < playerUpgrades.size(); i++) {
-            if(playerUpgrades.get(i) == null) {
-                nonemptyUpgradeIndex = i;
-                return true;
-            }
-        }
-        return false;
+    public boolean hasItemInventorySpace(List<Purchasable> playerUpgrades) {
+        return playerUpgrades.size() < 5;
     }
 
     public String getNonemptyTowerList() {

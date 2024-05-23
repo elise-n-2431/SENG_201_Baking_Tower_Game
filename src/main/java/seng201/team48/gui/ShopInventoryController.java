@@ -10,7 +10,6 @@ import seng201.team48.TowerManager;
 import seng201.team48.UpgradeManager;
 import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
-import seng201.team48.models.Upgrade;
 import seng201.team48.services.ShopService;
 
 import java.util.ArrayList;
@@ -324,8 +323,12 @@ public class ShopInventoryController {
             infoAlert.showAndWait();
 
             // Remove item from shop and place in first available spot in player inventory
-            buyUpgradeButtons.get(selectedItemIndex).setVisible(false);
-            upgradeManager.addPlayerUpgrade((Upgrade) totalShopItems.get(selectedItemIndex));
+            buyUpgradeButtons.get(selectedItemIndex - 5).setVisible(false);
+            upgradeManager.addPlayerUpgrade(totalShopItems.get(selectedItemIndex));
+
+            Button newButton = boughtItemButtons.get(upgradeManager.getPlayerUpgrades().size() - 1);
+            newButton.setVisible(true);
+            newButton.setText(totalShopItems.get(selectedItemIndex).getName());
 
         } else if (!hasEnoughMoney) {
             alert.setTitle("Error");
