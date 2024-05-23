@@ -113,6 +113,8 @@ public class ShopInventoryController {
     private Label invItemNameLabel;
     @FXML
     private Label invDescriptionLabel;
+    @FXML
+    private Label sellPriceLabel;
     List<Button> buyTowerButtons;
     List<Button> buyUpgradeButtons;
     List<Label> upgradePriceLabels;
@@ -150,6 +152,11 @@ public class ShopInventoryController {
         totalShopItems.addAll(upgradeManager.getUpgradesForSale());
 
         // Show first item in inventory active stations and first item in shop
+        updateInvDisplay((towerManager.getPlayerTowers().get(0)));
+        updateShopDisplay(towerManager.getDefaultTowers().get(0));
+        sellPriceLabel.setText(String.valueOf(towerManager.getPlayerTowers().get(0).getSellPrice()));
+        active1Button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
+        tower1Button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
 
         /*
          * Set up click functionality for purchasable tower buttons in shop
@@ -265,6 +272,7 @@ public class ShopInventoryController {
     public void updateInvDisplay(Purchasable purchasable) {
         invItemNameLabel.setText(("In Inventory: " + purchasable.getName()));
         invDescriptionLabel.setText((purchasable.getDescription()));
+        sellPriceLabel.setText(String.valueOf(purchasable.getSellPrice()));
     }
 
     /**

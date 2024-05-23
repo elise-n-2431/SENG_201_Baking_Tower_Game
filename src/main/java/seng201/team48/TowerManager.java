@@ -22,19 +22,19 @@ public class TowerManager {
     public TowerManager() {
         Tower flourTower = new Tower("Flour",
                 "A flour station to fill your bowls.\n\nUsed in pasta, pasta sauce, pancakes, carbonara, cake, and banana bread recipes.\n\nReload speed: Slow.",
-                100, 3, 10, 0.05);
+                100, 50, 10, 0.05);
         Tower eggTower = new Tower("Eggs",
                 "An egg station to fill your bowls.\n\nUsed in fried eggs, scrambled eggs, pasta, pancakes, carbonara, cake, banana bread recipes.\n\nReload speed: Slow.",
-                100, 3, 20, 0.05);
+                100, 50, 20, 0.05);
         Tower sugarTower = new Tower("Sugar",
                 "A sugar station to fill your bowls.\n\nUsed only in cake and banana bread recipes.\n\nReload speed: Medium.",
-                100, 3, 5, 0.02);
+                100, 50, 5, 0.02);
         Tower milkTower = new Tower("Milk",
                 "A milk station to fill your bowls.\n\nUsed in pasta sauce, scrambled eggs, pancakes, carbonara, cake, and banana bread recipes.\n\nReload speed: Fast.",
-                100, 3, 8, 0.035);
+                100, 50, 8, 0.035);
         Tower bananaTower = new Tower("Banana",
                 "A fancy banana station to fill your bowls.\n\nUsed in smoothie and banana bread recipes.\n\nRefreshes quite slowly, but these recipes reward you well.",
-                150, 7, 8, 0.04);
+                150, 75, 8, 0.04);
         defaultTowers.addAll(List.of(flourTower, eggTower, sugarTower, milkTower, bananaTower));
 
         String flourImagePath = getClass().getResource("/images/FlourButton.png").toExternalForm();

@@ -13,7 +13,7 @@ public class Upgrade extends Purchasable {
      */
     public Upgrade(String towerLevel) {
         super("Level " + towerLevel + " Upgrade",
-                "Upgrades a level " + towerLevel + "station to level "+(towerLevel+1), computePurchasePrice(towerLevel), 3);
+                "Upgrades a level " + towerLevel + " station to level "+(Integer.parseInt(towerLevel)+1), computePurchasePrice(towerLevel), 10);
         this.towerLevel = towerLevel;
     }
 
