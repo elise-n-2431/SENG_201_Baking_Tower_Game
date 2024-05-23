@@ -213,7 +213,7 @@
                </GridPane.margin>
             </Button>
             <Button fx:id="upgrade1Button" layoutX="330.0" layoutY="511.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" GridPane.rowIndex="13" />
-            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSellTowerClicked" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Button fx:id="sellButton" mnemonicParsing="false" onAction="#onSellClicked" prefHeight="25.0" prefWidth="87.0" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></Button>
@@ -418,12 +418,12 @@
                   <Image url="@../images/Coin.png" />
                </image>
                <GridPane.margin>
-                  <Insets left="40.0" />
+                  <Insets left="90.0" />
                </GridPane.margin>
             </ImageView>
             <Label fx:id="sellPriceLabel" prefHeight="16.0" prefWidth="43.0" text="100" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <GridPane.margin>
-                  <Insets left="65.0" />
+                  <Insets left="115.0" />
                </GridPane.margin>
             </Label>
          </children>

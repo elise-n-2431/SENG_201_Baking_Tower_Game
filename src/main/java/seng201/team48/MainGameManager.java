@@ -32,7 +32,7 @@ public class MainGameManager {
     private double reload3Temp = 0;
     private double reload4Temp = 0;
     private double reload5Temp = 0;
-    private Integer totalMoney = 200; // CHANGE BACK LATER
+    private Integer totalMoney = 500; // CHANGE BACK LATER
     private String previousScreen;
     private double bowlStepSize;
     private double bowlLocation = -25;
@@ -168,6 +168,9 @@ public class MainGameManager {
 
     public void deductTotalMoney(int price) {
         this.totalMoney -= price;
+    }
+    public void addTotalMoney(int price) {
+        this.totalMoney += price;
     }
 
     public Boolean getSuccess() { return success;}

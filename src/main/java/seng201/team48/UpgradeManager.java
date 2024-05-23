@@ -83,4 +83,7 @@ public class UpgradeManager {
     public List<String> getUpgradesForSaleImages() {
         return upgradesForSaleImages;
     }
+
+    public void removePlayerUpgrade(Purchasable soldItem) { this.playerUpgrades.remove(soldItem);
+    }
 }

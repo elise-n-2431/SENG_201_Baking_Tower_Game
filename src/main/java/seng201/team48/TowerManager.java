@@ -12,6 +12,7 @@ public class TowerManager {
     private final List<Tower> defaultTowers = new ArrayList<>();
     private List<String> defaultTowersImages = new ArrayList<>();
     private List<String> playerTowersImages = new ArrayList<>();
+    private List<String> reserveTowersImages = new ArrayList<>();
     private List<Tower> playerTowers;
     private List<Tower> reserveTowers;
 
@@ -63,6 +64,18 @@ public class TowerManager {
         this.playerTowersImages.add(imagePath);
     }
 
+    public List<String> getReserveTowersImages() {
+        return reserveTowersImages;
+    }
+
+    public void setReserveTowersImages(List<String> reserveTowersImages) {
+        this.reserveTowersImages = reserveTowersImages;
+    }
+
+    public void addReserveTowersImage(String imagePath) {
+        this.reserveTowersImages.add(imagePath);
+    }
+
     public List<Tower> getDefaultTowers() {
         return defaultTowers;
     }
@@ -90,6 +103,7 @@ public class TowerManager {
     public void removePlayerTower(Tower tower) {
         this.playerTowers.remove(tower);
     }
+    public void removePlayerTower(int index) {this.playerTowers.remove(index); }
 
     public void addReserveTower(Tower tower) {
         this.reserveTowers.add(tower);

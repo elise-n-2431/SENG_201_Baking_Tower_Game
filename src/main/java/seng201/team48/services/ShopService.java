@@ -45,6 +45,15 @@ public class ShopService {
         return playerUpgrades.size() < 5;
     }
 
+    /**
+     * Checks if the player has enough towers to sell a tower in their inventory.
+     * @param playerTowers List of active player towers
+     * @return true if player has more than 3 active towers, false otherwise.
+     */
+    public boolean hasEnoughTowers(List<Tower> playerTowers) {
+        return playerTowers.size() > 3;
+    }
+
     public String getNonemptyTowerList() {
         return nonemptyTowerList;
     }
