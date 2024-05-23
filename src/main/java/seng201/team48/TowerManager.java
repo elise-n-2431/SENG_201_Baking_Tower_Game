@@ -63,6 +63,9 @@ public class TowerManager {
     public void addPlayerTowersImage(String imagePath) {
         this.playerTowersImages.add(imagePath);
     }
+    public void removePlayerTowersImage(int index) {
+        this.playerTowersImages.remove(index);
+    }
 
     public List<String> getReserveTowersImages() {
         return reserveTowersImages;

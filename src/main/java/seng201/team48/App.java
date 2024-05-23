@@ -7,7 +7,6 @@ import seng201.team48.gui.FXWindow;
  * @author seng201 teaching team
  */
 public class App {
-
     /**
      * Entry point which runs the javaFX application
      * Due to how JavaFX works we must call MainWindow.launchWrapper() from here,

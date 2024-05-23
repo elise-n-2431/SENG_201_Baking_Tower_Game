@@ -12,7 +12,6 @@ import seng201.team48.TowerManager;
 import seng201.team48.UpgradeManager;
 import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
-import seng201.team48.models.Upgrade;
 import seng201.team48.services.ShopService;
 
 import java.util.ArrayList;
@@ -288,7 +287,6 @@ public class ShopInventoryController {
             alert.setContentText("You can only store up to 5 items at a time. Try upgrading your towers or selling items!");
             alert.showAndWait();
         }
-        System.out.println("TEST " + towerManager.getPlayerTowers());
         initialiseLayout();
     }
 
@@ -301,17 +299,18 @@ public class ShopInventoryController {
                 soldItem = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
                 sellPrice = soldItem.getSellPrice();
                 towerManager.removePlayerTower((Tower) soldItem);
-                activeTowerButtons.get(selectedActiveItemIndex).setVisible(false);
+                towerManager.removePlayerTowersImage(selectedActiveItemIndex);
             } else if (lastSelectedInvList == "reserve") {
                 soldItem = towerManager.getReserveTowers().get(selectedReserveItemIndex);
                 sellPrice = soldItem.getSellPrice();
                 towerManager.removeReserveTower((Tower) soldItem);
-                reserveTowerButtons.get(selectedReserveItemIndex).setVisible(false);
+                towerManager.removePlayerTowersImage(selectedReserveItemIndex);
             } else if (lastSelectedInvList == "item") {
                 soldItem = upgradeManager.getPlayerUpgrades().get(selectedUpgradeIndex);
                 sellPrice = soldItem.getSellPrice();
                 upgradeManager.removePlayerUpgrade(soldItem);
-                boughtItemButtons.get(selectedUpgradeIndex).setVisible(false);
+            } else {
+                return;
             }
             mainGameManager.addTotalMoney(sellPrice);
             initialiseLayout();
@@ -418,14 +417,14 @@ public class ShopInventoryController {
                 selectedActiveItemIndex = finalI;
                 lastSelectedInvList = "active";
                 updateInvDisplay(towerManager.getPlayerTowers().get(finalI));
-                if (selectedReserveItemIndex != -1) {
-                    // Swap active and reserve tower
-                    Tower reserveTower = towerManager.getReserveTowers().get(selectedReserveItemIndex);
-                    Tower activeTower = towerManager.getPlayerTowers().get(finalI);
-                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
-                    activeTowerButtons.get(finalI).setText(reserveTower.getName());
-                    reserveTowerButtons.get(selectedReserveItemIndex).setText(activeTower.getName());
-                }
+//                if (selectedReserveItemIndex != -1) {
+//                    // Swap active and reserve tower
+//                    Tower reserveTower = towerManager.getReserveTowers().get(selectedReserveItemIndex);
+//                    Tower activeTower = towerManager.getPlayerTowers().get(finalI);
+//                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
+//                    activeTowerButtons.get(finalI).setText(reserveTower.getName());
+//                    reserveTowerButtons.get(selectedReserveItemIndex).setText(activeTower.getName());
+//                }
                 activeTowerButtons.forEach(button -> {
                     if (button == activeTowerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
@@ -459,14 +458,14 @@ public class ShopInventoryController {
                 selectedReserveItemIndex = finalI;
                 lastSelectedInvList = "reserve";
                 updateInvDisplay(towerManager.getReserveTowers().get(finalI));
-                if (selectedActiveItemIndex != -1) {
-                    // COPY PASTED -- DOES IT WORK???
-                    Tower reserveTower = towerManager.getReserveTowers().get(finalI);
-                    Tower activeTower = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
-                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
-                    activeTowerButtons.get(selectedActiveItemIndex).setText(reserveTower.getName());
-                    reserveTowerButtons.get(finalI).setText(activeTower.getName());
-                }
+//                if (selectedActiveItemIndex != -1) {
+//                    // COPY PASTED -- DOES IT WORK???
+//                    Tower reserveTower = towerManager.getReserveTowers().get(finalI);
+//                    Tower activeTower = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
+//                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
+//                    activeTowerButtons.get(selectedActiveItemIndex).setText(reserveTower.getName());
+//                    reserveTowerButtons.get(finalI).setText(activeTower.getName());
+//                }
                 reserveTowerButtons.forEach(button -> {
                     if (button == reserveTowerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
