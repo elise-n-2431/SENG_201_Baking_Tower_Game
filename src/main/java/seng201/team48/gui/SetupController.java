@@ -9,6 +9,7 @@ import seng201.team48.models.Tower;
 import seng201.team48.services.NameService;
 import seng201.team48.services.TowerService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -134,7 +135,7 @@ public class SetupController {
         String name = nameTextField.getText();
         if (nameService.isValidName(name) && towerService.areAllTowersSelected(selectedTowers)) {
             mainGameManager.setName(name);
-            towerManager.setPlayerTowers(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList());
+            towerManager.setPlayerTowers(new ArrayList<>(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList()));
             mainGameManager.closeSetupScreen();
         }
         else if (!nameService.isValidName(name)) {

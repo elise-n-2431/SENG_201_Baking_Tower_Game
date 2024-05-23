@@ -28,7 +28,7 @@ public class ShopInventoryController {
     UpgradeManager upgradeManager;
     ShopService shopService = new ShopService();
     private List<Tower> towersForSale;
-    private List<Purchasable> totalShopItems = new ArrayList<Purchasable>();
+    private List<Purchasable> totalShopItems;
     private int selectedItemIndex = -1;
     private int selectedActiveItemIndex = -1;
     private int selectedReserveItemIndex = -1;
@@ -121,6 +121,7 @@ public class ShopInventoryController {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
         upgradeManager = new UpgradeManager();
+        totalShopItems = new ArrayList<Purchasable>();
         System.out.println(upgradeManager.getDefaultUpgradesList());
     }
 
@@ -151,6 +152,7 @@ public class ShopInventoryController {
             int finalI = i; // variables used within lambdas must be final
             buyTowerButtons.get(i).setOnAction(event -> {
                 updateShopDisplay(towerManager.getDefaultTowers().get(finalI));
+                buyItemButton.setVisible(false);
                 buyTowerButton.setVisible(true);
                 selectedItemIndex = finalI;
                 buyTowerButtons.forEach(button -> {
@@ -172,6 +174,7 @@ public class ShopInventoryController {
             // Set on click functionality
             buyUpgradeButtons.get(i).setOnAction(event -> {
                 updateShopDisplay(upgradesForSale.get(finalI));
+                buyTowerButton.setVisible(false);
                 buyItemButton.setVisible(true);
                 selectedItemIndex = finalI + 5;
                 buyUpgradeButtons.forEach(button -> {
@@ -214,6 +217,19 @@ public class ShopInventoryController {
                     }
                 });
             });
+        }
+
+        // Set reserve towers
+        for (int i = 0; i < reserveTowerButtons.size(); i++) {
+            int finalI = i;
+            // Set names of the player's active towers
+            if (i < towerManager.getReserveTowers().size()) {
+                reserveTowerButtons.get(i).setText(towerManager.getReserveTowers().get(i).getName());
+            }
+            else {
+                // Hide buttons
+                reserveTowerButtons.get(i).setVisible(false);
+            }
         }
 
     }
@@ -266,10 +282,19 @@ public class ShopInventoryController {
             // Add last clicked tower to player inventory in the correct list
             if (Objects.equals(shopService.getNonemptyTowerList(), "playerTower")) {
                 towerManager.addPlayerTower((Tower) totalShopItems.get(selectedItemIndex));
+                // Make button of new index visible
+                Button newButton = activeTowerButtons.get(towerManager.getPlayerTowers().size() - 1);
+                newButton.setVisible(true);
+                newButton.setText(totalShopItems.get(selectedItemIndex).getName());
             }
             else {
                 towerManager.addReserveTower((Tower) totalShopItems.get(selectedItemIndex));
+                // Make button of new index visible
+                Button newButton = reserveTowerButtons.get(towerManager.getReserveTowers().size() - 1);
+                newButton.setVisible(true);
+                newButton.setText(totalShopItems.get(selectedItemIndex).getName());
             }
+
 
         } else if (!hasEnoughMoney) {
             alert.setTitle("Error");
