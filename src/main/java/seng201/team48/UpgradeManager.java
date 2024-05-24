@@ -9,23 +9,30 @@ import java.util.List;
 import java.util.Random;
 
 public class UpgradeManager {
-    private Random random = new Random();
-    private List<Purchasable> defaultUpgradesList = new ArrayList<>();
-    private List<String> defaultUpgradesImages = new ArrayList<>();
+    private Random random;
+    private List<Purchasable> defaultUpgradesList;
+    private List<String> defaultUpgradesImages;
+    private List<String> playerItemsImages;
     private List<Purchasable> upgradesForSale;
     private List<Purchasable> playerUpgrades;
-    private List<String> upgradesForSaleImages = new ArrayList<>();
+    private List<String> upgradesForSaleImages;
 
     /**
      * Constructor which initialises list of default upgrades used by the shop.
      * Upgrades to level 1 towers are more common than other upgrade types.
      */
     public UpgradeManager() {
+        random = new Random();
         Upgrade level1Upgrade = new Upgrade("1");
         Upgrade level1Upgrade2 = new Upgrade("1");
         Upgrade level2Upgrade = new Upgrade("2");
         Upgrade level3Upgrade = new Upgrade("3");
         RepairKit repairKit = new RepairKit();
+
+        defaultUpgradesList = new ArrayList<>();
+        defaultUpgradesImages = new ArrayList<>();
+        upgradesForSaleImages = new ArrayList<>();
+        playerItemsImages = new ArrayList<>();
         defaultUpgradesList.addAll(List.of(level1Upgrade, level1Upgrade2, level2Upgrade, level3Upgrade, repairKit));
 
         String l1ImagePath = getClass().getResource("/images/Level1.png").toExternalForm();
@@ -56,10 +63,6 @@ public class UpgradeManager {
         return defaultUpgradesList;
     }
 
-    public void setDefaultUpgradesList(List<Purchasable> defaultShopList) {
-        this.defaultUpgradesList = defaultShopList;
-    }
-
     public List<Purchasable> getUpgradesForSale() {
         return upgradesForSale;
     }
@@ -72,10 +75,6 @@ public class UpgradeManager {
         return playerUpgrades;
     }
 
-    public void setPlayerUpgrades(List<Purchasable> playerUpgrades) {
-        this.playerUpgrades = playerUpgrades;
-    }
-
     public void addPlayerUpgrade(Purchasable boughtUpgrade) {
         this.playerUpgrades.add(boughtUpgrade);
     }
@@ -84,6 +83,19 @@ public class UpgradeManager {
         return upgradesForSaleImages;
     }
 
-    public void removePlayerUpgrade(Purchasable soldItem) { this.playerUpgrades.remove(soldItem);
+    public void removePlayerUpgrade(Purchasable soldItem) {
+        this.playerUpgrades.remove(soldItem);
+    }
+
+    public List<String> getPlayerItemsImages() {
+        return playerItemsImages;
+    }
+
+    public void addPlayerItemsImage(String imagePath) {
+        this.playerItemsImages.add(imagePath);
+    }
+
+    public void removePlayerItemsImage(int index) {
+        this.playerItemsImages.remove(index);
     }
 }

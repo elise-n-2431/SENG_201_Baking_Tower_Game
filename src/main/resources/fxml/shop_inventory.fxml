@@ -407,7 +407,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="invDescriptionLabel" prefHeight="156.0" prefWidth="341.0" text="Item description" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="4" />
+            <Label fx:id="invDescriptionLabel" prefHeight="143.0" prefWidth="341.0" text="Item description" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="4" />
             <Button fx:id="makeReserveButton" mnemonicParsing="false" onAction="#onPlaceButtonClicked" prefHeight="24.0" prefWidth="112.0" text="Make Reserve" GridPane.columnIndex="2" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets />
@@ -431,6 +431,7 @@
                   <Insets left="230.0" />
                </GridPane.margin>
             </Button>
+            <Label fx:id="invLevelLabel" prefHeight="16.0" prefWidth="132.0" text="Level: " GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

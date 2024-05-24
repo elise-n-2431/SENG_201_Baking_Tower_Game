@@ -4,7 +4,7 @@ package seng201.team48.models;
  * Purchasable class which is inherited by RepairKit, Upgrade, and Tower
  * @author Hannah Grace
  */
-public class Purchasable {
+public class Purchasable implements Cloneable {
     private String name;
     private int purchasePrice;
     private int sellPrice;
@@ -22,6 +22,11 @@ public class Purchasable {
         this.purchasePrice = purchasePrice;
         this.sellPrice = sellPrice;
     }
+
+//    @Override
+//    public Purchasable clone() throws CloneNotSupportedException {
+//        return (Purchasable) super.clone();
+//    }
 
     /**
      * Gets description of Purchasable object
@@ -61,27 +66,12 @@ public class Purchasable {
         this.name = name;
     }
 
-    /**
-     * Set purchase price
-     * @param purchasePrice Amount of coins required to purchase object from shop
-     */
-    public void setPurchasePrice(int purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
+    public Purchasable cloneSelf() {
+        try {
+            return (Purchasable) this.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
 
-    /**
-     * Set sell price
-     * @param sellPrice Amount of coins user receives after selling object in shop
-     */
-    public void setSellPrice(int sellPrice) {
-        this.sellPrice = sellPrice;
-    }
-
-    /**
-     *  Set description
-     * @param description Short description of Purchasable object in the game's context
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
