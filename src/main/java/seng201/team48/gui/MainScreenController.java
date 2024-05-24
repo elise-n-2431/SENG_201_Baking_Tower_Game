@@ -388,7 +388,7 @@ public class MainScreenController {
         if (currentBowl.getSize() == "Large"){
             bowlImage.setFitHeight(120);
             bowlImage.setFitWidth(120);
-            bowlImage.setTranslateY(-40);
+            bowlImage.setTranslateY(-30);
         }
         mainGameManager.resetBowlLocation();
     }
@@ -445,7 +445,7 @@ public class MainScreenController {
         pauseTimer = true;
     }
 
-    /** The following three methods change the active screen and may pass in "MainScreen" as a parameter
+    /** Change the active screen and may pass in "MainScreen" as a parameter
      * The parameter sets the navigation back to this page
      */
     /* LEAVE MAIN GAME SCREEN */
@@ -454,11 +454,19 @@ public class MainScreenController {
         saveValuesMidRound();
         mainGameManager.launchShopScreen("MainScreen");
     }
+
+    /** Change the active screen and may pass in "MainScreen" as a parameter
+     * The parameter sets the navigation back to this page
+     */
     @FXML
     private void onRecipeClicked(){
         saveValuesMidRound();
         mainGameManager.launchRecipeBook("MainScreen");
     }
+
+    /** Change the active screen and may pass in "MainScreen" as a parameter
+     * The parameter sets the navigation back to this page
+     */
     @FXML
     private void onBackClicked() {
         resetValuesEndGame();
