@@ -41,6 +41,7 @@ public class MainScreenController {
     BowlService bowlService;
     public AnimationTimer timer;
     private boolean endTimer = false;
+    private boolean pauseTimer = false;
     private List<Tower> playerTowers;
     public ImageView bowlImage;
 
@@ -60,8 +61,13 @@ public class MainScreenController {
                     reloadTimer = now;
                 }
                 if (endTimer){
+                    System.out.println("Has stopped.");
                     this.stop();
                     fail();
+                }
+                if (pauseTimer){
+                    System.out.print("Paused");
+                    this.stop();
                 }
                 if(now - reloadTimer >= 200_000_000L){
                     increaseProgressBars();
@@ -327,6 +333,7 @@ public class MainScreenController {
         bowlImage.setTranslateX(x_value);
         if (x_value >= 720){
             endTimer = true;
+            System.out.println(endTimer);
         }
     }
     public void resetBowlVisual(){
@@ -366,11 +373,13 @@ public class MainScreenController {
         mainGameManager.setCurrentBowl(currentBowl);
         mainGameManager.setIngredient1Contents(ingredient1Contents);
         mainGameManager.setBowlService(bowlService);
+        pauseTimer = true;
     }
     public void resetValuesEndGame(){
         mainGameManager.setIsStartOfRound(true);
         mainGameManager.resetBowlLocation();
         mainGameManager.setTotalMoney(0);
+        pauseTimer = true;
     }
 
     /* LEAVE MAIN GAME SCREEN */
@@ -390,10 +399,12 @@ public class MainScreenController {
         mainGameManager.closeMainScreenHome();
     }
     private void endRound() {
+
         if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())) {
             resetValuesEndGame();
             mainGameManager.closeMainScreenConclusion();
         } else {
+            pauseTimer = true;
             mainGameManager.updateRounds();
             mainGameManager.setIsStartOfRound(true);
             mainGameManager.resetBowlLocation();

@@ -41,6 +41,7 @@ public class MainGameManager {
     private String ingredient1Contents;
     private BowlService bowlService = new BowlService();
     private String previousScreenShop;
+    private String preroundLocation;
 
 
 
@@ -64,6 +65,7 @@ public class MainGameManager {
     public void closeSetupScreen() {
         clearScreen.run();
         launchPreroundScreen();
+        preroundLocation = "Setup";
     }
 
     public void launchPreroundScreen() {
@@ -93,7 +95,10 @@ public class MainGameManager {
         clearScreen.run();
         switch (previousScreenShop) {
             case "MainScreen" -> launchMainScreen();
-            case "Preround" -> launchPreroundScreen();
+            case "Preround" -> {
+                launchPreroundScreen();
+                preroundLocation = "Shop";
+            }
         }
     }
     public void launchConclusionScreen() {conclusionLauncher.accept(this);}
@@ -108,6 +113,7 @@ public class MainGameManager {
     public void closeMainScreenPreRound(){
         clearScreen.run();
         launchPreroundScreen();
+        preroundLocation = "MainScreen";
     }
     public void launchRecipeBook(String previousScreen1){
         clearScreen.run();
@@ -118,7 +124,10 @@ public class MainGameManager {
         switch (previousScreen) {
             case "MainScreen" -> launchMainScreen();
             case "Setup" -> launchSetupScreen();
-            case "Preround" -> launchPreroundScreen();
+            case "Preround" -> {
+                launchPreroundScreen();
+                preroundLocation = "Recipe";
+            }
         }
 
     }
@@ -294,4 +303,5 @@ public class MainGameManager {
     public BowlService getBowlService(){
         return bowlService;
     }
+    public String getPreroundLocation(){ return preroundLocation; }
 }

@@ -8,6 +8,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
+
+import java.util.Objects;
 import java.util.Random;
 
 public class PreroundController {
@@ -38,21 +40,29 @@ public class PreroundController {
     public void initialize() {
         if (mainGameManager.getCurrentRound() > 1) {
             setGreetingText("Congrats, you've completed round " + (mainGameManager.getCurrentRound() - 1) + "! Ready for the next one?");
-            brokenTowerAlert = new Alert(Alert.AlertType.INFORMATION);
-            rand = new Random();
-            switch(mainGameManager.getGameDifficulty()) {
-                case "Easy": {randInt = rand.nextInt(60);}
-                case "Medium": {randInt = rand.nextInt(45);}
-                case "Hard" :{randInt = rand.nextInt(6);}
-            }
-            System.out.println(randInt); //prints random integer chosen in terminal
-            for (int i = 0; i < towerManager.getPlayerTowers().size(); i++) {
-                if((randInt - 1) == i){
-                    towerManager.getPlayerTowers().get(i).setBroken(true);
-                    brokenTowerAlert.setTitle("Uh oh...");
-                    brokenTowerAlert.setHeaderText(towerManager.getPlayerTowers().get(i).getResourceType() + " Tower is broken.");
-                    brokenTowerAlert.setContentText("You must fix this tower with a repair kit from the shop before you can use it again.");
-                    brokenTowerAlert.showAndWait();
+            if (Objects.equals(mainGameManager.getPreroundLocation(), "MainScreen")){
+                brokenTowerAlert = new Alert(Alert.AlertType.INFORMATION);
+                rand = new Random();
+                switch (mainGameManager.getGameDifficulty()) {
+                    case "Easy": {
+                        randInt = rand.nextInt(60);
+                    }
+                    case "Medium": {
+                        randInt = rand.nextInt(45);
+                    }
+                    case "Hard": {
+                        randInt = rand.nextInt(6);
+                    }
+                }
+                System.out.println(randInt); //prints random integer chosen in terminal
+                for (int i = 0; i < towerManager.getPlayerTowers().size(); i++) {
+                    if ((randInt - 1) == i) {
+                        towerManager.getPlayerTowers().get(i).setBroken(true);
+                        brokenTowerAlert.setTitle("Uh oh...");
+                        brokenTowerAlert.setHeaderText(towerManager.getPlayerTowers().get(i).getResourceType() + " Tower is broken.");
+                        brokenTowerAlert.setContentText("You must fix this tower with a repair kit from the shop before you can use it again.");
+                        brokenTowerAlert.showAndWait();
+                    }
                 }
             }
         }

@@ -12,13 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainGameManagerTest {
     MainGameManager testMainGameManager;
-    MockStage mockStage;
     Pane mockPane;
     @BeforeEach
     public void init(){
-        mockStage = new MockStage();
         mockPane = new Pane();
-
+/*
         testMainGameManager = new MainGameManager(
                 this::launchSetupScreen,
                 this::launchPreroundScreen,
@@ -29,7 +27,7 @@ public class MainGameManagerTest {
                 this::launchRecipeBookScreen
         );
         testMainGameManager.init(mockStage);
-
+*/
     }
     @Test
     public void updateRounds() {
