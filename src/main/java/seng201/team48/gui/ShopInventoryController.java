@@ -22,7 +22,17 @@ import java.util.Objects;
 
 /**
  * Controller class for the shop/inventory window.
+ * Manages the interaction between the user and the shop/inventory UI elements.
+ * Handles purchasing, selling, and using items/towers in the game.
+ * Initializes the layout and updates the UI based on user actions.
+ * Provides functionality to refresh the shop, display item details, and manage player inventory.
+ *
  * @author Hannah Grace, Elise Newman
+ * @see MainGameManager
+ * @see TowerManager
+ * @see UpgradeManager
+ * @see InventoryService
+ * @see ShopService
  */
 
 public class ShopInventoryController {
@@ -39,15 +49,9 @@ public class ShopInventoryController {
     private int selectedReserveItemIndex = -1;
     private int selectedUpgradeIndex = -1;
     @FXML
-    private Button back_button;
-    @FXML
     private Button buyTowerButton;
     @FXML
     private Button buyItemButton;
-    @FXML
-    private Button sellButton;
-    @FXML
-    private Button place;
     @FXML
     private Button active1Button;
     @FXML
@@ -133,14 +137,25 @@ public class ShopInventoryController {
     private Alert alert;
     private Alert infoAlert;
 
+    /**
+     * Constructor for the ShopInventoryController.
+     * Initializes the main game manager, tower manager, and upgrade manager.
+     *
+     * @param mainGameManager the main game manager
+     */
     public ShopInventoryController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
         this.upgradeManager = mainGameManager.getUpgradeManager();
-        totalShopItems = new ArrayList<Purchasable>();
+        totalShopItems = new ArrayList<>();
         System.out.println(upgradeManager.getDefaultUpgradesList());
     }
 
+    /**
+     * Initializes the controller class.
+     * Sets up the shop and inventory layout.
+     * Prepares the UI elements and loads initial data.
+     */
     public void initialize() {
         refreshShop();
         buyTowerButtons = List.of(tower1Button, tower2Button, tower3Button, tower4Button, tower5Button);
@@ -161,11 +176,21 @@ public class ShopInventoryController {
 
     }
 
+    /**
+     * Updates the shop display with the details of the selected purchasable item.
+     *
+     * @param purchasable the selected item
+     */
     public void updateShopDisplay(Purchasable purchasable) {
         viewItemNameLabel.setText("Available in shop: " + purchasable.getName());
         viewDescriptionLabel.setText(purchasable.getDescription());
     }
 
+    /**
+     * Updates the inventory display with the details of the selected purchasable item.
+     *
+     * @param purchasable the selected item
+     */
     public void updateInvDisplay(Purchasable purchasable) {
         invItemNameLabel.setText(("In Inventory: " + purchasable.getName()));
         invDescriptionLabel.setText((purchasable.getDescription()));
@@ -187,20 +212,31 @@ public class ShopInventoryController {
         upgradeManager.setUpgradesForSale(upgradeManager.generateUpgradesForSale());
     }
 
-    public List<Tower> getTowersForSale() {
-        return towersForSale;
-    }
-
+    /**
+     * Sets the list of towers available for sale.
+     *
+     * @param towersForSale the list of towers to set
+     */
     public void setTowersForSale(List<Tower> towersForSale) {
         this.towersForSale = towersForSale;
     }
 
+    /**
+     * Handles the action when the back button is clicked.
+     * Closes the shop screen.
+     */
     @FXML
     private void onBackClicked() {
         mainGameManager.closeShopScreen();
     }
 
-
+    /**
+     * Handles the action when the buy tower button is clicked.
+     * Purchases the selected tower and updates the player inventory and coins.
+     *
+     * @param actionEvent the event triggered when the buy tower button is clicked
+     * @throws CloneNotSupportedException if the tower cannot be cloned
+     */
     public void onBuyTowerButtonClicked(ActionEvent actionEvent) throws CloneNotSupportedException {
         int moneyRequired = totalShopItems.get(selectedItemIndex).getPurchasePrice();
         boolean hasEnoughMoney = shopService.canPurchase(mainGameManager.getTotalMoney(), moneyRequired);
@@ -257,6 +293,12 @@ public class ShopInventoryController {
         }
     }
 
+    /**
+     * Handles the action when the buy item button is clicked.
+     * Purchases the selected item and updates the player inventory and coins.
+     *
+     * @param actionEvent the event triggered when the buy tower button is clicked
+     */
     public void onBuyItemButtonClicked(ActionEvent actionEvent) {
         int moneyRequired = totalShopItems.get(selectedItemIndex).getPurchasePrice();
         boolean hasEnoughMoney = shopService.canPurchase(mainGameManager.getTotalMoney(), moneyRequired);
@@ -325,7 +367,10 @@ public class ShopInventoryController {
         }
     }
 
-    public void onPlaceButtonClicked(ActionEvent actionEvent) {
+    public void onMakeReserveButtonClicked(ActionEvent actionEvent) {
+    }
+
+    public void onMakeActiveButtonClicked(ActionEvent actionEvent) {
     }
 
     /**
@@ -553,9 +598,12 @@ public class ShopInventoryController {
     }
 
     /**
-     * @param listToGetFrom List of image paths
-     * @param buttonList
-     * @param index
+     * Sets button images for towers and items in inventory and shop.
+     * Adds an image overlay of a red 'X' to the button if the image is for a broken tower.
+     * Called from a for loop
+     * @param listToGetFrom List of image paths being looped through
+     * @param buttonList List of buttons being looped through
+     * @param index Location of the desired button and image in their respective lists.
      */
     public void setButtonImages(List<String> listToGetFrom, List<Button> buttonList, int index, boolean needsOverlay) {
         // Set relevant button's image in inventory
@@ -566,8 +614,8 @@ public class ShopInventoryController {
         imageView.setFitHeight(40);
         buttonList.get(index).setGraphic(imageView);
 
+        // Set 'X' image overlay if tower is in broken state
         if (needsOverlay) {
-            // Set 'X' image overlay if tower is in broken state
             String overlayImagePath = getClass().getResource("/images/Broken.png").toExternalForm();
             Image overlayImage = new Image(overlayImagePath);
             ImageView overlayImageView = new ImageView(overlayImage);

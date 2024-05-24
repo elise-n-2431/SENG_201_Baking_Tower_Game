@@ -5,10 +5,15 @@ import seng201.team48.models.Tower;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code TowerManager} class manages different types of towers and their corresponding images
+ * used in the game. It maintains lists of default towers, player-owned towers, and reserve towers,
+ * along with their associated image paths.
+ *
+ * @author Hannah Grace, Elise Newman
+ */
+
 public class TowerManager {
-    //    private final Consumer<TowerManager> setupScreenLauncher;
-//    private final Consumer<TowerManager> mainScreenLauncher;
-//    private final Runnable clearScreen;
     private final List<Tower> defaultTowers = new ArrayList<>();
     private List<String> defaultTowersImages = new ArrayList<>();
     private List<String> playerTowersImages = new ArrayList<>();
@@ -16,9 +21,8 @@ public class TowerManager {
     private List<Tower> playerTowers;
     private List<Tower> reserveTowers;
 
-
     /**
-     * Constructor
+     * Constructs a new {@code TowerManager} and initializes the default towers and their images.
      */
     public TowerManager() {
         Tower flourTower = new Tower("Flour",
@@ -48,70 +52,128 @@ public class TowerManager {
         reserveTowers = new ArrayList<>();
     }
 
+    /**
+     * Gets the image paths for the default towers.
+     *
+     * @return a list of image paths for the default towers.
+     */
     public List<String> getDefaultTowersImages() {
         return defaultTowersImages;
     }
 
+    /**
+     * Gets the image paths for the player's towers.
+     *
+     * @return a list of image paths for the player's towers.
+     */
     public List<String> getPlayerTowersImages() {
         return playerTowersImages;
     }
 
+    /**
+     * Sets the image paths for the player's towers.
+     *
+     * @param playerTowersImages a list of image paths to set for the player's towers.
+     */
     public void setPlayerTowersImages(List<String> playerTowersImages) {
         this.playerTowersImages = playerTowersImages;
     }
 
+    /**
+     * Adds an image path to the player's towers images.
+     *
+     * @param imagePath the image path to add.
+     */
     public void addPlayerTowersImage(String imagePath) {
         this.playerTowersImages.add(imagePath);
     }
+
+    /**
+     * Removes an image path from the player's towers images at the specified index.
+     *
+     * @param index the index of the image path to remove.
+     */
     public void removePlayerTowersImage(int index) {
         this.playerTowersImages.remove(index);
     }
 
-    public List<String> getReserveTowersImages() {
-        return reserveTowersImages;
-    }
-
-    public void setReserveTowersImages(List<String> reserveTowersImages) {
-        this.reserveTowersImages = reserveTowersImages;
-    }
-
+    /**
+     * Adds an image path to the reserve towers images.
+     *
+     * @param imagePath the image path to add.
+     */
     public void addReserveTowersImage(String imagePath) {
         this.reserveTowersImages.add(imagePath);
     }
 
+    /**
+     * Gets the list of tower types: Ingredient stations for eggs, flour, sugar, milk, and banana.
+     *
+     * @return a list of default towers.
+     */
     public List<Tower> getDefaultTowers() {
         return defaultTowers;
     }
 
+    /**
+     * Gets the list of player's towers.
+     *
+     * @return a list of player's towers.
+     */
     public List<Tower> getPlayerTowers() {
         return playerTowers;
     }
 
+    /**
+     * Sets the list of player's active towers, which will be used in gameplay.
+     *
+     * @param playerTowers a list of the player's active towers
+     */
     public void setPlayerTowers(List<Tower> playerTowers) {
         this.playerTowers = playerTowers;
     }
 
+    /**
+     * Gets the list of the player's reserve towers.
+     *
+     * @return a list of reserve towers.
+     */
     public List<Tower> getReserveTowers() {
         return reserveTowers;
     }
 
-    public void setReserveTowers(List<Tower> reserveTowers) {
-        this.reserveTowers = reserveTowers;
-    }
-
+    /**
+     * Adds a tower to the player's active towers.
+     *
+     * @param tower the tower to add.
+     */
     public void addPlayerTower(Tower tower) {
         this.playerTowers.add(tower);
     }
 
+    /**
+     * Removes a tower from the player's active towers.
+     *
+     * @param tower the tower to remove.
+     */
     public void removePlayerTower(Tower tower) {
         this.playerTowers.remove(tower);
     }
-    public void removePlayerTower(int index) {this.playerTowers.remove(index); }
 
+    /**
+     * Adds a tower to the player's reserve towers.
+     *
+     * @param tower the tower to add.
+     */
     public void addReserveTower(Tower tower) {
         this.reserveTowers.add(tower);
     }
 
+    /**
+     * Removes a tower from the reserve towers.
+     *
+     * @param tower the tower to remove.
+     */
     public void removeReserveTower(Tower tower) {
         this.reserveTowers.remove(tower);
     }
