@@ -29,7 +29,6 @@ public class MainScreenController {
     public Label announcement;
     public Label bowlNumber;
     public Label roundNumber;
-    public Button resetBowl;
     public Bowl currentBowl;
     public Button recipeButton;
     public ProgressBar reload1;
@@ -405,10 +404,6 @@ public class MainScreenController {
 
     /** when reset button is clicked, implement resetBowlContents method
      */
-    @FXML
-    private void resetBowlClicked(){
-        resetBowlContents();
-    }
 
     /** Any time the bank balance increases - this method is called
      * sets the totalMoney in mainGameManager so is saved between rounds and onShopClicked

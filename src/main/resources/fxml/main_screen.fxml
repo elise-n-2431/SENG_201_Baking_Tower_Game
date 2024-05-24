@@ -74,13 +74,12 @@
             </ImageView>
          </children>
       </GridPane>
-      <Button fx:id="recipeButton" layoutX="729.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
+      <Button fx:id="recipeButton" layoutX="715.0" layoutY="15.0" mnemonicParsing="false" onAction="#onRecipeClicked" text="Recipes" />
       <Label fx:id="announcement" layoutX="183.0" layoutY="13.0" prefHeight="26.0" prefWidth="360.0" textAlignment="RIGHT" wrapText="true">
          <font>
             <Font name="Cambria" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="resetBowl" layoutX="718.0" layoutY="244.0" mnemonicParsing="false" onAction="#resetBowlClicked" text="Reset Bowl" />
       <Label fx:id="header" layoutX="236.0" layoutY="100.0" text="In ______ Bowl:">
          <font>
             <Font name="Cambria" size="17.0" />
