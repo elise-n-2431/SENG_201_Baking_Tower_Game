@@ -127,8 +127,9 @@ public class MainGameManager {
         switch (previousScreenShop) {
             case "MainScreen" -> launchMainScreen();
             case "Preround" -> {
-                launchPreroundScreen();
                 preroundLocation = "Shop";
+                launchPreroundScreen();
+
             }
         }
     }
@@ -147,8 +148,8 @@ public class MainGameManager {
     /**Closes main screen and saves "MainScreen" when opening preround screen to trigger random event */
     public void closeMainScreenPreRound(){
         clearScreen.run();
-        launchPreroundScreen();
         preroundLocation = "MainScreen";
+        launchPreroundScreen();
     }
     /**Launches recipe book and saves past location as a parameter
      * @param previousScreen1 past screen location String
@@ -164,8 +165,8 @@ public class MainGameManager {
             case "MainScreen" -> launchMainScreen();
             case "Setup" -> launchSetupScreen();
             case "Preround" -> {
-                launchPreroundScreen();
                 preroundLocation = "Recipe";
+                launchPreroundScreen();
             }
         }
 

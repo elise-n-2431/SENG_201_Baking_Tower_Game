@@ -135,19 +135,12 @@ public class MainScreenController {
                     reload5.setVisible(true);
                     if (playerTowers.get(i).isBroken()){ crossFive.setVisible(true);}
                     break;
-
             }
         }
 
         String s = String.valueOf(mainGameManager.getTotalMoney());
         moneyValue.setText(s);
-        Integer numSmall = mainGameManager.getNumSmall();
-        Integer numLarge = mainGameManager.getNumLarge();
-        if (numSmall != null){
-            if (numLarge != null){
-                bowlService.setNumBowlsSelected(numSmall, numLarge);
-            }
-        }
+        bowlService.setNumBowlsSelected(mainGameManager.getNumSmall(), mainGameManager.getNumLarge());
         if (mainGameManager.getIsStartOfRound()){
             mainGameManager.setIsStartOfRound(false);
             currentBowl = bowlService.getNewBowl();

@@ -49,15 +49,21 @@ public class BowlService {
     public Bowl getNewBowl(){
         // bowl is called for if not all have been used
         if (numSmallBowlsSelected.equals(numSmallBowlsSent)){
-            //send a large bowl
-            List<Tower> newFilled = new ArrayList<Tower> (5);
-            newFilled.add(null);
-            newFilled.add(null);
-            newFilled.add(null);
-            newFilled.add(null);
-            newFilled.add(null);
-            numLargeBowlsSent += 1;
-            return new Bowl(5, "Large", newFilled);
+            if(numLargeBowlsSelected.equals(numLargeBowlsSent)){
+                numSmallBowlsSent = 0;
+                numLargeBowlsSent = 0;
+                return getNewBowl();
+            } else {
+                //send a large bowl
+                List<Tower> newFilled = new ArrayList<Tower>(5);
+                newFilled.add(null);
+                newFilled.add(null);
+                newFilled.add(null);
+                newFilled.add(null);
+                newFilled.add(null);
+                numLargeBowlsSent += 1;
+                return new Bowl(5, "Large", newFilled);
+            }
         } else{
             //send a small bowl
             List<Tower> newFilled = new ArrayList<Tower> (3);
