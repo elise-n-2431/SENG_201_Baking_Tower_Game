@@ -354,6 +354,10 @@ public class ShopInventoryController {
         }
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void onMakeReserveButtonClicked(ActionEvent actionEvent) {
         boolean canMakeReserve = inventoryService.canMakeReserve(mainGameManager);
         if (canMakeReserve) {

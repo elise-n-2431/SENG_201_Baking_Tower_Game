@@ -159,6 +159,7 @@ public class MainGameManager {
         clearScreen.run();
         previousScreen = previousScreen1;
         recipeBookLauncher.accept(this);}
+
     /**Closes recipe book and opens saved past screen location's screen*/
     public void closeRecipeBook(){
         clearScreen.run();
@@ -170,7 +171,6 @@ public class MainGameManager {
                 launchPreroundScreen();
             }
         }
-
     }
 
 
@@ -451,4 +451,60 @@ public class MainGameManager {
      * @return preRoundLocation
      */
     public String getPreroundLocation(){ return preroundLocation; }
+
+    /**
+     * Gets setup screen launcher
+     * @return setup screen launcher
+     */
+    public Consumer<MainGameManager> getSetupScreenLauncher() {
+        return setupScreenLauncher;
+    }
+
+    /**
+     * Gets preround screen launcher
+     * @return preround screen launcher
+     */
+    public Consumer<MainGameManager> getPreroundScreenLauncher() {
+        return preroundScreenLauncher;
+    }
+
+    /**
+     * Gets main screen launcher
+     * @return main screen launcher
+     */
+    public Consumer<MainGameManager> getMainScreenLauncher() {
+        return mainScreenLauncher;
+    }
+
+    /**
+     * Gets shop screen launcher
+     * @return shop screen launcher
+     */
+    public Consumer<MainGameManager> getShopScreenLauncher() {
+        return shopScreenLauncher;
+    }
+
+    /**
+     * Gets launcher for the end screen
+     * @return conclusion screen launcher
+     */
+    public Consumer<MainGameManager> getConclusionLauncher() {
+        return conclusionLauncher;
+    }
+
+    /**
+     * Gets launcher for recipe book screen
+     * @return recipe book launcher
+     */
+    public Consumer<MainGameManager> getRecipeBookLauncher() {
+        return recipeBookLauncher;
+    }
+
+    /**
+     * Gets clear screen Runnable
+     * @return Runnable to clear screen
+     */
+    public Runnable getClearScreen() {
+        return clearScreen;
+    }
 }
