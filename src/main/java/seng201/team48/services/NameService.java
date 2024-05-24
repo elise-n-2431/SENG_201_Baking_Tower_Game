@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 /**
  * Service class which validates name entry from setup_screen_fxml.
+ * @author Hannah Grace, Elise Newman
  */
 public class NameService {
     /**

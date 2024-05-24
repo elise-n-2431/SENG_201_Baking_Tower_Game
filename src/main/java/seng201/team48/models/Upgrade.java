@@ -4,6 +4,7 @@ package seng201.team48.models;
  * This class describes Upgrade objects, which are Purchasable
  * Upgrades are applied to a Tower of the given level to level them up.
  * When used, the Tower's level increases by one, increasing its reload speed.
+ * @author Hannah Grace, Elise Newman
  */
 
 public class Upgrade extends Purchasable {

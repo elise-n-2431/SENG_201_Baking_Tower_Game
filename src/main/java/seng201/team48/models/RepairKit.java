@@ -4,6 +4,7 @@ package seng201.team48.models;
  * This class describes RepairKit objects, which are Purchasable
  * Repair kits are used to repair a Tower in the player's inventory from a broken state to an unbroken state.
  * When used, the Tower's broken variable changes from true to false.
+ * @author Hannah Grace, Elise Newman
  */
 
 public class RepairKit extends Purchasable {

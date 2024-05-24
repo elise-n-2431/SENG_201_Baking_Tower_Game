@@ -7,6 +7,7 @@ import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 /**Conclusion controller controls the conclusion screen and displays a message, either positive if you won
  * or negative if you lost
+ * @author Hannah Grace, Elise Newman
  */
 public class ConclusionController {
     @FXML

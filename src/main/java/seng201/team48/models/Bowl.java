@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * This class is the blueprint for bowl ('cart') objects which must be filled by player during gameplay.
- * @author Hannah Grace
+ * @author Hannah Grace, Elise Newman
  */
 public class Bowl {
     private Integer capacity = 0;

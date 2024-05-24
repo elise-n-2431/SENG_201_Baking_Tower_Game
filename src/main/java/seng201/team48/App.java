@@ -5,6 +5,7 @@ import seng201.team48.gui.FXWindow;
 /**
  * Default entry point class
  * @author seng201 teaching team
+ * @author Hannah Grace, Elise Newman
  */
 public class App {
     /**

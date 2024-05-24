@@ -4,6 +4,7 @@ import seng201.team48.models.Tower;
 
 /**
  * Tower service class which validates tower selection.
+ * @author Hannah Grace, Elise Newman
  */
 
 public class TowerService {

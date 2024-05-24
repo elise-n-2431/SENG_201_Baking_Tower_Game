@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**Allows the user to select starting towers, gameDifficulty and their name
+ * @author Hannah Grace, Elise Newman
  */
 public class SetupController {
 

@@ -12,7 +12,10 @@ import seng201.team48.TowerManager;
 import java.util.Objects;
 import java.util.Random;
 
-/**Sets variables for roundDifficulty and broken tower alerts */
+/**
+ * Sets variables for roundDifficulty and broken tower alerts
+ * @author Hannah Grace, Elise Newman
+ * */
 public class PreroundController {
     private final TowerManager towerManager;
     private String greetingText = "Welcome to the game, ";

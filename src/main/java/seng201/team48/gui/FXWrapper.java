@@ -14,6 +14,7 @@ import java.io.IOException;
 /**
  * Manages the stages and panes alongside FXWindow
  * Creates MainGameManager
+ * @author Hannah Grace, Elise Newman
  */
 public class FXWrapper {
     @FXML

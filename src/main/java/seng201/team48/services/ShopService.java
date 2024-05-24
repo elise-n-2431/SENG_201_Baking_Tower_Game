@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Service class which validates purchase process in shop. Called from ShopInventoryController.java.
+ * @author Hannah Grace, Elise Newman
  */
 
 public class ShopService {
