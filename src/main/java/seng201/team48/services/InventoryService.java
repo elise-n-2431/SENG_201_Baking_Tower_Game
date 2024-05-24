@@ -5,13 +5,29 @@ import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
 import seng201.team48.models.Tower;
 
+/**
+ * Performs validation for the inventory, activates and reserves towers and shows alerts
+ */
 public class InventoryService {
     TowerManager towerManager;
 
+    /**
+     * Checks if the tower is the correct level for an upgrade
+     * @param tower Tower object
+     * @param requiredLevel Integer of tower level
+     * @return Boolean of whether levels match
+     */
     public boolean isCorrectUpgradeLevel(Tower tower, int requiredLevel) {
         return tower.getLevel() == requiredLevel;
     }
 
+    /**
+     * Displays alerts for random events
+     * @param alert is the alert instance
+     * @param title "error"
+     * @param header What went wrong
+     * @param content More information about error
+     */
     public void showAlert(Alert alert, String title, String header, String content) {
         alert.setTitle(title);
         alert.setHeaderText(header);
@@ -19,6 +35,11 @@ public class InventoryService {
         alert.showAndWait();
     }
 
+    /**
+     * Generates an error if the tower cannot be made into a reserve
+     * @param mainGameManager manages main game variables
+     * @return false if an error was generated, true if correct
+     */
     public boolean canMakeReserve(MainGameManager mainGameManager) {
         towerManager = mainGameManager.getTowerManager();
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -38,6 +59,11 @@ public class InventoryService {
         return false;
     }
 
+    /**
+     * Generates an error if the tower cannot be made active
+     * @param mainGameManager manages main game variables
+     * @return false if an error has been generated, true if works
+     */
     public boolean canMakeActive(MainGameManager mainGameManager) {
         towerManager = mainGameManager.getTowerManager();
         Alert alert = new Alert(Alert.AlertType.ERROR);
