@@ -2,7 +2,7 @@ package seng201.team48.models;
 
 /**
  * Purchasable class which is inherited by RepairKit, Upgrade, and Tower
- * @author Hannah Grace
+ * @author Hannah Grace, Elise Newman
  */
 public class Purchasable implements Cloneable {
     private String name;
@@ -22,11 +22,6 @@ public class Purchasable implements Cloneable {
         this.purchasePrice = purchasePrice;
         this.sellPrice = sellPrice;
     }
-
-//    @Override
-//    public Purchasable clone() throws CloneNotSupportedException {
-//        return (Purchasable) super.clone();
-//    }
 
     /**
      * Gets description of Purchasable object
@@ -66,6 +61,10 @@ public class Purchasable implements Cloneable {
         this.name = name;
     }
 
+    /**
+     * Creates clone of the Purchasable object, and throws a RuntimeException if the clone is not supported.
+     * @return clone of the Purchasable object
+     */
     public Purchasable cloneSelf() {
         try {
             return (Purchasable) this.clone();

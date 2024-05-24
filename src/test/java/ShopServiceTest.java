@@ -76,21 +76,17 @@ public class ShopServiceTest {
     @Test
     public void testHasEnoughTowers() {
         List<Tower> playerTowers = new ArrayList<>();
-
         Tower eggTower = new Tower("Eggs", "Used in fried eggs, scrambled eggs, pasta, pancakes, carbonara, cake, banana bread", 5, 3, 20, 0.05);
-
         for (int i = 0; i < 4; i++) {
             playerTowers.add((Tower) eggTower.cloneSelf());
         }
-
         assertTrue(testShopService.hasEnoughTowers(playerTowers));
-
         playerTowers.remove(0);
         assertFalse(testShopService.hasEnoughTowers(playerTowers));
     }
 
     @Test
-    public void testSellInvItemEnoughTowers() {
+    public void testSellItemEnoughTowers() {
         // Arrange
         MainGameManager mainGameManager = mock(MainGameManager.class);
         TowerManager towerManager = mock(TowerManager.class);
@@ -105,15 +101,12 @@ public class ShopServiceTest {
 
         ShopService shopService = new ShopService();
 
-        // Act
         String result = shopService.sellInvItem(mainGameManager, "active", 0, 0, 0);
-
-        // Assert
         assertEquals("doRefresh", result);
     }
 
     @Test
-    public void testSellInvItemWhenNotEnoughTowers() {
+    public void testSellItemWhenNotEnoughTowers() {
         MainGameManager mainGameManager = mock(MainGameManager.class);
         TowerManager towerManager = mock(TowerManager.class);
         UpgradeManager upgradeManager = mock(UpgradeManager.class);

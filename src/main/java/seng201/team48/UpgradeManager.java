@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class stores information about the level upgrades and repair kits used in gameplay.
+ * It manages holding state, GUI windows, and passing objects into controller classes.
+ *
+ * @author Hannah Grace, Elise Newman
+ */
+
 public class UpgradeManager {
     public Random random;
     private List<Purchasable> defaultUpgradesList;
@@ -59,42 +66,82 @@ public class UpgradeManager {
 
     }
 
+    /**
+     * Gets list of default upgrade items.
+     * @return default upgrades list
+     */
     public List<Purchasable> getDefaultUpgradesList() {
         return defaultUpgradesList;
     }
 
+    /**
+     * Gets list of upgrades currently available for purchase in the shop.
+     * @return list of upgrades for sale
+     */
     public List<Purchasable> getUpgradesForSale() {
         return upgradesForSale;
     }
 
+    /**
+     * Sets list of Purchasable items for sale in upgrades section of shop
+     * @param upgradesForSale list of Purchasable upgrades for sale
+     */
     public void setUpgradesForSale(List<Purchasable> upgradesForSale) {
         this.upgradesForSale = upgradesForSale;
     }
 
+    /**
+     * Gets list of the player's upgrades available in their inventory
+     * @return list of player's upgrades
+     */
     public List<Purchasable> getPlayerUpgrades() {
         return playerUpgrades;
     }
 
+    /**
+     * Adds a purchased upgrade (level-up upgrade or repair kit) to the player's item inventory
+     * @param boughtUpgrade the upgrade purchased from the shop
+     */
     public void addPlayerUpgrade(Purchasable boughtUpgrade) {
         this.playerUpgrades.add(boughtUpgrade);
     }
 
+    /**
+     * Gets list of image paths of upgrades currently being sold in shop, sorted by their appearance on-screen
+     * @return list of upgrade image paths
+     */
     public List<String> getUpgradesForSaleImages() {
         return upgradesForSaleImages;
     }
 
-    public void removePlayerUpgrade(Purchasable soldItem) {
-        this.playerUpgrades.remove(soldItem);
+    /**
+     * Removes item (upgrade or repair kit) from player's inventory if item is sold or used.
+     * @param item item to be removed from player's item inventory
+     */
+    public void removePlayerUpgrade(Purchasable item) {
+        this.playerUpgrades.remove(item);
     }
 
+    /**
+     * Gets list of image paths of items (upgrade or repair kit) currently in player's item inventory
+     * @return list of item image paths, sorted by their appearance in player's inventory on-screen
+     */
     public List<String> getPlayerItemsImages() {
         return playerItemsImages;
     }
 
+    /**
+     * Adds image path to list of item images displayed in player's item inventory
+     * @param imagePath item's image path to be added to list
+     */
     public void addPlayerItemsImage(String imagePath) {
         this.playerItemsImages.add(imagePath);
     }
 
+    /**
+     * Removes image path at given index from list of item inventory image paths.
+     * @param index index of the image path to be removed
+     */
     public void removePlayerItemsImage(int index) {
         this.playerItemsImages.remove(index);
     }

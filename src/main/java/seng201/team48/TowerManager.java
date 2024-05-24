@@ -71,9 +71,9 @@ public class TowerManager {
     }
 
     /**
-     * Sets the image paths for the player's towers.
+     * Sets the image paths for the player's active towers.
      *
-     * @param playerTowersImages a list of image paths to set for the player's towers.
+     * @param playerTowersImages a list of image paths to set for the player's active towers.
      */
     public void setPlayerTowersImages(List<String> playerTowersImages) {
         this.playerTowersImages = playerTowersImages;
@@ -98,12 +98,30 @@ public class TowerManager {
     }
 
     /**
+     * Gets the image paths for the player's reserve towers.
+     *
+     * @return a list of image paths for the player's reserve towers.
+     */
+    public List<String> getReserveTowersImages() {
+        return reserveTowersImages;
+    }
+
+    /**
      * Adds an image path to the reserve towers images.
      *
      * @param imagePath the image path to add.
      */
     public void addReserveTowersImage(String imagePath) {
         this.reserveTowersImages.add(imagePath);
+    }
+
+    /**
+     * Removes an image path from the player's reserve towers image list at the specified index.
+     *
+     * @param index the index of the image path to remove.
+     */
+    public void removeReserveTowersImage(int index) {
+        this.reserveTowersImages.remove(index);
     }
 
     /**
@@ -176,9 +194,5 @@ public class TowerManager {
      */
     public void removeReserveTower(Tower tower) {
         this.reserveTowers.remove(tower);
-    }
-    public void swapActiveReserveTowers(int index, Tower activeTower, Tower reserveTower) {
-        this.reserveTowers.set(index, activeTower);
-        this.playerTowers.set(index, reserveTower);
     }
 }
