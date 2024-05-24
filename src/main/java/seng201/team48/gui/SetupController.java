@@ -125,22 +125,23 @@ public class SetupController {
 
                     selectedTowerButtons.get(finalI).setGraphic(imageView);
                     //selectedTowerButtons.get(finalI).setText(towerManager.getDefaultTowers().get(selectedTowerIndex).getName());
-                    selectedTowers[finalI] = towerManager.getDefaultTowers().get(selectedTowerIndex);
+
+                    Tower clonedTower;
+                    clonedTower = (Tower) towerManager.getDefaultTowers().get(selectedTowerIndex).cloneSelf();
+                    selectedTowers[finalI] = clonedTower;
 
                 }
             });
         }
 
         /* Sets number of rounds based on user input */
-        numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            mainGameManager.setNumRounds(newValue.intValue());
-        });
+        numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> mainGameManager.setNumRounds(newValue.intValue()));
     }
     /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
     public void updateStats(Tower tower){
         statsResourceTypeLabel.setText("Resource Type: " + tower.getResourceType());
-        statsReloadSpeedLabel.setText("Reload Speed: " + String.valueOf(tower.getReloadSpeed()));
-        statsResourceAmountLabel.setText("Resource Amount: " + String.valueOf(tower.getResourceAmount()));
+        statsReloadSpeedLabel.setText("Reload Speed: " + tower.getReloadSpeed());
+        statsResourceAmountLabel.setText("Resource Amount: " + tower.getResourceAmount());
     }
     /* Sends the information to the relevant classes - tower or */
     @FXML
