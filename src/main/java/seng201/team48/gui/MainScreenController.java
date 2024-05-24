@@ -44,6 +44,11 @@ public class MainScreenController {
     private boolean pauseTimer = false;
     private List<Tower> playerTowers;
     public ImageView bowlImage;
+    public ImageView crossOne;
+    public ImageView crossTwo;
+    public ImageView crossThree;
+    public ImageView crossFour;
+    public ImageView crossFive;
 
 
     /**Constructor method
@@ -66,12 +71,10 @@ public class MainScreenController {
                     reloadTimer = now;
                 }
                 if (endTimer){
-                    System.out.println("Has stopped.");
                     this.stop();
                     fail();
                 }
                 if (pauseTimer){
-                    System.out.print("Paused");
                     this.stop();
                 }
                 if(now - reloadTimer >= 200_000_000L){
@@ -106,27 +109,33 @@ public class MainScreenController {
                     imageOne.setGraphic(viewI);
                     imageOne.setDisable(false);
                     reload1.setVisible(true);
+                    if (playerTowers.get(i).isBroken()){ crossOne.setVisible(true);}
                     break;
                 case 1:
                     imageTwo.setGraphic(viewI);
                     imageTwo.setDisable(false);
                     reload2.setVisible(true);
+                    if (playerTowers.get(i).isBroken()){ crossTwo.setVisible(true);}
                     break;
                 case 2:
                     imageThree.setGraphic(viewI);
                     imageThree.setDisable(false);
                     reload3.setVisible(true);
+                    if (playerTowers.get(i).isBroken()){ crossThree.setVisible(true);}
                     break;
                 case 3:
                     imageFour.setGraphic(viewI);
                     imageFour.setDisable(false);
                     reload4.setVisible(true);
+                    if (playerTowers.get(i).isBroken()){ crossFour.setVisible(true);}
                     break;
                 case 4:
                     imageFive.setGraphic(viewI);
                     imageFive.setDisable(false);
                     reload5.setVisible(true);
+                    if (playerTowers.get(i).isBroken()){ crossFive.setVisible(true);}
                     break;
+
             }
         }
 
@@ -226,35 +235,35 @@ public class MainScreenController {
     /* ADD ITEMS TO BOWLS */
     @FXML
     public void onOneClicked(){
-        if (mainGameManager.getReload1Temp() >= 1){
+        if (mainGameManager.getReload1Temp() >= 1 && !playerTowers.get(0).isBroken()){
             reload1.setProgress(0);
             mainGameManager.setReload1Temp(0);
             addToBowl(playerTowers.get(0));}
     }
     @FXML
     private void onTwoClicked(){
-        if (mainGameManager.getReload2Temp() >= 1){
+        if (mainGameManager.getReload2Temp() >= 1 && !playerTowers.get(1).isBroken()){
             reload2.setProgress(0);
             mainGameManager.setReload2Temp(0);
             addToBowl(playerTowers.get(1));}
     }
     @FXML
     private void onThreeClicked(){
-        if (mainGameManager.getReload3Temp() >= 1) {
+        if (mainGameManager.getReload3Temp() >= 1 && !playerTowers.get(2).isBroken()) {
             reload3.setProgress(0);
             mainGameManager.setReload3Temp(0);
             addToBowl(playerTowers.get(2));}
     }
     @FXML
     private void onFourClicked(){
-        if (mainGameManager.getReload4Temp() >= 1){
+        if (mainGameManager.getReload4Temp() >= 1 && !playerTowers.get(3).isBroken()){
             reload4.setProgress(0);
             mainGameManager.setReload4Temp(0);
             addToBowl(playerTowers.get(3));}
     }
     @FXML
     private void onFiveClicked(){
-        if (mainGameManager.getReload5Temp() >= 1){
+        if (mainGameManager.getReload5Temp() >= 1 && !playerTowers.get(4).isBroken()){
             reload5.setProgress(0);
             mainGameManager.setReload5Temp(0);
             addToBowl(playerTowers.get(4));}
@@ -360,6 +369,7 @@ public class MainScreenController {
         int num_sugar = Collections.frequency(filled, sugar);
         return "" + num_egg + num_milk + num_flour + num_banana + num_sugar;
     }
+
 
     /** Bowl step size is set by the gameDifficulty
      * Image is translated on step along the x-axis unless end is reached

@@ -134,4 +134,15 @@ public class Tower extends Purchasable {
         setBroken(false);
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj){return true;}
+        if (obj == null || getClass() != obj.getClass()){ return false;}
+        Tower tower = (Tower) obj;
+        if(resourceType != tower.resourceType){return false;}
+        if(resourceAmount != tower.resourceAmount){return false;}
+        if(reloadSpeed != tower.reloadSpeed){return false;}
+        if(level != tower.level){return false;}
+        return broken == tower.broken;
+    }
 }

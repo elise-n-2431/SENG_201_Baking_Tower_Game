@@ -9,6 +9,12 @@ public class Bowl {
     private String size;
     private Boolean fullBowl = Boolean.FALSE;
     private List<Tower> filled;
+
+    /**Creates a bowl object
+     * @param newCapacity is the number of towers the bowl can hold. Will be 3 or 5
+     * @param newSize is the string representation of capacity. "Small" or "Large"
+     * @param newFilled is the list of towers in the bowl, starts size = capacity, only contains null
+     */
     public Bowl(Integer newCapacity, String newSize, List<Tower> newFilled){
         capacity = newCapacity;
         filled = newFilled;
@@ -16,6 +22,11 @@ public class Bowl {
         size = newSize;
 
     }
+
+    /**
+     *
+     * @param content
+     */
     public void addToBowl(Tower content){
         filled.set(currentIndex, content);
         if((currentIndex + 1) != capacity) {
