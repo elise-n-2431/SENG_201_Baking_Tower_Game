@@ -1,15 +1,7 @@
-# SENG201 Template Project Overview
-Welcome to the template project for SENG201 which you will transform into your own.
-This README file includes some useful information to help you get started.
-However, we expect that this README becomes your own
+# SENG201 Project Overview
+This project is an abstract baking simulator game developed using Java and JavaFX.
 
-## Notes
-Remember you are required to commit your code to the **main** branch of your repository before the deadline.
-
-This project contains default naming of `team48` throughout.
-If you are interested you can update this to reflect your team number, however it is **not required**.
-This can be done by renaming any instance of `team48` with `team<48>` (where x is your number).
-IntelliJ can help with this using `ctrl+shift+f` to find all instances of a string, and `ctrl+shift+r` to replace them, though make sure to change the package names as well.
+During gameplay, the player maintains a set of resource towers (ingredient stations) which are used to fill carts (baking bowls) which move along a conveyor belt during a round. The player must fill each cart before it reaches the oven at the end of the track. Win the game by filling every bowl in each round. Along the way, you can buy new towers, apply upgrades, and switch towers between the player's active and reserve slots if needed. Random events may cause towers to break; these towers must be repaired using a repair kit item before they can be used again in gameplay.
 
 ## Authors
 - SENG201 Teaching team
@@ -32,8 +24,6 @@ We have also included a basic setup of the Gradle project and Tasks required for
 - Build plugins:
     - JavaFX Gradle plugin for working with (and packaging) JavaFX applications easily
 
-You are expected to understand the content provided and build your application on top of it. If there is anything you
-would like more information about please reach out to the tutors.
 
 ## Importing Project (Using IntelliJ)
 IntelliJ has built-in support for Gradle. To import your project:
@@ -50,15 +40,15 @@ IntelliJ has built-in support for Gradle. To import your project:
 
 ## Build and Run Jar
 1. Open a command line interface inside the project directory and run `./gradlew jar` to create a packaged Jar. The Jar file is located at build/libs/seng201_team48-1.0-SNAPSHOT.jar
-2. Navigate to the build/libs/ directory (you can do this with `cd build/libs`)
-3. Run the command `53169260_26479546_team-48.jar` to open the application.
+2. Navigate to the 'build/libs/' directory (you can do this with `cd build/libs`)
+3. Run the command `java -jar hgr82_ene41_team-48.jar` to open the application.
 
 ## Run Tests
 1. Open a command line interface inside the project directory and run `./gradlew test` to run the tests.
 2. Test results should be printed to the command line
 
 ## Image Credit
-Images by Elise Newman.
+Images by Elise Newman and Hannah Grace.
 
 ## Background Audio Credit
 The background audio used in this project is:
@@ -67,5 +57,3 @@ The background audio used in this project is:
 - **Artist**: moodmode
 - **Source**: [Pixabay](https://pixabay.com/)
 - **License**: Royalty-Free Music from Pixabay
-
-**Note:** *This Jar is **NOT** cross-platform, so you **must** build the jar you submit on Linux.*
