@@ -2,13 +2,12 @@ package seng201.team48.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import seng201.team48.MainGameManager;
 import seng201.team48.TowerManager;
-
-import java.util.Objects;
 import java.util.Random;
 
 public class PreroundController {
@@ -28,6 +27,7 @@ public class PreroundController {
     public Button recipeButton;
     private Random rand;
     private Integer randInt;
+    private Alert brokenTowerAlert;
 
 
     public PreroundController(MainGameManager mainGameManager){
@@ -38,6 +38,7 @@ public class PreroundController {
     public void initialize() {
         if (mainGameManager.getCurrentRound() > 1) {
             setGreetingText("Congrats, you've completed round " + (mainGameManager.getCurrentRound() - 1) + "! Ready for the next one?");
+            brokenTowerAlert = new Alert(Alert.AlertType.INFORMATION);
             rand = new Random();
             switch(mainGameManager.getGameDifficulty()) {
                 case "Easy": {randInt = rand.nextInt(60);}
@@ -48,8 +49,10 @@ public class PreroundController {
             for (int i = 0; i < towerManager.getPlayerTowers().size(); i++) {
                 if((randInt - 1) == i){
                     towerManager.getPlayerTowers().get(i).setBroken(true);
-                    System.out.println(towerManager.getPlayerTowers().get(i).getResourceType() + " Tower is broken.");
-                    //can the line above be put into an error message?
+                    brokenTowerAlert.setTitle("Uh oh...");
+                    brokenTowerAlert.setHeaderText(towerManager.getPlayerTowers().get(i).getResourceType() + " Tower is broken.");
+                    brokenTowerAlert.setContentText("You must fix this tower with a repair kit from the shop before you can use it again.");
+                    brokenTowerAlert.showAndWait();
                 }
             }
         }

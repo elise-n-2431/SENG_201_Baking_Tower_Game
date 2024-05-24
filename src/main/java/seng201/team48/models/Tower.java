@@ -60,7 +60,10 @@ public class Tower extends Purchasable {
      * @param level Level of tower. Higher levels result in favourable increases to tower attributes.
      */
     public void setLevel(int level) {
-        this.level = level;
+        if (level <= 4) {
+            this.level = level;
+            this.reloadSpeed -= 0.005;
+        }
     }
 
     /**
