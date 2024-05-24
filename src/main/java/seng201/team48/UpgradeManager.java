@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class UpgradeManager {
-    private Random random;
+    public Random random;
     private List<Purchasable> defaultUpgradesList;
     private List<String> defaultUpgradesImages;
     private List<String> playerItemsImages;
@@ -21,8 +21,8 @@ public class UpgradeManager {
      * Constructor which initialises list of default upgrades used by the shop.
      * Upgrades to level 1 towers are more common than other upgrade types.
      */
-    public UpgradeManager() {
-        random = new Random();
+    public UpgradeManager(Random random) {
+        this.random = random;
         Upgrade level1Upgrade = new Upgrade("1");
         Upgrade level1Upgrade2 = new Upgrade("1");
         Upgrade level2Upgrade = new Upgrade("2");

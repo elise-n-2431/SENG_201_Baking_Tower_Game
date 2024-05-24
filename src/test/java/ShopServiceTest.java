@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seng201.team48.MainGameManager;
+import seng201.team48.TowerManager;
+import seng201.team48.UpgradeManager;
 import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
 import seng201.team48.models.Upgrade;
@@ -8,8 +11,8 @@ import seng201.team48.services.ShopService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class ShopServiceTest {
     private ShopService testShopService;
@@ -84,6 +87,49 @@ public class ShopServiceTest {
 
         playerTowers.remove(0);
         assertFalse(testShopService.hasEnoughTowers(playerTowers));
+    }
+
+    @Test
+    public void testSellInvItemEnoughTowers() {
+        // Arrange
+        MainGameManager mainGameManager = mock(MainGameManager.class);
+        TowerManager towerManager = mock(TowerManager.class);
+        UpgradeManager upgradeManager = mock(UpgradeManager.class);
+
+        when(mainGameManager.getTowerManager()).thenReturn(towerManager);
+        when(mainGameManager.getUpgradeManager()).thenReturn(upgradeManager);
+
+        when(towerManager.getPlayerTowers()).thenReturn(List.of(mock(Tower.class), mock(Tower.class), mock(Tower.class), mock(Tower.class), mock(Tower.class)));
+        when(towerManager.getReserveTowers()).thenReturn(List.of());
+        when(upgradeManager.getPlayerUpgrades()).thenReturn(List.of());
+
+        ShopService shopService = new ShopService();
+
+        // Act
+        String result = shopService.sellInvItem(mainGameManager, "active", 0, 0, 0);
+
+        // Assert
+        assertEquals("doRefresh", result);
+    }
+
+    @Test
+    public void testSellInvItemWhenNotEnoughTowers() {
+        MainGameManager mainGameManager = mock(MainGameManager.class);
+        TowerManager towerManager = mock(TowerManager.class);
+        UpgradeManager upgradeManager = mock(UpgradeManager.class);
+
+        when(mainGameManager.getTowerManager()).thenReturn(towerManager);
+        when(mainGameManager.getUpgradeManager()).thenReturn(upgradeManager);
+
+        when(towerManager.getPlayerTowers()).thenReturn(List.of(mock(Tower.class), mock(Tower.class), mock(Tower.class)));
+        when(towerManager.getReserveTowers()).thenReturn(List.of());
+        when(upgradeManager.getPlayerUpgrades()).thenReturn(List.of());
+
+        ShopService shopService = new ShopService();
+
+        String result = shopService.sellInvItem(mainGameManager, "active", 0, 0, 0);
+
+        assertEquals("showError", result);
     }
 
 }

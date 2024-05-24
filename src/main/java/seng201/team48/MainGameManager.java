@@ -3,6 +3,7 @@ package seng201.team48;
 import seng201.team48.models.Bowl;
 import seng201.team48.services.BowlService;
 
+import java.util.Random;
 import java.util.function.Consumer;
 
 /**
@@ -62,7 +63,7 @@ public class MainGameManager {
         this.shopScreenLauncher = shopScreenLauncher;
         this.clearScreen = clearScreen;
         this.towerManager = new TowerManager();
-        this.upgradeManager = new UpgradeManager();
+        this.upgradeManager = new UpgradeManager(new Random());
         this.conclusionLauncher = conclusionLauncher;
         this.recipeBookLauncher = recipeBookLauncher;
 
@@ -192,12 +193,6 @@ public class MainGameManager {
         return gameDifficulty;
     }
 
-    /**Get difficulty of current round
-     * @return roundDifficulty
-     */
-    public String getRoundDifficulty() {
-        return roundDifficulty;
-    }
     /**Sets the number of bowls based on round difficulty
      * @return number of small bowls Integer
      */
@@ -377,7 +372,6 @@ public class MainGameManager {
 
     /**Generates and sets bowl step size based on game difficulty */
     public void setBowlStepSize(){
-        System.out.println(gameDifficulty);
         switch (gameDifficulty) {
             case "Easy" -> { bowlStepSize = 2;}
             case "Medium" -> { bowlStepSize = 4;}

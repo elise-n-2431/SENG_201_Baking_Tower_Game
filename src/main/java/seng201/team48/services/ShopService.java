@@ -1,5 +1,8 @@
 package seng201.team48.services;
 
+import seng201.team48.MainGameManager;
+import seng201.team48.TowerManager;
+import seng201.team48.UpgradeManager;
 import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
 import java.util.List;
@@ -14,6 +17,50 @@ public class ShopService {
     private int nonemptyUpgradeIndex;
     public boolean canPurchase(int moneyAvailable, int moneyRequired) {
         return moneyAvailable - moneyRequired >= 0;
+    }
+
+    /**
+     * Sells an inventory item based on the given parameters.
+     * Called from onSellClicked method in ShopInventoryController.
+     *
+     * @param mainGameManager        The MainGameManager instance.
+     * @param lastSelectedInvList    The last selected inventory list ("active", "reserve", or "item").
+     * @param selectedUpgradeIndex   The index of the selected upgrade item.
+     * @param selectedActiveItemIndex   The index of the selected active tower item.
+     * @param selectedReserveItemIndex  The index of the selected reserve tower item.
+     * @return                       A string indicating the action to perform ("doRefresh", "showError", or "doNothing").
+     */
+    public String sellInvItem(MainGameManager mainGameManager, String lastSelectedInvList,
+                            int selectedUpgradeIndex, int selectedActiveItemIndex, int selectedReserveItemIndex) {
+        TowerManager towerManager = mainGameManager.getTowerManager();
+        UpgradeManager upgradeManager = mainGameManager.getUpgradeManager();
+
+        if (hasEnoughTowers(towerManager.getPlayerTowers()) || lastSelectedInvList == "item") {
+            int sellPrice = -500;
+            Purchasable soldItem;
+            if (lastSelectedInvList == "active") {
+                soldItem = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
+                sellPrice = soldItem.getSellPrice();
+                towerManager.removePlayerTower((Tower) soldItem);
+                towerManager.removePlayerTowersImage(selectedActiveItemIndex);
+            } else if (lastSelectedInvList == "reserve") {
+                soldItem = towerManager.getReserveTowers().get(selectedReserveItemIndex);
+                sellPrice = soldItem.getSellPrice();
+                towerManager.removeReserveTower((Tower) soldItem);
+                towerManager.removePlayerTowersImage(selectedReserveItemIndex);
+            } else if (lastSelectedInvList == "item") {
+                soldItem = upgradeManager.getPlayerUpgrades().get(selectedUpgradeIndex);
+                sellPrice = soldItem.getSellPrice();
+                upgradeManager.removePlayerUpgrade(soldItem);
+                upgradeManager.removePlayerItemsImage(selectedUpgradeIndex);
+            } else {
+                return "doNothing";
+            }
+            mainGameManager.addTotalMoney(sellPrice);
+            return "doRefresh";
+        } else {
+            return "showError";
+        }
     }
 
     /**
@@ -58,23 +105,4 @@ public class ShopService {
         return nonemptyTowerList;
     }
 
-    public void setNonemptyTowerList(String nonemptyTowerList) {
-        this.nonemptyTowerList = nonemptyTowerList;
-    }
-
-    public int getNonemptyTowerIndex() {
-        return nonemptyTowerIndex;
-    }
-
-    public void setNonemptyTowerIndex(int nonemptyTowerIndex) {
-        this.nonemptyTowerIndex = nonemptyTowerIndex;
-    }
-
-    public int getNonemptyUpgradeIndex() {
-        return nonemptyUpgradeIndex;
-    }
-
-    public void setNonemptyUpgradeIndex(int nonemptyUpgradeIndex) {
-        this.nonemptyUpgradeIndex = nonemptyUpgradeIndex;
-    }
 }
