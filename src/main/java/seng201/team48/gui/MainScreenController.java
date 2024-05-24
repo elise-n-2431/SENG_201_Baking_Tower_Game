@@ -13,6 +13,10 @@ import seng201.team48.services.BowlService;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * MainScreenController contains the game functionality, timers, recipe book checking and movement and creating of
+ * Bowl objects
+ */
 public class MainScreenController {
     public Button backButton;
     public Button shopButton;

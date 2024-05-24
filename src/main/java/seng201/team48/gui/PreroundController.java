@@ -12,6 +12,7 @@ import seng201.team48.TowerManager;
 import java.util.Objects;
 import java.util.Random;
 
+/**Sets variables for roundDifficulty and broken tower alerts */
 public class PreroundController {
     private final TowerManager towerManager;
     private String greetingText = "Welcome to the game, ";
@@ -31,12 +32,17 @@ public class PreroundController {
     private Integer randInt;
     private Alert brokenTowerAlert;
 
-
+    /**Constucts controller by calling mainGameManager
+     * @param mainGameManager main game functionality
+     */
     public PreroundController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
     }
 
+    /**On startup
+     * defines gamedifficulty and sets broken tower alerts
+     */
     public void initialize() {
         if (mainGameManager.getCurrentRound() > 1) {
             setGreetingText("Congrats, you've completed round " + (mainGameManager.getCurrentRound() - 1) + "! Ready for the next one?");
@@ -73,24 +79,32 @@ public class PreroundController {
         gameDifficultyLabel.setText("Game difficulty: " + mainGameManager.getGameDifficulty());
     }
 
+    /**Sets roundDifficulty value based on num carts inputted */
     public void onNumCartsChanged() {
         mainGameManager.setRoundDifficulty(numCartsChoiceBox.getValue());
     }
 
+    /**Closes preround screen */
     public void onStartClicked(ActionEvent actionEvent) {
         mainGameManager.closePreroundStart();
     }
 
+    /**Sets greeting text using name input */
     public void setGreetingText(String greetingText) {
         this.greetingText = greetingText;
     }
 
+    /**Go back to preround setup */
     public void onBackClicked(){
         mainGameManager.closePreroundSetup();
     }
+
+    /**Enters shop */
     public void onShopClicked(){
         mainGameManager.launchShopScreen("Preround");
     }
+
+    /**Enters recipeBook */
     public void onRecipeClicked(){
         mainGameManager.launchRecipeBook("Preround");
     }

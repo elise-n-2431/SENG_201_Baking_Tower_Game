@@ -16,9 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Controller for the setup_screen.fxml window
- * @author seng201 teaching team
+/**Allows the user to select starting towers, gameDifficulty and their name
  */
 public class SetupController {
 
@@ -82,11 +80,17 @@ public class SetupController {
     @FXML
     private Label statsLevelLabel;
 
+    /**Constructs the class passing in the mainGameManager
+     * */
     public SetupController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
     }
 
+    /**On Startup
+     * Select towers and add to starting playerTowers
+     * Select the number of rounds and enter name
+     */
     @FXML
     public void initialize() {
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);
@@ -136,14 +140,18 @@ public class SetupController {
         numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> mainGameManager.setNumRounds(newValue.intValue()));
     }
 
-    /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
+
+    /**Displays relevant tower info in the window */
     public void updateStats(Tower tower) {
         statsResourceTypeLabel.setText("Resource Type: " + tower.getResourceType());
         statsReloadSpeedLabel.setText("Reload Speed: " + tower.getReloadSpeed());
         statsResourceAmountLabel.setText("Resource Amount: " + tower.getResourceAmount());
     }
 
-    /* Sends the information to the relevant classes - tower or */
+    /** Sends the information to the relevant classes
+     * Checks if the variables are valid and selected correctly
+     * Closes screen
+     */
     @FXML
     private void onStartClicked() {
         String name = nameTextField.getText();
@@ -161,15 +169,18 @@ public class SetupController {
         }
     }
 
+    /**Difficulty is set based on user input */
     @FXML
     private void onDifficultyChange() {
         mainGameManager.setGameDifficulty(gameDifficultyChoiceBox.getValue());
     }
 
+    /**number of rounds is set based on user input */
     public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {
         mainGameManager.setNumRounds((int) numRoundsSlider.getValue());
     }
 
+    /**Go to recipeBook, save previous location as "Setup" */
     @FXML
     private void onRecipeClicked() {
         mainGameManager.launchRecipeBook("Setup");

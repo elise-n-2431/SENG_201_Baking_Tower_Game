@@ -10,9 +10,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**Controls the startup of windows and transitions of screens
+ * Controls audio
+ * */
 public class FXWindow extends Application {
     private MediaPlayer mediaPlayer;
+
+    /**Sets the Stages
+     *
+     * @param primaryStage the primary stage for this application, onto which
+     * the application scene can be set.
+     * Applications may create other stages, if needed, but they will not be
+     * primary stages.
+     * @throws IOException if invalid
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader baseLoader = new FXMLLoader(getClass().getResource("/fxml/fx_wrapper.fxml"));
