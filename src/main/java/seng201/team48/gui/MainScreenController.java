@@ -46,7 +46,12 @@ public class MainScreenController {
     public ImageView bowlImage;
 
 
-
+    /**Constructor method
+     * creates the connection to mainGameManager
+     * timer is responsible for reloadTimer and moving bowl visual
+     * "/*" tags indicate sections of the mainScreen functionality for easy navigation
+     * @param mainGameManager stores global variables and can navigate between screens
+     */
     public MainScreenController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
@@ -79,6 +84,12 @@ public class MainScreenController {
         };
         timer.start();
     }
+
+    /** is called on startup and sets up variables based on current progress stored in mainGameManager and towerManager
+     * sets tower graphics and enables images
+     * sets progress bars state
+     * creates or fetches current bowl, updates headers
+     */
     /* ON STARTUP */
     @FXML
     public void initialize(){
@@ -126,7 +137,7 @@ public class MainScreenController {
         if (numSmall != null){
             if (numLarge != null){
                 bowlService.setNumBowlsSelected(numSmall, numLarge);
-            }//comment
+            }
         }
         if (mainGameManager.getIsStartOfRound()){
             mainGameManager.setIsStartOfRound(false);
@@ -168,9 +179,12 @@ public class MainScreenController {
         String setCurrentRoundStats = mainGameManager.getCurrentRound() + " / " + mainGameManager.getNumRounds();
         roundNumber.setText(setCurrentRoundStats);
     }
+
+    /** Increases the values for reloadTemp in mainGameManager per active tower
+     * Sets the reload bar's progress in the fxml page
+     */
     /* PROGRESS BARS */
     public void increaseProgressBars() {
-        //updates progress bars for each active tower in towers
         for (int i = 0; i < playerTowers.size(); i++) {
             double reloadSpeed = playerTowers.get(i).getReloadSpeed();
             double currentReload = 0;
@@ -205,6 +219,10 @@ public class MainScreenController {
             }
         }
     }
+    /** The following methods control the tower buttons
+     * Tower item can only be added to bowl is the reload bar is full (>= 1)
+     * Progress bar value is reset in both fxml bar and in mainGameManager
+     */
     /* ADD ITEMS TO BOWLS */
     @FXML
     public void onOneClicked(){
@@ -241,6 +259,13 @@ public class MainScreenController {
             mainGameManager.setReload5Temp(0);
             addToBowl(playerTowers.get(4));}
     }
+
+    /** Adds the item to the bowl then checks if currentBowl is full
+     * if full, the items are passed to inRecipe to confirm validity
+     * if valid, new bowl is generated
+     * else bowl is reset and error is displayed
+     * @param tower is the tower passing in its item to the currentBowl
+     */
     private void addToBowl(Tower tower){
         currentBowl.addToBowl(tower);
         ingredient1Contents = ingredient1Contents + "- " + tower.getResourceType() + "\n";
@@ -250,7 +275,6 @@ public class MainScreenController {
             if(product != null){
                 announcement.setText("You have made: " + product);
                 if(bowlService.getBowlsUsed()){
-                    //no more bowls
                     endRound();
                 } else {
                     currentBowl = bowlService.getNewBowl();
@@ -268,6 +292,11 @@ public class MainScreenController {
             }
         }
     }
+
+    /** Checks string of tower contents against chosen recipe combinations
+     * calls for method getString to turn currentBowl contents into quantity sting
+     * @return String displaying food item created
+     */
     /* RECIPE BOOK CONFIRMATION */
     private String inRecipe(){
         String all = getString();
@@ -310,6 +339,11 @@ public class MainScreenController {
             }
         } return null;
     }
+
+    /** Compares the list of possible towers against the ones in currentBowl
+     * frequencies are concatenated into a single string as max frequency is 5
+     * @return String of number of single digit occurrences of tower in currentBowl
+     */
     private String getString(){
         List<Tower> allTowers = towerManager.getDefaultTowers();
         Tower egg = allTowers.get(1);
@@ -327,6 +361,9 @@ public class MainScreenController {
         return "" + num_egg + num_milk + num_flour + num_banana + num_sugar;
     }
 
+    /** Bowl step size is set by the gameDifficulty
+     * Image is translated on step along the x-axis unless end is reached
+     */
     /* CONTROL BOWL MOVEMENT */
     public void moveBowlVisual(){
         double x_value = mainGameManager.updateBowlStepSize();
@@ -336,6 +373,10 @@ public class MainScreenController {
             System.out.println(endTimer);
         }
     }
+
+    /** Bowl has been used to create a recipe and returns to start of track
+     * If bowl has large capacity (5), it is set visually larger
+     */
     public void resetBowlVisual(){
         if (currentBowl.getSize() == "Large"){
             bowlImage.setFitHeight(120);
@@ -344,6 +385,9 @@ public class MainScreenController {
         }
         mainGameManager.resetBowlLocation();
     }
+
+    /** Bowl model has to be reset and all text or live variables also
+     */
     /* RESET OR UPDATE VALUES */
     private void resetBowlContents(){
         currentBowl.setEmpty();
@@ -352,12 +396,17 @@ public class MainScreenController {
         ingredient1.setText("");
     }
 
+    /** when reset button is clicked, implement resetBowlContents method
+     */
     @FXML
     private void resetBowlClicked(){
-        currentBowl.setEmpty();
-        ingredient1Contents = "";
-        ingredient1.setText("");
+        resetBowlContents();
     }
+
+    /** Any time the bank balance increases - this method is called
+     * sets the totalMoney in mainGameManager so is saved between rounds and onShopClicked
+     * @param increase is an Integer value which we are adding to the bank balance saved
+     */
     @FXML
     private void updateValue(int increase) {
         Integer newTotal = mainGameManager.getTotalMoney() + increase;
@@ -365,16 +414,27 @@ public class MainScreenController {
         String s = String.valueOf(newTotal);
         moneyValue.setText(s);
     }
+
+    /** Updates the little "num bowl / all bowl" statistic in the top left corner
+     */
     public void updateBowlNumber(){
         String setCurrentBowlStats = bowlService.getNumBowlsSent() + " / " + bowlService.getNumBowlsSelected();
         bowlNumber.setText(setCurrentBowlStats);
     }
+
+    /** Player leaves to go to shop or recipe book
+     * Some local variables need to be pushed into the mainGameManager, so they can be saved for when they return
+     */
     public void saveValuesMidRound(){
         mainGameManager.setCurrentBowl(currentBowl);
         mainGameManager.setIngredient1Contents(ingredient1Contents);
         mainGameManager.setBowlService(bowlService);
         pauseTimer = true;
     }
+
+    /** Player has either won the game or they have lost
+     * Reset saved values, so they don't persist to later games
+     */
     public void resetValuesEndGame(){
         mainGameManager.setIsStartOfRound(true);
         mainGameManager.resetBowlLocation();
@@ -382,6 +442,9 @@ public class MainScreenController {
         pauseTimer = true;
     }
 
+    /** The following three methods change the active screen and may pass in "MainScreen" as a parameter
+     * The parameter sets the navigation back to this page
+     */
     /* LEAVE MAIN GAME SCREEN */
     @FXML
     private void onShopClicked() {
@@ -398,6 +461,10 @@ public class MainScreenController {
         resetValuesEndGame();
         mainGameManager.closeMainScreenHome();
     }
+
+    /** The player has won the round
+     * If they are on the last round, they have won the game
+     */
     private void endRound() {
 
         if (mainGameManager.getCurrentRound().equals(mainGameManager.getNumRounds())) {
@@ -411,6 +478,10 @@ public class MainScreenController {
             mainGameManager.closeMainScreenPreRound();
         }
     }
+
+    /** The bowl has passed the threshold and they player lost
+     * They go to the failing conclusion page
+     */
     private void fail() {
         mainGameManager.setSuccess(Boolean.FALSE);
         resetValuesEndGame();
