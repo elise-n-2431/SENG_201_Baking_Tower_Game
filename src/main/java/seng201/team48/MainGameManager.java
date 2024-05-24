@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 
 public class MainGameManager {
     TowerManager towerManager;
+    UpgradeManager upgradeManager;
     private final Consumer<MainGameManager> setupScreenLauncher;
     private final Consumer<MainGameManager> preroundScreenLauncher;
     private final Consumer<MainGameManager> mainScreenLauncher;
@@ -52,6 +53,7 @@ public class MainGameManager {
         this.shopScreenLauncher = shopScreenLauncher;
         this.clearScreen = clearScreen;
         this.towerManager = new TowerManager();
+        this.upgradeManager = new UpgradeManager();
         this.conclusionLauncher = conclusionLauncher;
         this.recipeBookLauncher = recipeBookLauncher;
 
@@ -136,6 +138,8 @@ public class MainGameManager {
     public TowerManager getTowerManager() {
         return towerManager;
     }
+
+    public UpgradeManager getUpgradeManager() { return upgradeManager; }
 
 
     /**

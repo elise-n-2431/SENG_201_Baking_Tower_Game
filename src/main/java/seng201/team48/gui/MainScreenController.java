@@ -45,8 +45,6 @@ public class MainScreenController {
     private List<Tower> playerTowers;
     public ImageView bowlImage;
 
-
-
     public MainScreenController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();

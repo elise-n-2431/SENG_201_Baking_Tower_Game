@@ -13,6 +13,7 @@ import seng201.team48.TowerManager;
 import seng201.team48.UpgradeManager;
 import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
+import seng201.team48.services.InventoryService;
 import seng201.team48.services.ShopService;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ShopInventoryController {
     MainGameManager mainGameManager;
     UpgradeManager upgradeManager;
     ShopService shopService = new ShopService();
+    InventoryService inventoryService = new InventoryService();
     private String lastSelectedInvList;
     private List<Tower> towersForSale;
     private List<Purchasable> totalShopItems;
@@ -119,6 +121,8 @@ public class ShopInventoryController {
     @FXML
     private Label invDescriptionLabel;
     @FXML
+    private Label invLevelLabel;
+    @FXML
     private Label sellPriceLabel;
     private List<Button> buyTowerButtons;
     private List<Button> buyUpgradeButtons;
@@ -132,7 +136,7 @@ public class ShopInventoryController {
     public ShopInventoryController(MainGameManager mainGameManager){
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
-        upgradeManager = new UpgradeManager();
+        this.upgradeManager = mainGameManager.getUpgradeManager();
         totalShopItems = new ArrayList<Purchasable>();
         System.out.println(upgradeManager.getDefaultUpgradesList());
     }
@@ -166,6 +170,12 @@ public class ShopInventoryController {
         invItemNameLabel.setText(("In Inventory: " + purchasable.getName()));
         invDescriptionLabel.setText((purchasable.getDescription()));
         sellPriceLabel.setText(String.valueOf(purchasable.getSellPrice()));
+        if (purchasable instanceof Tower) {
+            invLevelLabel.setText("Level: " + ((Tower) purchasable).getLevel());
+        }
+        else {
+            invLevelLabel.setText("");
+        }
     }
 
     /**
@@ -192,7 +202,7 @@ public class ShopInventoryController {
     }
 
 
-    public void onBuyTowerButtonClicked(ActionEvent actionEvent) {
+    public void onBuyTowerButtonClicked(ActionEvent actionEvent) throws CloneNotSupportedException {
         int moneyRequired = totalShopItems.get(selectedItemIndex).getPurchasePrice();
         boolean hasEnoughMoney = shopService.canPurchase(mainGameManager.getTotalMoney(), moneyRequired);
         boolean hasInventorySpace = shopService.hasTowerInventorySpace(towerManager.getPlayerTowers(), towerManager.getReserveTowers());
@@ -204,9 +214,12 @@ public class ShopInventoryController {
             mainGameManager.deductTotalMoney(price);
             updatePlayerCoinsLabel();
 
+            Tower clonedTower;
+            clonedTower = (Tower) totalShopItems.get(selectedItemIndex).cloneSelf();
+
             // Add last clicked tower to player inventory in the correct list
             if (Objects.equals(shopService.getNonemptyTowerList(), "playerTower")) {
-                towerManager.addPlayerTower((Tower) totalShopItems.get(selectedItemIndex));
+                towerManager.addPlayerTower(clonedTower);
 
                 // Set relevant button's image in inventory
                 String imagePath = towerManager.getDefaultTowersImages().get(selectedItemIndex);
@@ -221,7 +234,7 @@ public class ShopInventoryController {
 
             }
             else {
-                towerManager.addReserveTower((Tower) totalShopItems.get(selectedItemIndex));
+                towerManager.addReserveTower(clonedTower);
 
                 // Set relevant button's image in inventory
                 String imagePath = towerManager.getDefaultTowersImages().get(selectedItemIndex);
@@ -235,21 +248,14 @@ public class ShopInventoryController {
                 newButton.setGraphic(imageView);
                 //newButton.setText(totalShopItems.get(selectedItemIndex).getName());
             }
-            infoAlert.setTitle("Tower Purchase Successful");
-            infoAlert.setHeaderText("You have bought " + name);
-            infoAlert.showAndWait();
-
+            inventoryService.showAlert(infoAlert, "Tower purchase successful", "You have bought " + name, "");
 
         } else if (!hasEnoughMoney) {
-            alert.setTitle("Error");
-            alert.setHeaderText("Not enough money");
-            alert.setContentText("Earn more money by creating recipes during the next round!");
-            alert.showAndWait();
+            inventoryService.showAlert(alert, "Error", "Not enough money",
+                    "Earn more money by creating recipes during the next round!");
         } else if (!hasInventorySpace) {
-            alert.setTitle("Error");
-            alert.setHeaderText("Not enough inventory space");
-            alert.setContentText("Your active and reserve tower slots are full. Try upgrading your towers instead!");
-            alert.showAndWait();
+            inventoryService.showAlert(alert, "Error", "Not enough inventory space",
+                    "Your active and reserve tower slots are full. Try upgrading your towers instead!");
         }
     }
 
@@ -270,6 +276,7 @@ public class ShopInventoryController {
 
             // Set relevant button's image in inventory
             String imagePath = upgradeManager.getUpgradesForSaleImages().get(selectedItemIndex - 5);
+            upgradeManager.addPlayerItemsImage(imagePath);
             Image image = new Image(imagePath);
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(40);
@@ -278,20 +285,14 @@ public class ShopInventoryController {
             newButton.setVisible(true);
             newButton.setGraphic(imageView);
 
-            infoAlert.setTitle("Item Purchase Successful");
-            infoAlert.setContentText("You have bought " + name);
-            infoAlert.showAndWait();
+            inventoryService.showAlert(infoAlert, "Item Purchase Successful", "", "You have bought " + name);
 
         } else if (!hasEnoughMoney) {
-            alert.setTitle("Error");
-            alert.setHeaderText("Not enough money");
-            alert.setContentText("Earn more money by creating recipes during the next round!");
-            alert.showAndWait();
+            inventoryService.showAlert(alert, "Error", "Not enough money",
+                    "Earn more money by creating recipes during the next round!");
         } else if (!hasInventorySpace) {
-            alert.setTitle("Error");
-            alert.setHeaderText("Not enough inventory space");
-            alert.setContentText("You can only store up to 5 items at a time. Try upgrading your towers or selling items!");
-            alert.showAndWait();
+            inventoryService.showAlert(alert, "Error", "Not enough inventory space",
+                    "You can only store up to 5 items at a time. Try upgrading your towers or selling items!");
         }
         initialiseLayout();
     }
@@ -315,6 +316,7 @@ public class ShopInventoryController {
                 soldItem = upgradeManager.getPlayerUpgrades().get(selectedUpgradeIndex);
                 sellPrice = soldItem.getSellPrice();
                 upgradeManager.removePlayerUpgrade(soldItem);
+                upgradeManager.removePlayerItemsImage(selectedUpgradeIndex);
             } else {
                 return;
             }
@@ -322,10 +324,7 @@ public class ShopInventoryController {
             initialiseLayout();
         }
         else {
-            alert.setTitle("Error");
-            alert.setHeaderText("Cannot sell tower");
-            alert.setContentText("You need three towers at all times!");
-            alert.showAndWait();
+            inventoryService.showAlert(alert, "Error", "Cannot sell tower", "You need three towers at all times!");
         }
     }
 
@@ -334,45 +333,62 @@ public class ShopInventoryController {
 
     /**
      * Use item button appears when an active or reserve station is clicked.
-     * @param actionEvent
+     * @param actionEvent When "Use Item" button is clicked
      */
     public void onUseItemButtonClicked(ActionEvent actionEvent) {
-        Purchasable item = upgradeManager.getPlayerUpgrades().get(selectedItemIndex);
-        Tower tower;
-        switch(lastSelectedInvList) {
-            case "active":
-                tower = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
-                break;
-            case "reserve":
-                tower = towerManager.getReserveTowers().get(selectedReserveItemIndex);
-                break;
-            default:
-                throw new IllegalArgumentException("Unexpected list clicked: " + lastSelectedInvList);
-        }
+        Purchasable item = upgradeManager.getPlayerUpgrades().get(selectedUpgradeIndex);
+        Tower tower = switch (lastSelectedInvList) {
+            case "active" -> towerManager.getPlayerTowers().get(selectedActiveItemIndex);
+            case "reserve" -> towerManager.getReserveTowers().get(selectedReserveItemIndex);
+            default -> throw new IllegalArgumentException("Unexpected list clicked: " + lastSelectedInvList);
+        };
 
+        int requiredLevel = -1;
         try {
             switch(item.getName()) {
-                case "Level 1 Tower Upgrade":
-                    // Upgrades tower to level 2
-
+                case "Level 1 Upgrade":
+                    requiredLevel = 1;
                     break;
-                case "Level 2 Tower Upgrade":
-                    // Upgrades tower to level 3
+                case "Level 2 Upgrade":
+                    requiredLevel = 2;
                     break;
-                case "Level 3 Tower Upgrade":
-                    // Upgrades tower to level 4
+                case "Level 3 Upgrade":
+                    requiredLevel = 3;
                     break;
                 case "Repair kit":
                     // Checks if the tower is broken. If true, fix it. If not, give alert and do nothing.
+                    if (tower.isBroken()) {
+                        tower.setBroken(false);
+                    }
+                    else {
+                        inventoryService.showAlert(alert, "Error", "Cannot use repair kit", "This tower is not broken! Save your item for a broken tower.");
+                    }
                     break;
                 default:
                     throw new IllegalArgumentException("Unexpected value: " + item.getName());
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return;
         }
 
+        // If item is a level upgrade and the tower is the correct level to use it, then level up
+        if (requiredLevel != -1) {
+            boolean isCorrectUpgradeLevel = inventoryService.isCorrectUpgradeLevel(tower, requiredLevel);
+            if (isCorrectUpgradeLevel) {
+                tower.setLevel(requiredLevel + 1);
+            }
+            else {
+                inventoryService.showAlert(alert, "Error", "Cannot use " + item.getName() + " on this tower.",
+                        "This upgrade must be used to upgrade a level " + requiredLevel + " tower to level " + (requiredLevel+1) + ".");
 
+            }
+        }
+
+        // Remove item from player inventory
+        upgradeManager.removePlayerUpgrade(item);
+        upgradeManager.removePlayerItemsImage(selectedUpgradeIndex);
+        initialiseLayout();
     }
 
     public void updatePlayerCoinsLabel() {
@@ -495,19 +511,29 @@ public class ShopInventoryController {
         for (int i = 0; i < boughtItemButtons.size(); i++) {
             int finalI = i;
             if (i < upgradeManager.getPlayerUpgrades().size()) {
-                boughtItemButtons.get(i).setText(upgradeManager.getPlayerUpgrades().get(i).getName());
+                //boughtItemButtons.get(i).setText(upgradeManager.getPlayerUpgrades().get(i).getName());
+
+                // Set relevant button's image in inventory
+                String imagePath = upgradeManager.getPlayerItemsImages().get(i);
+                Image image = new Image(imagePath);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(40);
+                imageView.setFitHeight(40);
+                boughtItemButtons.get(i).setGraphic(imageView);
             }
+            else {
+                boughtItemButtons.get(i).setVisible(false);
+            }
+
             // On click functionality
             boughtItemButtons.get(i).setOnAction(event -> {
                 selectedUpgradeIndex = finalI;
                 lastSelectedInvList = "item";
                 useItemButton.setVisible(false);
+                // SET MAKE RESERVE/ACTIVE TO FALSE
                 updateInvDisplay(upgradeManager.getPlayerUpgrades().get(finalI));
-                if (selectedUpgradeIndex != -1) {
-                    // option to sell item?
-                }
-                reserveTowerButtons.forEach(button -> {
-                    if (button == reserveTowerButtons.get(finalI)) {
+                boughtItemButtons.forEach(button -> {
+                    if (button == boughtItemButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
                     } else {
                         button.setStyle("");
