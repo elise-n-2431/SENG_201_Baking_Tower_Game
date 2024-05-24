@@ -54,7 +54,6 @@ public class PreroundController {
                         randInt = rand.nextInt(6);
                     }
                 }
-                System.out.println(randInt); //prints random integer chosen in terminal
                 for (int i = 0; i < towerManager.getPlayerTowers().size(); i++) {
                     if ((randInt - 1) == i) {
                         towerManager.getPlayerTowers().get(i).setBroken(true);

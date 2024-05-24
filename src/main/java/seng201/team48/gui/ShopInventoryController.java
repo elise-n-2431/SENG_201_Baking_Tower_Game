@@ -148,7 +148,6 @@ public class ShopInventoryController {
         this.towerManager = mainGameManager.getTowerManager();
         this.upgradeManager = mainGameManager.getUpgradeManager();
         totalShopItems = new ArrayList<>();
-        System.out.println(upgradeManager.getDefaultUpgradesList());
     }
 
     /**
@@ -280,7 +279,6 @@ public class ShopInventoryController {
                 Button newButton = reserveTowerButtons.get(towerManager.getReserveTowers().size() - 1);
                 newButton.setVisible(true);
                 newButton.setGraphic(imageView);
-                //newButton.setText(totalShopItems.get(selectedItemIndex).getName());
             }
             inventoryService.showAlert(infoAlert, "Tower purchase successful", "You have bought " + name, "");
 
@@ -337,32 +335,17 @@ public class ShopInventoryController {
         initialiseLayout();
     }
 
+    /**
+     * Handles the action event when the sell button is clicked.
+     * Passes information into sellInvItem method in ShopService.
+     *
+     * @param actionEvent            The ActionEvent triggered by the sell button.
+     */
     public void onSellClicked(ActionEvent actionEvent) {
-        boolean hasEnoughTowers = shopService.hasEnoughTowers(towerManager.getPlayerTowers());
-        if (hasEnoughTowers || lastSelectedInvList == "item") {
-            int sellPrice = -500;
-            Purchasable soldItem;
-            if (lastSelectedInvList == "active") {
-                soldItem = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
-                sellPrice = soldItem.getSellPrice();
-                towerManager.removePlayerTower((Tower) soldItem);
-                towerManager.removePlayerTowersImage(selectedActiveItemIndex);
-            } else if (lastSelectedInvList == "reserve") {
-                soldItem = towerManager.getReserveTowers().get(selectedReserveItemIndex);
-                sellPrice = soldItem.getSellPrice();
-                towerManager.removeReserveTower((Tower) soldItem);
-                towerManager.removePlayerTowersImage(selectedReserveItemIndex);
-            } else if (lastSelectedInvList == "item") {
-                soldItem = upgradeManager.getPlayerUpgrades().get(selectedUpgradeIndex);
-                sellPrice = soldItem.getSellPrice();
-                upgradeManager.removePlayerUpgrade(soldItem);
-                upgradeManager.removePlayerItemsImage(selectedUpgradeIndex);
-            } else {
-                return;
-            }
-            mainGameManager.addTotalMoney(sellPrice);
+        String sellAction = shopService.sellInvItem(mainGameManager, lastSelectedInvList, selectedUpgradeIndex, selectedActiveItemIndex, selectedReserveItemIndex);
+        if (sellAction == "doRefresh") {
             initialiseLayout();
-        } else {
+        } else if (sellAction == "showError") {
             inventoryService.showAlert(alert, "Error", "Cannot sell tower", "You need three towers at all times!");
         }
     }
@@ -597,13 +580,15 @@ public class ShopInventoryController {
         }
     }
 
+
     /**
      * Sets button images for towers and items in inventory and shop.
-     * Adds an image overlay of a red 'X' to the button if the image is for a broken tower.
-     * Called from a for loop
+     * Overloading of setButtonImages in the case when button and image are at the same index in their respective lists.
+     *
      * @param listToGetFrom List of image paths being looped through
-     * @param buttonList List of buttons being looped through
-     * @param index Location of the desired button and image in their respective lists.
+     * @param buttonList    List of buttons being looped through
+     * @param index         Location of the desired button and image in their respective lists
+     * @param needsOverlay  True if the tower is broken and needs overlay, false otherwise
      */
     public void setButtonImages(List<String> listToGetFrom, List<Button> buttonList, int index, boolean needsOverlay) {
         // Set relevant button's image in inventory
@@ -624,8 +609,6 @@ public class ShopInventoryController {
             StackPane stackPane = new StackPane();
             stackPane.getChildren().addAll(imageView, overlayImageView);
             buttonList.get(index).setGraphic(stackPane);
-        } else {
-            buttonList.get(index).setGraphic(imageView);
         }
     }
 }

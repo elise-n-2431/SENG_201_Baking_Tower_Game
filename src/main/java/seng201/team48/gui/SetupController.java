@@ -33,8 +33,6 @@ public class SetupController {
 
     private final Tower[] selectedTowers = new Tower[3];
     private final String[] selectedTowersImages = new String[3];
-    @FXML
-    private Button recipeButton;
 
     @FXML
     private TextField nameTextField;
@@ -84,19 +82,19 @@ public class SetupController {
     @FXML
     private Label statsLevelLabel;
 
-    public SetupController(MainGameManager mainGameManager){
+    public SetupController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         List<Button> selectedTowerButtons = List.of(selectedTower1Button, selectedTower2Button, selectedTower3Button);
         List<Button> towerButtons = List.of(flourTowerButton, waterTowerButton, sugarTowerButton, milkTowerButton);
         errorLabel.setText("");
 
         /* Loops through tower index and sets up on click functionality.
-        * Calls updateStats. Sets selectedTowerIndex to index of clicked button. */
+         * Calls updateStats. Sets selectedTowerIndex to index of clicked button. */
         for (int i = 0; i < towerButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             towerButtons.get(i).setOnAction(event -> {
@@ -137,12 +135,14 @@ public class SetupController {
         /* Sets number of rounds based on user input */
         numRoundsSlider.valueProperty().addListener((observable, oldValue, newValue) -> mainGameManager.setNumRounds(newValue.intValue()));
     }
+
     /* Displays relevant tower info in the window -SHOULD IT BE @FXML? */
-    public void updateStats(Tower tower){
+    public void updateStats(Tower tower) {
         statsResourceTypeLabel.setText("Resource Type: " + tower.getResourceType());
         statsReloadSpeedLabel.setText("Reload Speed: " + tower.getReloadSpeed());
         statsResourceAmountLabel.setText("Resource Amount: " + tower.getResourceAmount());
     }
+
     /* Sends the information to the relevant classes - tower or */
     @FXML
     private void onStartClicked() {
@@ -152,54 +152,26 @@ public class SetupController {
             towerManager.setPlayerTowers(new ArrayList<>(Arrays.stream(selectedTowers).filter((Objects::nonNull)).toList()));
             towerManager.setPlayerTowersImages(new ArrayList<>(Arrays.stream(selectedTowersImages).filter((Objects::nonNull)).toList()));
             mainGameManager.closeSetupScreen();
-        }
-        else if (!nameService.isValidName(name)) {
+        } else if (!nameService.isValidName(name)) {
             errorLabel.setText("Name must be between 3 and 15 characters, and contain no special characters");
-        }
-        else if (!towerService.areAllTowersSelected(selectedTowers)) {
+        } else if (!towerService.areAllTowersSelected(selectedTowers)) {
             errorLabel.setText("Must select 3 towers");
-        }
-        else {
+        } else {
             errorLabel.setText("Name must be between 3 and 15 characters, and contain no special characters");
         }
     }
-//commit
+
     @FXML
     private void onDifficultyChange() {
         mainGameManager.setGameDifficulty(gameDifficultyChoiceBox.getValue());
-        System.out.println("game difficulty has been changed to: " + gameDifficultyChoiceBox.getValue() + " = " + mainGameManager.getGameDifficulty());
     }
 
     public void onNumRoundsChange(MouseDragEvent mouseDragEvent) {
-        System.out.println("Number of rounds changed");
         mainGameManager.setNumRounds((int) numRoundsSlider.getValue());
     }
 
     @FXML
-    private void onRecipeClicked(){
+    private void onRecipeClicked() {
         mainGameManager.launchRecipeBook("Setup");
     }
-
-    /* Prefilled in content
-    @FXML
-    private Label defaultLabel;
-
-    @FXML
-    private Button defaultButton;
-
-    private CounterService counterService;
-
-    public void init(Stage stage) {
-        counterService = new CounterService();
-    }
-
-
-    @FXML
-    public void onButtonClicked() {
-        System.out.println("Button has been clicked");
-        counterService.incrementCounter();
-
-        int count = counterService.getCurrentCount();
-        defaultLabel.setText(Integer.toString(count));
-    }*/
 }
