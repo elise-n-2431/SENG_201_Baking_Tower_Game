@@ -1,8 +1,11 @@
 package seng201.team48.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the blueprint for bowl ('cart') objects which must be filled by player during gameplay.
+ * @author Hannah Grace
+ */
 public class Bowl {
     private Integer capacity = 0;
     private Integer currentIndex = 0;
@@ -62,7 +65,7 @@ public class Bowl {
     }
 
     /**Get all items stored in bowl
-     * @return filled List<Tower>
+     * @return filled list
      */
     public List<Tower> getFilled(){
         return filled;

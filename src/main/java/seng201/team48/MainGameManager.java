@@ -7,9 +7,9 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 /**
- * This class stores information about the current game session. EQUIVALENT TO ROCKETMANAGER IN TUTORIAL
+ * This class stores information about the current game session.
  * It manages holding state, GUI windows, and passing objects into controller classes.
- * An
+ *
  * @author Hannah Grace, Elise Newman
  */
 

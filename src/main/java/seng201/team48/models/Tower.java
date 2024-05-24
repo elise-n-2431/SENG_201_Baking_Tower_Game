@@ -2,10 +2,9 @@ package seng201.team48.models;
 
 /**
  * This class contains the blueprint for all in-game 'Tower' objects.
- * In-game, six tower objects are created, all with different properties.
+ * In-game, five types of tower objects are created, all with different properties.
  * * Tower is a subclass of Purchasable.
- * It inherits the purchasePrice, sellPrice and description variables, and their
- * getters.
+ * It inherits the name, purchasePrice, sellPrice and description variables.
  * @author Hannah Grace, Elise Newman
  */
 
@@ -77,7 +76,7 @@ public class Tower extends Purchasable {
 
     /**
      * Set tower's reload speed.
-     * @param reloadSpeed
+     * @param reloadSpeed determines how often a player can use tower to donate resources to carts
      */
     public void setReloadSpeed(double reloadSpeed) {
         this.reloadSpeed = reloadSpeed;
@@ -85,7 +84,7 @@ public class Tower extends Purchasable {
 
     /**
      * Setter function for resource type of tower.
-     * @param resourceType
+     * @param resourceType type of ingredient which tower fills bowls ('carts') with
      */
     public void setResourceType(String resourceType) {
         this.resourceType = resourceType;
@@ -98,14 +97,6 @@ public class Tower extends Purchasable {
      */
     public int getResourceAmount() {
         return resourceAmount;
-    }
-
-    /**
-     * Set resourceAmount
-     * @param resourceAmount Amount of resources to load into carts per action.
-     */
-    public void setResourceAmount(int resourceAmount) {
-        this.resourceAmount = resourceAmount;
     }
 
     /**

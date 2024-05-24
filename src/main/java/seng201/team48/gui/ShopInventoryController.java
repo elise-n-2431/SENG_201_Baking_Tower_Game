@@ -105,6 +105,10 @@ public class ShopInventoryController {
     @FXML
     private Button useItemButton;
     @FXML
+    private Button makeReserveButton;
+    @FXML
+    private Button makeActiveButton;
+    @FXML
     private Label upgrade1PriceLabel;
     @FXML
     private Label upgrade2PriceLabel;
@@ -351,9 +355,48 @@ public class ShopInventoryController {
     }
 
     public void onMakeReserveButtonClicked(ActionEvent actionEvent) {
+        boolean canMakeReserve = inventoryService.canMakeReserve(mainGameManager);
+        if (canMakeReserve) {
+            Tower movedItem = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
+            String movedImagePath = towerManager.getPlayerTowersImages().get(selectedActiveItemIndex);
+            towerManager.removePlayerTower(movedItem);
+            towerManager.removePlayerTowersImage(selectedActiveItemIndex);
+
+            towerManager.addReserveTower(movedItem);
+            towerManager.addReserveTowersImage(movedImagePath);
+
+            Image image = new Image(movedImagePath);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
+            Button newButton = reserveTowerButtons.get(towerManager.getReserveTowers().size() - 1);
+            newButton.setVisible(true);
+            newButton.setGraphic(imageView);
+            initialiseLayout();
+        }
     }
 
     public void onMakeActiveButtonClicked(ActionEvent actionEvent) {
+        boolean canMakeActive = inventoryService.canMakeActive(mainGameManager);
+
+        if (canMakeActive) {
+            Tower movedItem = towerManager.getPlayerTowers().get(selectedReserveItemIndex);
+            String movedImagePath = towerManager.getPlayerTowersImages().get(selectedReserveItemIndex);
+            towerManager.removeReserveTower(movedItem);
+            towerManager.removeReserveTowersImage(selectedReserveItemIndex);
+
+            towerManager.addPlayerTower(movedItem);
+            towerManager.addPlayerTowersImage(movedImagePath);
+
+            Image image = new Image(movedImagePath);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
+            Button newButton = activeTowerButtons.get(towerManager.getPlayerTowers().size() - 1);
+            newButton.setVisible(true);
+            newButton.setGraphic(imageView);
+            initialiseLayout();
+        }
     }
 
     /**
@@ -423,6 +466,8 @@ public class ShopInventoryController {
         buyItemButton.setVisible(false);
         buyTowerButton.setVisible(false);
         useItemButton.setVisible(false);
+        makeActiveButton.setVisible(false);
+        makeReserveButton.setVisible(false);
         updatePlayerCoinsLabel();
 
         // Show first item in inventory active stations and first item in shop
@@ -452,15 +497,9 @@ public class ShopInventoryController {
                 selectedActiveItemIndex = finalI;
                 lastSelectedInvList = "active";
                 useItemButton.setVisible(true);
+                makeReserveButton.setVisible(true);
+                makeActiveButton.setVisible(false);
                 updateInvDisplay(towerManager.getPlayerTowers().get(finalI));
-//                if (selectedReserveItemIndex != -1) {
-//                    // Swap active and reserve tower
-//                    Tower reserveTower = towerManager.getReserveTowers().get(selectedReserveItemIndex);
-//                    Tower activeTower = towerManager.getPlayerTowers().get(finalI);
-//                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
-//                    activeTowerButtons.get(finalI).setText(reserveTower.getName());
-//                    reserveTowerButtons.get(selectedReserveItemIndex).setText(activeTower.getName());
-//                }
                 activeTowerButtons.forEach(button -> {
                     if (button == activeTowerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
@@ -477,7 +516,7 @@ public class ShopInventoryController {
             // Set names of the player's active towers
             if (i < towerManager.getReserveTowers().size()) {
                 // Set relevant button's image in inventory
-                setButtonImages(towerManager.getDefaultTowersImages(), reserveTowerButtons, i, false);
+                setButtonImages(towerManager.getReserveTowersImages(), reserveTowerButtons, i, false);
             } else {
                 // Hide buttons
                 reserveTowerButtons.get(i).setVisible(false);
@@ -487,15 +526,9 @@ public class ShopInventoryController {
                 selectedReserveItemIndex = finalI;
                 lastSelectedInvList = "reserve";
                 useItemButton.setVisible(true);
+                makeReserveButton.setVisible(false);
+                makeActiveButton.setVisible(true);
                 updateInvDisplay(towerManager.getReserveTowers().get(finalI));
-//                if (selectedActiveItemIndex != -1) {
-//                    // COPY PASTED -- DOES IT WORK???
-//                    Tower reserveTower = towerManager.getReserveTowers().get(finalI);
-//                    Tower activeTower = towerManager.getPlayerTowers().get(selectedActiveItemIndex);
-//                    towerManager.swapActiveReserveTowers(finalI, activeTower, reserveTower);
-//                    activeTowerButtons.get(selectedActiveItemIndex).setText(reserveTower.getName());
-//                    reserveTowerButtons.get(finalI).setText(activeTower.getName());
-//                }
                 reserveTowerButtons.forEach(button -> {
                     if (button == reserveTowerButtons.get(finalI)) {
                         button.setStyle("-fx-background-color: #b3b3b3; -fx-background-radius: 5;");
@@ -533,10 +566,7 @@ public class ShopInventoryController {
             });
         }
 
-        /*
-         * Set up click functionality for purchasable tower buttons in shop
-         *
-         * */
+        // Set up click functionality for purchasable tower buttons in shop
         for (int i = 0; i < buyTowerButtons.size(); i++) {
             int finalI = i; // variables used within lambdas must be final
             buyTowerButtons.get(i).setOnAction(event -> {
