@@ -18,33 +18,17 @@ public class Upgrade extends Purchasable {
     }
 
     public static int computePurchasePrice(String towerLevel) {
-        int purchasePrice;
-        switch (towerLevel) {
-            case "1":
-                purchasePrice = 20;
-                break;
-            case "2":
-                purchasePrice = 30;
-                break;
-            case "3":
-                purchasePrice = 40;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid upgrade level: " + towerLevel);
-        }
+        int purchasePrice = switch (towerLevel) {
+            case "1" -> 20;
+            case "2" -> 30;
+            case "3" -> 40;
+            default -> throw new IllegalArgumentException("Invalid upgrade level: " + towerLevel);
+        };
         return purchasePrice;
     }
 
-    /**
-     * Repairs the given tower by setting its 'broken' attribute to false.
-     * @param brokenTower A tower with its 'broken' attribute set to true.
-     */
-    public void repairTower(Tower brokenTower) {
-        brokenTower.setBroken(false);
-    }
-
     public String toString() {
-        return "Upgrade for level " + this.getDescription() + " tower. Price: " + this.getPurchasePrice();
+        return this.getDescription() + " station. Price: " + this.getPurchasePrice();
 
     }
 }

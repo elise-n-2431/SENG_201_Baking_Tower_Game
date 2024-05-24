@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seng201.team48.models.Purchasable;
 import seng201.team48.models.Tower;
+import seng201.team48.models.Upgrade;
 import seng201.team48.services.ShopService;
 
 import java.util.ArrayList;
@@ -44,4 +46,44 @@ public class ShopServiceTest {
         reserveTowers.addAll(List.of(flourTower, flourTower, sugarTower, milkTower, bananaTower));
         assertFalse(testShopService.hasTowerInventorySpace(playerTowers, reserveTowers));
     }
+
+    @Test
+    public void testHasItemInventorySpace() {
+        List<Purchasable> playerUpgrades = new ArrayList<>();
+
+        Upgrade testUpgrade = new Upgrade("1");
+
+        for (int i = 0; i < 4; i++) {
+            playerUpgrades.add(testUpgrade.cloneSelf());
+        }
+
+        assertTrue(testShopService.hasItemInventorySpace(playerUpgrades));
+
+        playerUpgrades.add(testUpgrade.cloneSelf());
+        assertFalse(testShopService.hasItemInventorySpace(playerUpgrades));
+    }
+
+    @Test
+    public void testCanPurchase() {
+        assertTrue(testShopService.canPurchase(100, 50));
+        assertFalse(testShopService.canPurchase(50, 100));
+        assertTrue(testShopService.canPurchase(50, 50));
+    }
+
+    @Test
+    public void testHasEnoughTowers() {
+        List<Tower> playerTowers = new ArrayList<>();
+
+        Tower eggTower = new Tower("Eggs", "Used in fried eggs, scrambled eggs, pasta, pancakes, carbonara, cake, banana bread", 5, 3, 20, 0.05);
+
+        for (int i = 0; i < 4; i++) {
+            playerTowers.add((Tower) eggTower.cloneSelf());
+        }
+
+        assertTrue(testShopService.hasEnoughTowers(playerTowers));
+
+        playerTowers.remove(0);
+        assertFalse(testShopService.hasEnoughTowers(playerTowers));
+    }
+
 }

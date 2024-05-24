@@ -10,7 +10,7 @@ public class UpgradeTest {
     void level1PurchasePriceTest() {
         upgrade = new Upgrade("1");
         System.out.println(upgrade.getPurchasePrice());
-        String expectedPrint = "Upgrade for level 1 tower. Price: 20";
+        String expectedPrint = "Upgrades a level 1 station to level 2 station. Price: 20";
         assertEquals(expectedPrint, upgrade.toString());
     }
 
@@ -18,7 +18,7 @@ public class UpgradeTest {
     void level2PurchasePriceTest() {
         upgrade = new Upgrade("2");
         System.out.println(upgrade.getPurchasePrice());
-        String expectedPrint = "Upgrade for level 2 tower. Price: 30";
+        String expectedPrint = "Upgrades a level 2 station to level 3 station. Price: 30";
         assertEquals(expectedPrint, upgrade.toString());
     }
 
@@ -26,7 +26,7 @@ public class UpgradeTest {
     void level3PurchasePriceTest() {
         upgrade = new Upgrade("3");
         System.out.println(upgrade.getPurchasePrice());
-        String expectedPrint = "Upgrade for level 3 tower. Price: 40";
+        String expectedPrint = "Upgrades a level 3 station to level 4 station. Price: 40";
         assertEquals(expectedPrint, upgrade.toString());
     }
 

@@ -133,7 +133,7 @@ public class ShopInventoryController {
     private Alert alert;
     private Alert infoAlert;
 
-    public ShopInventoryController(MainGameManager mainGameManager){
+    public ShopInventoryController(MainGameManager mainGameManager) {
         this.mainGameManager = mainGameManager;
         this.towerManager = mainGameManager.getTowerManager();
         this.upgradeManager = mainGameManager.getUpgradeManager();
@@ -161,7 +161,7 @@ public class ShopInventoryController {
 
     }
 
-    public void updateShopDisplay(Purchasable purchasable){
+    public void updateShopDisplay(Purchasable purchasable) {
         viewItemNameLabel.setText("Available in shop: " + purchasable.getName());
         viewDescriptionLabel.setText(purchasable.getDescription());
     }
@@ -172,8 +172,7 @@ public class ShopInventoryController {
         sellPriceLabel.setText(String.valueOf(purchasable.getSellPrice()));
         if (purchasable instanceof Tower) {
             invLevelLabel.setText("Level: " + ((Tower) purchasable).getLevel());
-        }
-        else {
+        } else {
             invLevelLabel.setText("");
         }
     }
@@ -197,7 +196,7 @@ public class ShopInventoryController {
     }
 
     @FXML
-    private void onBackClicked(){
+    private void onBackClicked() {
         mainGameManager.closeShopScreen();
     }
 
@@ -232,8 +231,7 @@ public class ShopInventoryController {
                 newButton.setVisible(true);
                 newButton.setGraphic(imageView);
 
-            }
-            else {
+            } else {
                 towerManager.addReserveTower(clonedTower);
 
                 // Set relevant button's image in inventory
@@ -322,8 +320,7 @@ public class ShopInventoryController {
             }
             mainGameManager.addTotalMoney(sellPrice);
             initialiseLayout();
-        }
-        else {
+        } else {
             inventoryService.showAlert(alert, "Error", "Cannot sell tower", "You need three towers at all times!");
         }
     }
@@ -333,6 +330,7 @@ public class ShopInventoryController {
 
     /**
      * Use item button appears when an active or reserve station is clicked.
+     *
      * @param actionEvent When "Use Item" button is clicked
      */
     public void onUseItemButtonClicked(ActionEvent actionEvent) {
@@ -345,7 +343,7 @@ public class ShopInventoryController {
 
         int requiredLevel = -1;
         try {
-            switch(item.getName()) {
+            switch (item.getName()) {
                 case "Level 1 Upgrade":
                     requiredLevel = 1;
                     break;
@@ -359,8 +357,7 @@ public class ShopInventoryController {
                     // Checks if the tower is broken. If true, fix it. If not, give alert and do nothing.
                     if (tower.isBroken()) {
                         tower.setBroken(false);
-                    }
-                    else {
+                    } else {
                         inventoryService.showAlert(alert, "Error", "Cannot use repair kit", "This tower is not broken! Save your item for a broken tower.");
                     }
                     break;
@@ -377,10 +374,9 @@ public class ShopInventoryController {
             boolean isCorrectUpgradeLevel = inventoryService.isCorrectUpgradeLevel(tower, requiredLevel);
             if (isCorrectUpgradeLevel) {
                 tower.setLevel(requiredLevel + 1);
-            }
-            else {
+            } else {
                 inventoryService.showAlert(alert, "Error", "Cannot use " + item.getName() + " on this tower.",
-                        "This upgrade must be used to upgrade a level " + requiredLevel + " tower to level " + (requiredLevel+1) + ".");
+                        "This upgrade must be used to upgrade a level " + requiredLevel + " tower to level " + (requiredLevel + 1) + ".");
 
             }
         }
@@ -417,27 +413,9 @@ public class ShopInventoryController {
             // Set images of the player's active towers
             if (i < towerManager.getPlayerTowers().size()) {
                 // Set relevant button's image in inventory
-                String imagePath = towerManager.getPlayerTowersImages().get(i);
-                Image image = new Image(imagePath);
-                ImageView imageView = new ImageView(image);
-                imageView.setFitWidth(40);
-                imageView.setFitHeight(40);
-                if (towerManager.getPlayerTowers().get(i).isBroken()) {
-                    // Set 'X' image overlay if tower is in broken state
-                    String overlayImagePath = getClass().getResource("/images/Broken.png").toExternalForm();
-                    Image overlayImage = new Image(overlayImagePath);
-                    ImageView overlayImageView = new ImageView(overlayImage);
-                    overlayImageView.setFitWidth(40);
-                    overlayImageView.setFitHeight(40);
-                    StackPane stackPane = new StackPane();
-                    stackPane.getChildren().addAll(imageView, overlayImageView);
-                    activeTowerButtons.get(i).setGraphic(stackPane);
-                }
-                else {
-                    activeTowerButtons.get(i).setGraphic(imageView);
-                }
-            }
-            else {
+                boolean isBroken = towerManager.getPlayerTowers().get(i).isBroken();
+                setButtonImages(towerManager.getPlayerTowersImages(), activeTowerButtons, i, isBroken);
+            } else {
                 // Hide buttons
                 activeTowerButtons.get(i).setVisible(false);
             }
@@ -470,16 +448,9 @@ public class ShopInventoryController {
             int finalI = i;
             // Set names of the player's active towers
             if (i < towerManager.getReserveTowers().size()) {
-                //reserveTowerButtons.get(i).setText(towerManager.getReserveTowers().get(i).getName());
                 // Set relevant button's image in inventory
-                String imagePath = towerManager.getReserveTowersImages().get(i);
-                Image image = new Image(imagePath);
-                ImageView imageView = new ImageView(image);
-                imageView.setFitWidth(40);
-                imageView.setFitHeight(40);
-                reserveTowerButtons.get(i).setGraphic(imageView);
-            }
-            else {
+                setButtonImages(towerManager.getDefaultTowersImages(), reserveTowerButtons, i, false);
+            } else {
                 // Hide buttons
                 reserveTowerButtons.get(i).setVisible(false);
             }
@@ -511,17 +482,9 @@ public class ShopInventoryController {
         for (int i = 0; i < boughtItemButtons.size(); i++) {
             int finalI = i;
             if (i < upgradeManager.getPlayerUpgrades().size()) {
-                //boughtItemButtons.get(i).setText(upgradeManager.getPlayerUpgrades().get(i).getName());
-
                 // Set relevant button's image in inventory
-                String imagePath = upgradeManager.getPlayerItemsImages().get(i);
-                Image image = new Image(imagePath);
-                ImageView imageView = new ImageView(image);
-                imageView.setFitWidth(40);
-                imageView.setFitHeight(40);
-                boughtItemButtons.get(i).setGraphic(imageView);
-            }
-            else {
+                setButtonImages(upgradeManager.getPlayerItemsImages(), boughtItemButtons, i, false);
+            } else {
                 boughtItemButtons.get(i).setVisible(false);
             }
 
@@ -568,12 +531,7 @@ public class ShopInventoryController {
         for (int i = 0; i < buyUpgradeButtons.size(); i++) {
             int finalI = i;
             // Set item shop buttons
-            String imagePath = upgradeManager.getUpgradesForSaleImages().get(i);
-            Image image = new Image(imagePath);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(40);
-            imageView.setFitHeight(40);
-            buyUpgradeButtons.get(i).setGraphic(imageView);
+            setButtonImages(upgradeManager.getUpgradesForSaleImages(), buyUpgradeButtons, i, false);
 
             upgradePriceLabels.get(i).setText(String.valueOf(upgradesForSale.get(i).getPurchasePrice()));
 
@@ -591,6 +549,35 @@ public class ShopInventoryController {
                     }
                 });
             });
+        }
+    }
+
+    /**
+     * @param listToGetFrom List of image paths
+     * @param buttonList
+     * @param index
+     */
+    public void setButtonImages(List<String> listToGetFrom, List<Button> buttonList, int index, boolean needsOverlay) {
+        // Set relevant button's image in inventory
+        String imagePath = listToGetFrom.get(index);
+        Image image = new Image(imagePath);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(40);
+        imageView.setFitHeight(40);
+        buttonList.get(index).setGraphic(imageView);
+
+        if (needsOverlay) {
+            // Set 'X' image overlay if tower is in broken state
+            String overlayImagePath = getClass().getResource("/images/Broken.png").toExternalForm();
+            Image overlayImage = new Image(overlayImagePath);
+            ImageView overlayImageView = new ImageView(overlayImage);
+            overlayImageView.setFitWidth(40);
+            overlayImageView.setFitHeight(40);
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().addAll(imageView, overlayImageView);
+            buttonList.get(index).setGraphic(stackPane);
+        } else {
+            buttonList.get(index).setGraphic(imageView);
         }
     }
 }
