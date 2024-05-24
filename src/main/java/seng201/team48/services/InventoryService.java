@@ -7,6 +7,7 @@ import seng201.team48.models.Tower;
 
 /**
  * Performs validation for the inventory, activates and reserves towers and shows alerts
+ * @author Hannah Grace, Elise Newman
  */
 public class InventoryService {
     TowerManager towerManager;

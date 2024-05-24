@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * MainScreenController contains the game functionality, timers, recipe book checking and movement and creating of
  * Bowl objects
+ * @author Hannah Grace, Elise Newman
  */
 public class MainScreenController {
     public Button backButton;

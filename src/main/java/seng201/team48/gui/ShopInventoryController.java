@@ -28,11 +28,6 @@ import java.util.Objects;
  * Provides functionality to refresh the shop, display item details, and manage player inventory.
  *
  * @author Hannah Grace, Elise Newman
- * @see MainGameManager
- * @see TowerManager
- * @see UpgradeManager
- * @see InventoryService
- * @see ShopService
  */
 
 public class ShopInventoryController {
@@ -354,6 +349,10 @@ public class ShopInventoryController {
         }
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void onMakeReserveButtonClicked(ActionEvent actionEvent) {
         boolean canMakeReserve = inventoryService.canMakeReserve(mainGameManager);
         if (canMakeReserve) {

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**Creates bowl objects based on the round difficulty and number of bowls already sent
  * Can create large or small bowls, small bowls are sent first.
+ * @author Hannah Grace, Elise Newman
  */
 public class BowlService {
     Integer numSmallBowlsSelected = 0;

@@ -12,6 +12,7 @@ import java.io.IOException;
 
 /**Controls the startup of windows and transitions of screens
  * Controls audio
+ * @author Hannah Grace, Elise Newman
  * */
 public class FXWindow extends Application {
     private MediaPlayer mediaPlayer;

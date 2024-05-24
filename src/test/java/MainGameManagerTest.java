@@ -1,263 +1,51 @@
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng201.team48.MainGameManager;
-import seng201.team48.gui.FXWrapper;
-import seng201.team48.gui.SetupController;
 
 import java.util.function.Consumer;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainGameManagerTest {
     MainGameManager testMainGameManager;
-    Pane mockPane;
+
     @BeforeEach
-    public void init(){
-        mockPane = new Pane();
-/*
-        testMainGameManager = new MainGameManager(
-                this::launchSetupScreen,
-                this::launchPreroundScreen,
-                this::launchMainScreen,
-                this::clearPane,
-                this::launchShopInventoryScreen,
-                this::launchConclusionScreen,
-                this::launchRecipeBookScreen
-        );
-        testMainGameManager.init(mockStage);
-*/
+    public void init() {
+        // Mock the Consumers and the Runnable
+        Consumer mockSetupScreenLauncher = mock(Consumer.class);
+        Consumer mockPreroundScreenLauncher = mock(Consumer.class);
+        Consumer mockMainScreenLauncher = mock(Consumer.class);
+        Runnable mockClearScreen = mock(Runnable.class);
+        Consumer mockShopScreenLauncher = mock(Consumer.class);
+        Consumer mockConclusionLauncher = mock(Consumer.class);
+        Consumer mockRecipeBookLauncher = mock(Consumer.class);
+
+        // Pass in the mocks to create a test mainGameManager
+        testMainGameManager = new MainGameManager(mockSetupScreenLauncher, mockPreroundScreenLauncher,
+                mockMainScreenLauncher, mockClearScreen, mockShopScreenLauncher, mockConclusionLauncher,
+                mockRecipeBookLauncher);
+
+        // Test that everything's initialised properly
+        assertEquals(mockSetupScreenLauncher, testMainGameManager.getSetupScreenLauncher());
+        assertEquals(mockPreroundScreenLauncher, testMainGameManager.getPreroundScreenLauncher());
+        assertEquals(mockMainScreenLauncher, testMainGameManager.getMainScreenLauncher());
+        assertEquals(mockClearScreen, testMainGameManager.getClearScreen());
+        assertEquals(mockShopScreenLauncher, testMainGameManager.getShopScreenLauncher());
+        assertEquals(mockConclusionLauncher, testMainGameManager.getConclusionLauncher());
+        assertEquals(mockRecipeBookLauncher, testMainGameManager.getRecipeBookLauncher());
+
+        assertNotNull(testMainGameManager.getTowerManager());
+        assertNotNull(testMainGameManager.getUpgradeManager());
     }
+
     @Test
     public void updateRounds() {
         Integer current = testMainGameManager.getCurrentRound();
         testMainGameManager.updateRounds();
         assertEquals(current + 1, testMainGameManager.getCurrentRound());
-
-    }
-    @Test
-    public void updateBowlStepSize() {
-
-    }
-    @Test
-    public void setTotalMoney() {
-
-    }
-    @Test
-    public void setSuccess() {
-
-    }
-    @Test
-    public void setRoundDifficulty() {
-
-    }
-    @Test
-    public void setReload5Temp() {
-
-    }
-    @Test
-    public void setReload4Temp() {
-
-    }
-    @Test
-    public void setReload3Temp() {
-
-    }
-    @Test
-    public void setReload2Temp() {
-
-    }
-    @Test
-    public void setReload1Temp() {
-
-    }
-    @Test
-    public void setNumRounds() {
-
-    }
-    @Test
-    public void setName() {
-
-    }
-    @Test
-    public void setIsStartOfRound() {
-
-    }
-    @Test
-    public void setIngredient1Contents() {
-
-    }
-    @Test
-    public void setGameDifficulty() {
-
-    }
-    @Test
-    public void setCurrentRound() {
-
-    }
-    @Test
-    public void setCurrentBowl() {
-
-    }
-    @Test
-    public void setBowlStepSize() {
-
-    }
-    @Test
-    public void setBowlService() {
-
-    }
-    @Test
-    public void resetBowlLocation() {
-
-    }
-    @Test
-    public void MainGameManager() {
-
-    }
-    @Test
-    public void launchShopScreen() {
-
-    }
-    @Test
-    public void launchSetupScreen() {
-
-    }
-    @Test
-    public void launchRecipeBook() {
-
-    }
-    @Test
-    public void launchPreroundScreen() {
-
-    }
-    @Test
-    public void launchMainScreen() {
-
-    }
-    @Test
-    public void launchConclusionScreen() {
-
-    }
-    @Test
-    public void getTowerManager() {
-
-    }
-    @Test
-    public void getTotalMoney() {
-
-    }
-    @Test
-    public void getSuccess() {
-
-    }
-    @Test
-    public void getRoundDifficulty() {
-
-    }
-    @Test
-    public void getReload5Temp() {
-
-    }
-    @Test
-    public void getReload4Temp() {
-
-    }
-    @Test
-    public void getReload3Temp() {
-
-    }
-    @Test
-    public void getReload2Temp() {
-
-    }
-    @Test
-    public void getReload1Temp() {
-
-    }
-    @Test
-    public void getNumSmall() {
-
-    }
-    @Test
-    public void getNumRounds() {
-
-    }
-    @Test
-    public void getNumLarge() {
-
-    }
-    @Test
-    public void getName() {
-
-    }
-    @Test
-    public void getIsStartOfRound() {
-
-    }
-    @Test
-    public void getIngredient1Contents() {
-
-    }
-    @Test
-    public void getGameDifficulty() {
-
-    }
-    @Test
-    public void getCurrentRound() {
-
-    }
-    @Test
-    public void getCurrentBowl() {
-
-    }
-    @Test
-    public void getBowlService() {
-
-    }{}
-    @Test
-    public void getBowlLocation() {
-
-    }
-    @Test
-    public void deductTotalMoney() {
-
-    }
-    @Test
-    public void closeShopScreen() {
-
-    }
-    @Test
-    public void closeSetupScreen() {
-
-    }
-    @Test
-    public void closeRecipeBook() {
-
-    }
-    @Test
-    public void closePreroundStart() {
-
-    }
-    @Test
-    public void closePreroundSetup() {
-
-    }
-    @Test
-    public void closeMainScreenPreRound() {
-
-    }
-    @Test
-    public void closeMainScreenHome() {
-
-    }
-    @Test
-    public void closeMainScreenConclusion() {
-
-    }
-    @Test
-    public void closeConclusionScreen() {
 
     }
 }

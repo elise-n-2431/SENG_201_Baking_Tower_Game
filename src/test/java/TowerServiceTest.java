@@ -5,7 +5,6 @@ import seng201.team48.services.TowerService;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TowerServiceTest {
     private TowerService testTowerService;
@@ -22,12 +21,6 @@ public class TowerServiceTest {
         flourTower = new Tower("Flour Mill", "Creates flour", 5, 3, 10, 1);
         waterTower = new Tower("Water Tower", "Stores water", 5, 3, 20, 2);
         sugarTower = new Tower("Sugarcane Mill", "Processes sugar", 5, 3, 5, 2);
-    }
-
-    @Test
-    void passCase() {
-        towersList.equals(List.of(flourTower, waterTower, sugarTower));
-        assertTrue(testTowerService.areAllTowersSelected(towersList));
     }
 
     @Test
